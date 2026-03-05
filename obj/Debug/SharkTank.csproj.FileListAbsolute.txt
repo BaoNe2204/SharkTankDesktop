@@ -1,0 +1,10 @@
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.csproj.AssemblyReference.cache
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.Properties.Resources.resources
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.csproj.GenerateResource.cache
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.csproj.CoreCompileInputs.cache
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\bin\Debug\SharkTank.exe.config
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\bin\Debug\SharkTank.exe
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\bin\Debug\SharkTank.pdb
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.exe
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.pdb
+C:\Users\minht\Music\SharkTank\SharkTank\SharkTank\obj\Debug\SharkTank.exe.config
