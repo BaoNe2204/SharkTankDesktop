@@ -78,7 +78,8 @@ INSERT INTO dbo.Roles (RoleName, [Description], IsSystemRole) VALUES
  (N'HR', N'Human Resources', 1),
  (N'Sales', N'Sales', 1),
  (N'Inventory', N'Inventory/Warehouse', 1),
- (N'Accounting', N'Accounting', 1);
+ (N'Accounting', N'Accounting', 1),
+ (N'CRM', N'Customer Relationship Management', 1);
 
 -- Seed Permissions
 INSERT INTO dbo.Permissions (PermissionCode, PermissionName, [Module]) VALUES
@@ -99,13 +100,19 @@ INSERT INTO dbo.Permissions (PermissionCode, PermissionName, [Module]) VALUES
  (N'ACCOUNTING.CREATE', N'Accounting - Create', N'Accounting'),
  (N'ACCOUNTING.UPDATE', N'Accounting - Update', N'Accounting'),
 
- (N'ADMIN.VIEW', N'Admin - View', N'Admin');
+ (N'ADMIN.VIEW', N'Admin - View', N'Admin'),
+
+ (N'CRM.VIEW', N'CRM - View', N'CRM'),
+ (N'CRM.CREATE', N'CRM - Create', N'CRM'),
+ (N'CRM.UPDATE', N'CRM - Update', N'CRM'),
+ (N'CRM.DELETE', N'CRM - Delete', N'CRM');
 
 DECLARE @RoleAdmin INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'Admin');
 DECLARE @RoleHR INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'HR');
 DECLARE @RoleSales INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'Sales');
 DECLARE @RoleInventory INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'Inventory');
 DECLARE @RoleAccounting INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'Accounting');
+DECLARE @RoleCRM INT = (SELECT RoleId FROM dbo.Roles WHERE RoleName = N'CRM');
 
 -- RolePermissions
 -- Admin: tất cả quyền
@@ -128,6 +135,10 @@ SELECT @RoleInventory, PermissionId FROM dbo.Permissions WHERE PermissionCode IN
 INSERT INTO dbo.RolePermissions(RoleId, PermissionId)
 SELECT @RoleAccounting, PermissionId FROM dbo.Permissions WHERE PermissionCode IN (N'ACCOUNTING.VIEW', N'ACCOUNTING.CREATE', N'ACCOUNTING.UPDATE');
 
+-- CRM: full CRUD CRM
+INSERT INTO dbo.RolePermissions(RoleId, PermissionId)
+SELECT @RoleCRM, PermissionId FROM dbo.Permissions WHERE PermissionCode LIKE N'CRM.%';
+
 -- Helper: create user with salt + hash
 DECLARE @now DATETIME = GETDATE();
 
@@ -137,6 +148,7 @@ DECLARE @salt_hr NVARCHAR(64) = LOWER(CONVERT(VARCHAR(32), CONVERT(BINARY(16), N
 DECLARE @salt_sales NVARCHAR(64) = LOWER(CONVERT(VARCHAR(32), CONVERT(BINARY(16), NEWID()), 2));
 DECLARE @salt_inventory NVARCHAR(64) = LOWER(CONVERT(VARCHAR(32), CONVERT(BINARY(16), NEWID()), 2));
 DECLARE @salt_accounting NVARCHAR(64) = LOWER(CONVERT(VARCHAR(32), CONVERT(BINARY(16), NEWID()), 2));
+DECLARE @salt_crm NVARCHAR(64) = LOWER(CONVERT(VARCHAR(32), CONVERT(BINARY(16), NEWID()), 2));
 
 INSERT INTO dbo.Users
 (Username, PasswordHash, PasswordSalt, FullName, Email, Phone, RoleId, IsActive, IsLocked, FailedLoginAttempts, CreatedAt, UpdatedAt)
@@ -170,6 +182,12 @@ VALUES
   LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), N'accounting123' + @salt_accounting)), 2)),
   @salt_accounting,
   N'Accounting User', N'accounting@example.com', N'', @RoleAccounting, 1, 0, 0, @now, @now
+),
+(
+  N'crm',
+  LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', CONVERT(VARBINARY(MAX), N'crm123' + @salt_crm)), 2)),
+  @salt_crm,
+  N'CRM User', N'crm@example.com', N'', @RoleCRM, 1, 0, 0, @now, @now
 );
 
 SELECT 'Seed done' AS Status;
