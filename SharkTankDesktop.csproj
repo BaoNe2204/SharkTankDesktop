@@ -51,9 +51,6 @@
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Controls\ModernSidebarItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -88,11 +85,91 @@
     <Compile Include="BLL\AuthService.cs" />
     <Compile Include="BLL\PermissionService.cs" />
     <Compile Include="BLL\SessionService.cs" />
+    <!-- UI Dashboard -->
+    <Compile Include="UI\MainDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainDashboard.Designer.cs">
+      <DependentUpon>MainDashboard.cs</DependentUpon>
+    </Compile>
+    <!-- Core Files -->
+    <Compile Include="MenuConfig.cs" />
+    <Compile Include="ViewManager.cs" />
+    <!-- Modules -->
+    <Compile Include="Modules\IModule.cs" />
+    <Compile Include="Modules\MenuItemHandler.cs" />
+    <!-- Accounting Module -->
+    <Compile Include="Modules\Accounting\AccountingModule.cs" />
+    <Compile Include="Modules\Accounting\AccountingViewRouter.cs" />
+    <!-- Admin Module -->
+    <Compile Include="Modules\Admin\AdminModule.cs" />
+    <Compile Include="Modules\Admin\AdminViewRouter.cs" />
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenTheoRoleForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- HR Module -->
+    <Compile Include="Modules\HR\HRModule.cs" />
+    <Compile Include="Modules\HR\HRViewRouter.cs" />
+    <!-- Inventory Module -->
+    <Compile Include="Modules\Inventory\InventoryModule.cs" />
+    <Compile Include="Modules\Inventory\InventoryViewRouter.cs" />
+    <!-- Sales Module -->
+    <Compile Include="Modules\Sales\SalesModule.cs" />
+    <Compile Include="Modules\Sales\SalesViewRouter.cs" />
+    <!-- CRM Module -->
+    <Compile Include="Modules\CRM\CRMModule.cs" />
+    <Compile Include="Modules\CRM\CRMViewRouter.cs" />
+    <!-- HR UI Forms -->
+    <Compile Include="Modules\HR\UI\Forms\HoSoNhanVienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- Sales UI Forms -->
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- Inventory UI Forms -->
+    <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- Accounting UI Forms -->
+    <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- CRM UI Forms -->
+    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- Z80 Navigation Bar -->
+    <Compile Include="Z80_NavBar\NavBarItem.cs" />
+    <Compile Include="Z80_NavBar\Z80_Navigation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Z80_NavBar\Z80_Navigation.Designer.cs">
+      <DependentUpon>Z80_Navigation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Z80_NavBar\Themes\ITheme.cs" />
+    <Compile Include="Z80_NavBar\Themes\ThemeSelector.cs" />
+    <Compile Include="Z80_NavBar\Themes\Definitions\DarkTheme.cs" />
+    <Compile Include="Z80_NavBar\Themes\Definitions\BlueTheme.cs" />
+    <Compile Include="Z80_NavBar\Themes\Definitions\ThemeEnums.cs" />
+    <!-- Template Files -->
+    <Compile Include="TEMPLATES\ViewTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Z80_NavBar\Z80_Navigation.resx">
+      <DependentUpon>Z80_Navigation.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -112,6 +189,21 @@
     <None Include="App.config" />
     <None Include="Database\00_CreateDatabase.sql" />
     <None Include="Database\CoreSystem.sql" />
+    <None Include="README.md" />
+    <None Include="HUONG_DAN_PHAN_QUYEN.md" />
+    <None Include="HUONG_DAN_THEM_MENU.md" />
+    <None Include="TEMPLATES\CHECKLIST_PHAT_TRIEN.md" />
+    <None Include="TEMPLATES\README_TEMPLATE.md" />
+    <None Include="Modules\Admin\README.md" />
+    <None Include="Modules\Admin\UI\Forms\README.md" />
+    <None Include="Modules\Accounting\README.md" />
+    <None Include="Modules\HR\README.md" />
+    <None Include="Modules\Inventory\README.md" />
+    <None Include="Modules\Sales\README.md" />
+    <None Include="Modules\CRM\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Chỉ giữ folder thật có file (UI/Forms đã có file nên không cần khai báo Folder) -->
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
