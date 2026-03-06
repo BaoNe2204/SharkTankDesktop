@@ -9,13 +9,9 @@
     <RootNamespace>SharkTank</RootNamespace>
     <AssemblyName>SharkTank</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <RuntimeIdentifier>win</RuntimeIdentifier>
-    <RuntimeIdentifiers>win</RuntimeIdentifiers>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <!-- Project .NET Framework, no NuGet PackageReference needed -->
-    <RestoreProjectStyle>None</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-<ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -54,9 +50,6 @@
     <!-- UI -->
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Admin\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\ModernSidebarItem.cs">
       <SubType>Component</SubType>
@@ -175,16 +168,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Admin\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Z80_NavBar\Z80_Navigation.resx">
       <DependentUpon>Z80_Navigation.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -214,10 +203,7 @@
     <None Include="Modules\CRM\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Chỉ giữ folder thật có file -->
-    <None Include="Resources\factory.gif" />
-    <None Include="Resources\factory1.gif" />
-    <None Include="Resources\android-chrome-96x96.png" />
+    <!-- Chỉ giữ folder thật có file (UI/Forms đã có file nên không cần khai báo Folder) -->
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

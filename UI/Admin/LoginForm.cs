@@ -1,17 +1,15 @@
+using System;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 using SharkTank.BLL;
 using SharkTank.DAL;
 using SharkTank.DAL.InMemory;
 using SharkTank.DAL.Sql;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 
 namespace SharkTank.UI.Admin
 {
-    public partial class LoginForm : Form
+    public class LoginForm : Form
     {
         private static bool _repoChoiceInitialized;
         private static bool _useSqlRepositories;
@@ -21,18 +19,17 @@ namespace SharkTank.UI.Admin
         private readonly SessionService _sessionService;
         private readonly IRoleRepository _roleRepository;
 
+        private TextBox _txtUsername;
+        private TextBox _txtPassword;
+        private Button _btnLogin;
+        private Label _lblMessage;
+
         public SessionService SessionService => _sessionService;
         public PermissionService PermissionService => _permissionService;
 
         public LoginForm()
         {
-            // Khi mở trong Designer, bỏ qua khởi tạo service / kết nối DB
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-            {
-                InitializeComponent();
-                return;
-            }
-
+            // Ưu tiên dùng SQL nếu đã cấu hình & dùng được (kiểm tra 1 lần duy nhất), sau đó cache kết quả.
             IUserRepository userRepository;
             IPermissionRepository permissionRepository;
             IRoleRepository roleRepository;
@@ -44,7 +41,7 @@ namespace SharkTank.UI.Admin
             _sessionService = new SessionService();
             _roleRepository = roleRepository;
 
-            InitializeComponent();
+            InitializeComponents();
         }
 
         private static void CreateRepositories(out IUserRepository userRepository, out IPermissionRepository permissionRepository, out IRoleRepository roleRepository)
@@ -88,16 +85,84 @@ namespace SharkTank.UI.Admin
             }
         }
 
+        private void InitializeComponents()
+        {
+            Text = "Đăng nhập hệ thống";
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            ClientSize = new Size(360, 220);
+
+            var lblTitle = new Label
+            {
+                Text = "ĐĂNG NHẬP ERP",
+                Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold),
+                AutoSize = true,
+                Location = new Point(110, 20)
+            };
+
+            var lblUsername = new Label
+            {
+                Text = "Username:",
+                AutoSize = true,
+                Location = new Point(40, 70)
+            };
+
+            _txtUsername = new TextBox
+            {
+                Location = new Point(130, 65),
+                Width = 180
+            };
+
+            var lblPassword = new Label
+            {
+                Text = "Password:",
+                AutoSize = true,
+                Location = new Point(40, 105)
+            };
+
+            _txtPassword = new TextBox
+            {
+                Location = new Point(130, 100),
+                Width = 180,
+                UseSystemPasswordChar = true
+            };
+
+            _btnLogin = new Button
+            {
+                Text = "Đăng nhập",
+                Location = new Point(130, 140),
+                Width = 100
+            };
+            _btnLogin.Click += BtnLogin_Click;
+
+            _lblMessage = new Label
+            {
+                AutoSize = true,
+                ForeColor = Color.Red,
+                Location = new Point(40, 180),
+                Width = 280
+            };
+
+            Controls.Add(lblTitle);
+            Controls.Add(lblUsername);
+            Controls.Add(_txtUsername);
+            Controls.Add(lblPassword);
+            Controls.Add(_txtPassword);
+            Controls.Add(_btnLogin);
+            Controls.Add(_lblMessage);
+        }
+
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = string.Empty;
+            _lblMessage.Text = string.Empty;
 
             try
             {
-                var result = _authService.Login(txtUsername.Text, txtPassword.Text);
+                var result = _authService.Login(_txtUsername.Text, _txtPassword.Text);
                 if (!result.Success)
                 {
-                    lblMessage.Text = result.ErrorMessage;
+                    _lblMessage.Text = result.ErrorMessage;
                     return;
                 }
 
@@ -113,31 +178,8 @@ namespace SharkTank.UI.Admin
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Có lỗi khi đăng nhập: " + ex.Message;
+                _lblMessage.Text = "Có lỗi khi đăng nhập: " + ex.Message;
             }
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-            ApplyRoundedCorners();
-        }
-
-        private void ApplyRoundedCorners()
-        {
-            if (panel1 == null) return;
-
-            GraphicsPath path = new GraphicsPath();
-            int radius = 20;
-
-            Rectangle bounds = panel1.ClientRectangle;
-
-            path.AddArc(bounds.X, bounds.Y, radius, radius, 180, 90);
-            path.AddArc(bounds.Right - radius, bounds.Y, radius, radius, 270, 90);
-            path.AddArc(bounds.Right - radius, bounds.Bottom - radius, radius, radius, 0, 90);
-            path.AddArc(bounds.X, bounds.Bottom - radius, radius, radius, 90, 90);
-
-            path.CloseAllFigures();
-            panel1.Region = new Region(path);
         }
     }
 }

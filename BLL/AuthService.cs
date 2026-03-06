@@ -77,30 +77,6 @@ namespace SharkTank.BLL
                 User = user
             };
         }
-
-        public bool ForgotPassword(string username, string newPassword)
-        {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(newPassword))
-            {
-                return false;
-            }
-
-            var user = _userRepository.GetByUsername(username);
-            if (user == null || !user.IsActive)
-            {
-                return false;
-            }
-
-            // Reset password về giá trị mới
-            var salt = PasswordHasher.GenerateSalt();
-            user.PasswordSalt = salt;
-            user.PasswordHash = PasswordHasher.HashPassword(newPassword, salt);
-            user.FailedLoginAttempts = 0;
-            user.IsLocked = false;
-            user.UpdatedAt = DateTime.Now;
-            _userRepository.Update(user);
-
-            return true;
-        }
     }
 }
+
