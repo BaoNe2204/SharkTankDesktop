@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Đánh giá lỗi code tự động",
+  "description": "Tự động kiểm tra code còn lỗi gì và đề xuất hướng phát triển tối ưu khi bạn gửi tin nhắn",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Hãy kiểm tra toàn bộ code trong workspace, tìm các lỗi còn tồn tại (syntax errors, logic errors, missing references), và đề xuất hướng phát triển tối ưu cho dự án. Trả lời bằng tiếng Việt."
+  }
+}

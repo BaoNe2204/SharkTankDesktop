@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SharkTank.UI.Admin;
-using SharkTank.UI;
 
 namespace SharkTank
 {
@@ -31,11 +27,11 @@ namespace SharkTank
                         break;
                     }
 
-                    using (var mainForm = new MainForm(loginForm.SessionService, loginForm.PermissionService))
+                    using (var mainDashboard = new MainDashboard(loginForm.SessionService, loginForm.PermissionService))
                     {
-                        Application.Run(mainForm);
+                        Application.Run(mainDashboard);
                         // Nếu bấm Đăng xuất thì lặp lại vòng while để hiện LoginForm ngay
-                        keepRunning = mainForm.RequestLogout;
+                        keepRunning = mainDashboard.RequestLogout;
                     }
                 }
             }
