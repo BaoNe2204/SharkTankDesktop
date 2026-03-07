@@ -1,5 +1,23 @@
+# Build folders
 bin/
 obj/
+
+# Visual Studio
 .vs/
+.vscode/
+
+# Build files
 *.exe
+*.dll
 *.pdb
+
+# User settings
+*.user
+*.suo
+
+# Nuget
+packages/
+*.nupkg
+
+# Logs
+*.log
