@@ -134,9 +134,6 @@
     <Compile Include="Modules\CRM\CRMModule.cs" />
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
-    <Compile Include="Modules\HR\UI\Forms\HoSoNhanVienView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Sales UI Forms -->
     <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
       <SubType>UserControl</SubType>
@@ -222,6 +219,9 @@
     <None Include="Resources\factory.gif" />
     <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\HR\UI\Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
