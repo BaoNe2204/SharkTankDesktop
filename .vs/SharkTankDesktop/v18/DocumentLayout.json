@@ -7,12 +7,36 @@
       "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\hrmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\danhsachnhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\danhsachnhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\hrviewrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\admin\\adminmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\admin\\adminmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\modules\\hr\\hrviewrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\hrviewrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\taohopdongview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\taohopdongview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\giahanhopdongform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\giahanhopdongform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\themnhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\themnhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\database\\dbhepler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:database\\dbhepler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +54,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HoSoNhanVienView.cs",
-              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
-              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
-              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
-              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAoAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "AdminModule.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\Admin\\AdminModule.cs",
+              "RelativeDocumentMoniker": "Modules\\Admin\\AdminModule.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\Admin\\AdminModule.cs",
+              "RelativeToolTip": "Modules\\Admin\\AdminModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-07T06:25:23.598Z",
+              "WhenOpened": "2026-03-07T12:25:52.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HRViewRouter.cs",
-              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
-              "RelativeDocumentMoniker": "Modules\\HR\\HRViewRouter.cs",
-              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
-              "RelativeToolTip": "Modules\\HR\\HRViewRouter.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAABUAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "ThemNhanVienView.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\ThemNhanVienView.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\ThemNhanVienView.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\ThemNhanVienView.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\ThemNhanVienView.cs",
+              "ViewState": "AgIAAE8CAAAAAAAAAAAuwHsCAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-07T05:56:32.65Z",
+              "WhenOpened": "2026-03-07T12:22:52.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaoHopDongView.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\TaoHopDongView.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\TaoHopDongView.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\TaoHopDongView.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\TaoHopDongView.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:22:37.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GiaHanHopDongForm.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\GiaHanHopDongForm.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\GiaHanHopDongForm.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\GiaHanHopDongForm.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\GiaHanHopDongForm.cs",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAuwNoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:22:22.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DanhSachNhanVienView.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\DanhSachNhanVienView.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\DanhSachNhanVienView.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\DanhSachNhanVienView.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\DanhSachNhanVienView.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAqwEgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:22:06.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DBHepler.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Database\\DBHepler.cs",
+              "RelativeDocumentMoniker": "Database\\DBHepler.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Database\\DBHepler.cs",
+              "RelativeToolTip": "Database\\DBHepler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T12:20:01.444Z",
               "EditorCaption": ""
             },
             {
@@ -62,10 +138,35 @@
               "RelativeDocumentMoniker": "Modules\\HR\\HRModule.cs",
               "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRModule.cs",
               "RelativeToolTip": "Modules\\HR\\HRModule.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAuwEcAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T05:56:31.698Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HRViewRouter.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\HRViewRouter.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
+              "RelativeToolTip": "Modules\\HR\\HRViewRouter.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAuwB0AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T05:56:32.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "HoSoNhanVienView.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T06:25:23.598Z"
             }
           ]
         }

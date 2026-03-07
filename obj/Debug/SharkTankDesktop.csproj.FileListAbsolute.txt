@@ -27,5 +27,14 @@ C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkT
 C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTank.Z80_NavBar.Z80_Navigation.resources
 C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTankDesktop.csproj.GenerateResource.cache
 C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTankDesktop.csproj.CoreCompileInputs.cache
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\SharkTank.exe.config
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\SharkTank.exe
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\SharkTank.pdb
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\System.Buffers.dll
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\System.Memory.dll
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\System.Resources.Extensions.dll
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTan.A54E4E6C.Up2Date
 C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTank.exe
 C:\Users\NGOC HIEN COMPUTER\Pictures\SharkTank\SharkTankDesktop\obj\Debug\SharkTank.pdb

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SharkTank.Modules.HR.UI.Forms;
 
 namespace SharkTank.Modules.HR
 {
@@ -9,37 +10,52 @@ namespace SharkTank.Modules.HR
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Thêm / sửa / xóa nhân viên", () => CreateDefaultView("Hồ sơ nhân viên") },
-            { "Thông tin cá nhân", () => CreateDefaultView("Thông tin cá nhân") },
-            { "Ảnh đại diện", () => CreateDefaultView("Ảnh đại diện") },
-            { "CCCD / hộ chiếu", () => CreateDefaultView("CCCD / hộ chiếu") },
-            { "Thông tin liên hệ", () => CreateDefaultView("Thông tin liên hệ") },
-            { "Danh sách phòng ban", () => CreateDefaultView("Danh sách phòng ban") },
-            { "Sơ đồ tổ chức", () => CreateDefaultView("Sơ đồ tổ chức") },
-            { "Chức danh", () => CreateDefaultView("Chức danh") },
-            { "Điều chuyển nhân sự", () => CreateDefaultView("Điều chuyển nhân sự") },
-            { "Tạo hợp đồng", () => CreateDefaultView("Tạo hợp đồng") },
-            { "Gia hạn / chấm dứt", () => CreateDefaultView("Gia hạn / chấm dứt") },
-            { "Lịch sử hợp đồng", () => CreateDefaultView("Lịch sử hợp đồng") },
-            { "Check-in / Check-out", () => CreateDefaultView("Check-in / Check-out") },
-            { "Bảng công theo tháng", () => CreateDefaultView("Bảng công theo tháng") },
-            { "Nghỉ phép", () => CreateDefaultView("Nghỉ phép") },
-            { "Làm thêm giờ", () => CreateDefaultView("Làm thêm giờ") },
-            { "Lương cơ bản", () => CreateDefaultView("Lương cơ bản") },
-            { "Phụ cấp", () => CreateDefaultView("Phụ cấp") },
-            { "Khấu trừ", () => CreateDefaultView("Khấu trừ") },
-            { "Thưởng", () => CreateDefaultView("Thưởng") },
-            { "Bảng lương", () => CreateDefaultView("Bảng lương") },
-            { "Phiếu lương", () => CreateDefaultView("Phiếu lương") },
-            { "Quyết định thưởng", () => CreateDefaultView("Quyết định thưởng") },
-            { "Vi phạm / cảnh cáo", () => CreateDefaultView("Vi phạm / cảnh cáo") },
-            { "Lịch sử", () => CreateDefaultView("Lịch sử") }
+            // ── QUẢN LÝ NHÂN VIÊN ──
+            { "Danh sách nhân viên",        () => new DanhSachNhanVienView() },
+            { "Thêm nhân viên mới",         () => new ThemNhanVienView() },
+
+            // ── HỒ SƠ ──
+            { "Thông tin cá nhân",          () => CreateDefaultView("Thông tin cá nhân") },
+            { "Ảnh đại diện",               () => CreateDefaultView("Ảnh đại diện") },
+            { "CCCD / hộ chiếu",            () => CreateDefaultView("CCCD / hộ chiếu") },
+            { "Thông tin liên hệ",          () => CreateDefaultView("Thông tin liên hệ") },
+
+            // ── PHÒNG BAN ──
+            { "Danh sách phòng ban",        () => CreateDefaultView("Danh sách phòng ban") },
+            { "Sơ đồ tổ chức",              () => CreateDefaultView("Sơ đồ tổ chức") },
+            { "Chức danh",                  () => CreateDefaultView("Chức danh") },
+            { "Điều chuyển nhân sự",        () => CreateDefaultView("Điều chuyển nhân sự") },
+
+            // ── HỢP ĐỒNG ──
+            { "Tạo hợp đồng",               () => new TaoHopDongView() },
+            { "Gia hạn / chấm dứt",         () => CreateDefaultView("Gia hạn / chấm dứt") },
+            { "Lịch sử hợp đồng",           () => CreateDefaultView("Lịch sử hợp đồng") },
+
+            // ── CHẤM CÔNG ──
+            { "Check-in / Check-out",       () => CreateDefaultView("Check-in / Check-out") },
+            { "Bảng công theo tháng",       () => CreateDefaultView("Bảng công theo tháng") },
+            { "Nghỉ phép",                  () => CreateDefaultView("Nghỉ phép") },
+            { "Làm thêm giờ",               () => CreateDefaultView("Làm thêm giờ") },
+
+            // ── LƯƠNG ──
+            { "Lương cơ bản",               () => CreateDefaultView("Lương cơ bản") },
+            { "Phụ cấp",                    () => CreateDefaultView("Phụ cấp") },
+            { "Khấu trừ",                   () => CreateDefaultView("Khấu trừ") },
+            { "Thưởng",                     () => CreateDefaultView("Thưởng") },
+            { "Bảng lương",                 () => CreateDefaultView("Bảng lương") },
+            { "Phiếu lương",                () => CreateDefaultView("Phiếu lương") },
+
+            // ── KHEN THƯỞNG ──
+            { "Quyết định thưởng",          () => CreateDefaultView("Quyết định thưởng") },
+            { "Vi phạm / cảnh cáo",         () => CreateDefaultView("Vi phạm / cảnh cáo") },
+            { "Lịch sử",                    () => CreateDefaultView("Lịch sử") }
         };
 
         public static UserControl GetView(string menuText)
         {
-            if (_routes.ContainsKey(menuText))
-                return _routes[menuText]();
+            string key = menuText?.Trim() ?? "";
+            if (_routes.ContainsKey(key))
+                return _routes[key]();
 
             return CreateDefaultView(menuText);
         }
