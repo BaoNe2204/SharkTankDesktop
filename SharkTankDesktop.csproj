@@ -53,6 +53,19 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+    <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,8 +233,6 @@
     <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\HR\UI\Forms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
