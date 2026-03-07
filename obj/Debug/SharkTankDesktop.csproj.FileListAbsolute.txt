@@ -10,3 +10,11 @@ C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\Shark
 C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTank.exe
 C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTank.pdb
 C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTank.exe.config
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTank.MainDashboard.resources
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTankDesktop.csproj.SuggestedBindingRedirects.cache
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\bin\Debug\System.Buffers.dll
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\bin\Debug\System.Memory.dll
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\bin\Debug\System.Resources.Extensions.dll
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\minht\Music\SharkTank\SharkTankDesktop\SharkTankDesktop\obj\Debug\SharkTan.A54E4E6C.Up2Date

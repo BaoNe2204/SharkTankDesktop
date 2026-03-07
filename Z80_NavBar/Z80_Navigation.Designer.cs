@@ -38,6 +38,7 @@ namespace SharkTank.Z80_NavBar
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(169, 399);
             this.Panel1.TabIndex = 1;
+            this.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // Z80_Navigation
             // 
@@ -45,7 +46,7 @@ namespace SharkTank.Z80_NavBar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Panel1);
             this.Name = "Z80_Navigation";
-            this.Size = new System.Drawing.Size(169, 399);
+            this.Size = new System.Drawing.Size(260, 399);
             this.ResumeLayout(false);
 
         }

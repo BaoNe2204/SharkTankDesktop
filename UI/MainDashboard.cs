@@ -22,6 +22,34 @@ namespace SharkTank
             _sessionService = sessionService ?? throw new ArgumentNullException(nameof(sessionService));
             _permissionService = permissionService ?? throw new ArgumentNullException(nameof(permissionService));
             InitializeComponent();
+            mnuProfile.AutoSize = false;
+            mnuSettings.AutoSize = false;
+            mnuLogout.AutoSize = false;
+
+            mnuProfile.Width = panelUserRight.Width;
+            mnuSettings.Width = panelUserRight.Width;
+            mnuLogout.Width = panelUserRight.Width;
+            CreateNavigationControl();
+        }
+
+        private void CreateNavigationControl()
+        {
+            // z80Navigation1 đã được tạo trong Designer, chỉ cần initialize
+            // z80Navigation1 = new Z80_NavBar.Z80_Navigation
+            // {
+            //     BackColor = Color.FromArgb(35, 40, 45),
+            //     BorderStyle = BorderStyle.FixedSingle,
+            //     Location = new Point(4, 80),
+            //     Name = "z80Navigation1",
+            //     Size = new Size(250, 574),
+            //     TabIndex = 3
+            // };
+            // Controls.Add(z80Navigation1);
+            // Controls.SetChildIndex(z80Navigation1, 3);
+
+            // Đã được Designer thêm vào, chỉ cần set properties nếu cần
+            z80Navigation1.BackColor = Color.FromArgb(35, 40, 45);
+            z80Navigation1.BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void RoundPanel(Panel panel, int radius)
@@ -37,25 +65,45 @@ namespace SharkTank
 
         private void MainDashboard_Load(object sender, EventArgs e)
         {
-            RoundPanel(panelSearch, 20);
-            
-            // Hiển thị thông tin user
+            // Hiển thị thông tin user trên PanelTop
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
-            lblWelcome.Text = $"Welcome to SharkTank ERP";
-            lblDate.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy");
-            
+            lblDate.Text = "Today is " + GetOrdinalDateString(DateTime.Now);
+            lblWelcome.Text = $"Welcome, Mr. {fullName} 👋";
+            lblUserName.Text = fullName;
+            lblUserRole.Text = user?.Role?.RoleName ?? "User";
+
+            // Avatar tròn
+            MakePictureBoxRound(picAvatar);
+
             // Cập nhật title với tên user
             this.Text = $"SharkTank ERP - {fullName}";
-            
+
             // Thêm logo và nút logout vào panelLogo
             SetupLogoPanel();
-            
+
             // Khởi tạo ViewManager
             _viewManager = new ViewManager(panelContent);
-            
+
             // Initialize Z80 Navigation
             InitializeNavigation();
+        }
+
+        private static string GetOrdinalDateString(DateTime d)
+        {
+            int day = d.Day;
+            string suffix = (day % 10 == 1 && day != 11) ? "st" : (day % 10 == 2 && day != 12) ? "nd" : (day % 10 == 3 && day != 13) ? "rd" : "th";
+            return d.ToString("dddd") + ", " + day + suffix + " " + d.ToString("MMMM yyyy");
+        }
+
+        private void MakePictureBoxRound(PictureBox pic)
+        {
+            if (pic.Width <= 0 || pic.Height <= 0) return;
+            using (var path = new GraphicsPath())
+            {
+                path.AddEllipse(0, 0, pic.Width, pic.Height);
+                pic.Region = new Region(path);
+            }
         }
 
         private void SetupLogoPanel()
@@ -74,7 +122,7 @@ namespace SharkTank
             // User info
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
-            
+
             Label lblUser = new Label
             {
                 Text = fullName,
@@ -135,7 +183,7 @@ namespace SharkTank
 
             // Xác định module dựa trên menu item
             string moduleName = GetModuleNameFromMenuItem(item);
-            
+
             if (!string.IsNullOrEmpty(moduleName))
             {
                 _currentModule = moduleName;
@@ -144,7 +192,7 @@ namespace SharkTank
 
             // Hiển thị view tương ứng trong panelContent
             _viewManager.ShowView(item.Text, _currentModule);
-            
+
             // Cập nhật title của form
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
@@ -163,7 +211,7 @@ namespace SharkTank
             // Sales: 4000-4999
             // Inventory: 5000-5999
             // CRM: 6000-6999
-            
+
             if (item.ID >= 1000 && item.ID < 2000)
                 return "Admin";
             else if (item.ID >= 2000 && item.ID < 3000)
@@ -176,18 +224,97 @@ namespace SharkTank
                 return "Inventory";
             else if (item.ID >= 6000 && item.ID < 7000)
                 return "CRM";
-            
+
             return _currentModule; // Giữ nguyên module hiện tại nếu không xác định được
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void panelUserRight_Click(object sender, EventArgs e)
         {
+            contextMenuUser.AutoSize = false;
+            contextMenuUser.Width = panelUserRight.Width;
 
+            contextMenuUser.Show(panelUserRight, new Point(0, panelUserRight.Height));
+        }
+
+        private void mnuProfile_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Profile - Coming soon.", "Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void mnuSettings_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Settings - Coming soon.", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void mnuLogout_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận đăng xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+            if (result == DialogResult.Yes)
+            {
+                _sessionService.EndSession();
+                RequestLogout = true;
+                this.Close();
+            }
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
         {
             // Vẽ border hoặc custom paint cho panelContent nếu cần
+        }
+
+        private void picBell_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            var r = picBell.ClientRectangle;
+            if (r.Width <= 0 || r.Height <= 0) return;
+            using (var pen = new Pen(Color.Black, 1.5f))
+            using (var brush = new SolidBrush(Color.Black))
+            {
+                int w = r.Width;
+                int h = r.Height;
+                int cx = w / 2;
+                int top = 2;
+                int bottom = h - 4;
+                // Bell body: arc + two lines
+                g.DrawArc(pen, 2, top, w - 4, (h - 4) * 3 / 4, 0, 180);
+                g.DrawLine(pen, 4, top + (h - 4) * 3 / 8, 4, bottom - 2);
+                g.DrawLine(pen, w - 4, top + (h - 4) * 3 / 8, w - 4, bottom - 2);
+                g.DrawEllipse(pen, cx - 2, bottom - 3, 4, 4);
+            }
+        }
+
+        private void picChevron_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            var r = picChevron.ClientRectangle;
+            if (r.Width <= 0 || r.Height <= 0) return;
+            int cx = r.Width / 2;
+            int top = 4;
+            int bottom = r.Height - 4;
+            int left = 4;
+            int right = r.Width - 4;
+            using (var brush = new SolidBrush(Color.Gray))
+            {
+                var pts = new[] { new Point(cx, bottom), new Point(left, top), new Point(right, top) };
+                g.FillPolygon(brush, pts);
+            }
+        }
+
+        private void PanelTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

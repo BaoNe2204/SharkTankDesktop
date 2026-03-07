@@ -1,4 +1,4 @@
-using System;
+`using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,7 +16,7 @@ namespace SharkTank.Modules.Admin
         public UserControl GetView(string viewName)
         {
             return AdminViewRouter.GetView(viewName);
-        }
+        }`
 
         public List<string> GetAvailableViews()
         {

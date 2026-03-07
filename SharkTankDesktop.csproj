@@ -14,8 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <!-- Project .NET Framework, no NuGet PackageReference needed -->
-    <RestoreProjectStyle>None</RestoreProjectStyle>
+    <!-- NuGet used for System.Resources.Extensions (resx with binary resources) -->
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +36,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-<ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -177,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Admin\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainDashboard.resx">
+      <DependentUpon>MainDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Z80_NavBar\Z80_Navigation.resx">
       <DependentUpon>Z80_Navigation.cs</DependentUpon>

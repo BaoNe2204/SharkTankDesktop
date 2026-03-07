@@ -826,6 +826,10 @@ namespace SharkTank.Z80_NavBar
 
         #endregion
 
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 
