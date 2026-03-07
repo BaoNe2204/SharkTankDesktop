@@ -1,14 +1,12 @@
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using Z80NavBar;
-using SharkTank.Modules.HR.UI.Forms;
 
 namespace SharkTank.Modules.HR
 {
     public class HRModule : IModule
     {
-        private static int _menuId = 2000;
+        private int _menuId = 2000;
 
         public string ModuleName => "HR";
 
@@ -31,6 +29,21 @@ namespace SharkTank.Modules.HR
         {
             var menuItems = new List<NavBarItem>();
 
+            // ── QUẢN LÝ NHÂN VIÊN ──
+            int qlnvId = _menuId++;
+            menuItems.Add(new NavBarItem
+            {
+                ID = qlnvId,
+                Text = "👥 Quản lý nhân viên",
+                ParentID = null,
+                Childs = new List<NavBarItem>
+                {
+                    new NavBarItem { ID = _menuId++, Text = "Danh sách nhân viên", ParentID = qlnvId },
+                    new NavBarItem { ID = _menuId++, Text = "Thêm nhân viên mới",  ParentID = qlnvId },
+                }
+            });
+
+            // ── HỒ SƠ NHÂN VIÊN ──
             int profileId = _menuId++;
             menuItems.Add(new NavBarItem
             {
@@ -39,14 +52,44 @@ namespace SharkTank.Modules.HR
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Thêm / sửa / xóa nhân viên", ParentID = profileId },
-                    new NavBarItem { ID = _menuId++, Text = "Thông tin cá nhân", ParentID = profileId },
-                    new NavBarItem { ID = _menuId++, Text = "Ảnh đại diện", ParentID = profileId },
-                    new NavBarItem { ID = _menuId++, Text = "CCCD / hộ chiếu", ParentID = profileId },
-                    new NavBarItem { ID = _menuId++, Text = "Thông tin liên hệ", ParentID = profileId }
+                    new NavBarItem { ID = _menuId++, Text = "Thông tin cá nhân",   ParentID = profileId },
+                    new NavBarItem { ID = _menuId++, Text = "Ảnh đại diện",        ParentID = profileId },
+                    new NavBarItem { ID = _menuId++, Text = "CCCD / hộ chiếu",     ParentID = profileId },
+                    new NavBarItem { ID = _menuId++, Text = "Thông tin liên hệ",   ParentID = profileId }
                 }
             });
 
+            // ── QUẢN LÝ NHÂN VIÊN ──
+            int pqlnvId = _menuId++;
+            menuItems.Add(new NavBarItem
+            {
+                ID = pqlnvId,
+                Text = "👥 Quản lý nhân viên",
+                ParentID = null,
+                Childs = new List<NavBarItem>
+                {
+                    new NavBarItem { ID = _menuId++, Text = "Danh sách nhân viên", ParentID = pqlnvId },
+                    new NavBarItem { ID = _menuId++, Text = "Thêm nhân viên mới",  ParentID = pqlnvId },
+                }
+            });
+
+            // ── HỒ SƠ NHÂN VIÊN ──
+            int pprofileId = _menuId++;
+            menuItems.Add(new NavBarItem
+            {
+                ID = pprofileId,
+                Text = "🧑‍💼 Hồ sơ nhân viên",
+                ParentID = null,
+                Childs = new List<NavBarItem>
+                {
+                    new NavBarItem { ID = _menuId++, Text = "Thông tin cá nhân",   ParentID = pprofileId },
+                    new NavBarItem { ID = _menuId++, Text = "Ảnh đại diện",        ParentID = pprofileId },
+                    new NavBarItem { ID = _menuId++, Text = "CCCD / hộ chiếu",     ParentID = pprofileId },
+                    new NavBarItem { ID = _menuId++, Text = "Thông tin liên hệ",   ParentID = pprofileId }
+                }
+            });
+
+            // ── PHÒNG BAN & CHỨC VỤ ──
             int deptId = _menuId++;
             menuItems.Add(new NavBarItem
             {
@@ -56,12 +99,13 @@ namespace SharkTank.Modules.HR
                 Childs = new List<NavBarItem>
                 {
                     new NavBarItem { ID = _menuId++, Text = "Danh sách phòng ban", ParentID = deptId },
-                    new NavBarItem { ID = _menuId++, Text = "Sơ đồ tổ chức", ParentID = deptId },
-                    new NavBarItem { ID = _menuId++, Text = "Chức danh", ParentID = deptId },
+                    new NavBarItem { ID = _menuId++, Text = "Sơ đồ tổ chức",       ParentID = deptId },
+                    new NavBarItem { ID = _menuId++, Text = "Chức danh",           ParentID = deptId },
                     new NavBarItem { ID = _menuId++, Text = "Điều chuyển nhân sự", ParentID = deptId }
                 }
             });
 
+            // ── HỢP ĐỒNG LAO ĐỘNG ──
             int contractId = _menuId++;
             menuItems.Add(new NavBarItem
             {
@@ -70,44 +114,13 @@ namespace SharkTank.Modules.HR
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Tạo hợp đồng", ParentID = contractId },
-                    new NavBarItem { ID = _menuId++, Text = "Gia hạn / chấm dứt", ParentID = contractId },
-                    new NavBarItem { ID = _menuId++, Text = "Lịch sử hợp đồng", ParentID = contractId }
+                    new NavBarItem { ID = _menuId++, Text = "Tạo hợp đồng",        ParentID = contractId },
+                    new NavBarItem { ID = _menuId++, Text = "Gia hạn / chấm dứt",  ParentID = contractId },
+                    new NavBarItem { ID = _menuId++, Text = "Lịch sử hợp đồng",    ParentID = contractId }
                 }
             });
 
-            int attendanceId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = attendanceId,
-                Text = "⏰ Chấm công",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Check-in / Check-out", ParentID = attendanceId },
-                    new NavBarItem { ID = _menuId++, Text = "Bảng công theo tháng", ParentID = attendanceId },
-                    new NavBarItem { ID = _menuId++, Text = "Nghỉ phép", ParentID = attendanceId },
-                    new NavBarItem { ID = _menuId++, Text = "Làm thêm giờ", ParentID = attendanceId }
-                }
-            });
-
-            int salaryId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = salaryId,
-                Text = "💵 Tính lương",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Lương cơ bản", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Phụ cấp", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Khấu trừ", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Thưởng", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Bảng lương", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu lương", ParentID = salaryId }
-                }
-            });
-
+            // ── KHEN THƯỞNG & KỶ LUẬT ──
             int rewardId = _menuId++;
             menuItems.Add(new NavBarItem
             {
@@ -116,9 +129,9 @@ namespace SharkTank.Modules.HR
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Quyết định thưởng", ParentID = rewardId },
-                    new NavBarItem { ID = _menuId++, Text = "Vi phạm / cảnh cáo", ParentID = rewardId },
-                    new NavBarItem { ID = _menuId++, Text = "Lịch sử", ParentID = rewardId }
+                    new NavBarItem { ID = _menuId++, Text = "Quyết định thưởng",   ParentID = rewardId },
+                    new NavBarItem { ID = _menuId++, Text = "Vi phạm / cảnh cáo",  ParentID = rewardId },
+                    new NavBarItem { ID = _menuId++, Text = "Lịch sử",             ParentID = rewardId }
                 }
             });
 

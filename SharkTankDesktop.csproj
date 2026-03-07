@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+<<<<<<< HEAD
     <Compile Include="Core\Data\DBHelper.cs" />
     <Compile Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.cs">
       <SubType>UserControl</SubType>
@@ -65,6 +66,20 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThemTaiKhoanForm.cs">
       <SubType>Form</SubType>
+=======
+    <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
+      <SubType>UserControl</SubType>
+>>>>>>> 63b44cf2b09bed446e01d10e8e9d4fe061260850
     </Compile>
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
@@ -138,9 +153,6 @@
     <Compile Include="Modules\CRM\CRMModule.cs" />
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
-    <Compile Include="Modules\HR\UI\Forms\HoSoNhanVienView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Sales UI Forms -->
     <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
       <SubType>UserControl</SubType>
