@@ -71,7 +71,7 @@ namespace SharkTank
             // 
             this.panelContent.Location = new System.Drawing.Point(260, 60);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1118, 594);
+            this.panelContent.Size = new System.Drawing.Size(1118, 606);
             this.panelContent.TabIndex = 0;
             this.panelContent.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContent_Paint);
             // 
@@ -105,41 +105,35 @@ namespace SharkTank
             // 
             // contextMenuUser
             // 
+            this.contextMenuUser.BackColor = System.Drawing.Color.White;
+            this.contextMenuUser.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.contextMenuUser.ForeColor = System.Drawing.Color.Black;
             this.contextMenuUser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuProfile,
             this.mnuSettings,
             this.mnuLogout});
             this.contextMenuUser.Name = "contextMenuUser";
-            this.contextMenuUser.Size = new System.Drawing.Size(117, 70);
-            this.contextMenuUser.Renderer = new ToolStripProfessionalRenderer(new MyColorTable());
-            this.contextMenuUser.BackColor = Color.White;
-            this.contextMenuUser.ForeColor = Color.Black;
-            this.contextMenuUser.Font = new Font("Segoe UI", 10);
+            this.contextMenuUser.Size = new System.Drawing.Size(128, 84);
             // 
             // mnuProfile
             // 
-            this.mnuProfile.Name = "mnuProfile";
-            this.mnuProfile.Size = new System.Drawing.Size(116, 22);
             this.mnuProfile.AutoSize = false;
-            this.mnuProfile.Height = 32;
+            this.mnuProfile.Name = "mnuProfile";
+            this.mnuProfile.Size = new System.Drawing.Size(116, 32);
             this.mnuProfile.Text = "Profile";
             this.mnuProfile.Click += new System.EventHandler(this.mnuProfile_Click);
             // 
             // mnuSettings
             // 
             this.mnuSettings.Name = "mnuSettings";
-            this.mnuSettings.Size = new System.Drawing.Size(116, 22);
-            this.mnuProfile.AutoSize = false;
-            this.mnuProfile.Height = 32;
+            this.mnuSettings.Size = new System.Drawing.Size(127, 24);
             this.mnuSettings.Text = "Settings";
             this.mnuSettings.Click += new System.EventHandler(this.mnuSettings_Click);
             // 
             // mnuLogout
             // 
             this.mnuLogout.Name = "mnuLogout";
-            this.mnuLogout.Size = new System.Drawing.Size(116, 22);
-            this.mnuProfile.AutoSize = false;
-            this.mnuProfile.Height = 32;
+            this.mnuLogout.Size = new System.Drawing.Size(127, 24);
             this.mnuLogout.Text = "Logout";
             this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
             // 
@@ -235,16 +229,14 @@ namespace SharkTank
             this.panelLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelLogo.Location = new System.Drawing.Point(-1, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(260, 74);
+            this.panelLogo.Size = new System.Drawing.Size(261, 74);
             this.panelLogo.TabIndex = 4;
             // 
             // z80Navigation1
             // 
             this.z80Navigation1.Location = new System.Drawing.Point(0, 75);
             this.z80Navigation1.Name = "z80Navigation1";
-            this.z80Navigation1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.z80Navigation1.Width = 260;
-
+            this.z80Navigation1.Size = new System.Drawing.Size(260, 591);
             this.z80Navigation1.TabIndex = 3;
             // 
             // MainDashboard
