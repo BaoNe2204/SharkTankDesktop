@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\minht\\Music\\SharkTank\\SharkTankDesktop\\SharkTankDesktop\\SharkTankDesktop.csproj": {}
+    "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\SharkTankDesktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\minht\\Music\\SharkTank\\SharkTankDesktop\\SharkTankDesktop\\SharkTankDesktop.csproj": {
+    "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\SharkTankDesktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\minht\\Music\\SharkTank\\SharkTankDesktop\\SharkTankDesktop\\SharkTankDesktop.csproj",
+        "projectUniqueName": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\SharkTankDesktop.csproj",
         "projectName": "SharkTank",
-        "projectPath": "C:\\Users\\minht\\Music\\SharkTank\\SharkTankDesktop\\SharkTankDesktop\\SharkTankDesktop.csproj",
-        "packagesPath": "C:\\Users\\minht\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\minht\\Music\\SharkTank\\SharkTankDesktop\\SharkTankDesktop\\obj\\",
+        "projectPath": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\SharkTankDesktop.csproj",
+        "packagesPath": "C:\\Users\\NGOC HIEN COMPUTER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "UsingMicrosoftNETSdk": false,
@@ -19,7 +19,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\minht\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NGOC HIEN COMPUTER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

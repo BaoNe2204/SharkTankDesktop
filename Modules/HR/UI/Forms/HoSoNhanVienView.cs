@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,7 +18,7 @@ namespace SharkTank.Modules.HR.UI.Forms
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            
+
             // Panel tiêu đề
             Panel panelTitle = new Panel
             {
@@ -26,7 +26,7 @@ namespace SharkTank.Modules.HR.UI.Forms
                 Height = 60,
                 BackColor = Color.FromArgb(0, 120, 215)
             };
-            
+
             Label lblTitle = new Label
             {
                 Text = "🧑‍💼 Hồ sơ nhân viên",

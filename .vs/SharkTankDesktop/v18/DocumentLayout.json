@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\hrmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\hrmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\ui\\forms\\hosonhanvienview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|c:\\users\\ngoc hien computer\\pictures\\sharktank\\sharktankdesktop\\modules\\hr\\hrviewrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}|SharkTankDesktop.csproj|solutionrelative:modules\\hr\\hrviewrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HoSoNhanVienView.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "RelativeToolTip": "Modules\\HR\\UI\\Forms\\HoSoNhanVienView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T06:25:23.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HRViewRouter.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\HRViewRouter.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRViewRouter.cs",
+              "RelativeToolTip": "Modules\\HR\\HRViewRouter.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T05:56:32.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HRModule.cs",
+              "DocumentMoniker": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRModule.cs",
+              "RelativeDocumentMoniker": "Modules\\HR\\HRModule.cs",
+              "ToolTip": "C:\\Users\\NGOC HIEN COMPUTER\\Pictures\\SharkTank\\SharkTankDesktop\\Modules\\HR\\HRModule.cs",
+              "RelativeToolTip": "Modules\\HR\\HRModule.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T05:56:31.698Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

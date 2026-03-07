@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11429.125 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharkTankDesktop", "SharkTankDesktop.csproj", "{3DFB1083-91DF-0EAD-2CC5-EA9ABE76362A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharkTankDesktop", "SharkTankDesktop.csproj", "{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3DFB1083-91DF-0EAD-2CC5-EA9ABE76362A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DFB1083-91DF-0EAD-2CC5-EA9ABE76362A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DFB1083-91DF-0EAD-2CC5-EA9ABE76362A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DFB1083-91DF-0EAD-2CC5-EA9ABE76362A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBCBB8CA-3674-41E4-88DA-7962D51D5BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
