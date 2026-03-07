@@ -1,0 +1,68 @@
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vscode/
+*.rsuser
+*.rsuserprefs
+
+# Visual Studio Editor files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# MSBuild
+*.metaproj
+*.metaproj.tmp
+*.metaproj.tmp.*
+
+# NuGet
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+**/[Pp]ackages/*
+
+# Rider
+.idea/
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Build scripts
+*.build.csdef
+
+# SQL Server
+*.mdf
+*.ldf
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Logs
+*.log
+*.txt
