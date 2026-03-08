@@ -1,3 +1,4 @@
+using SharkTank.Modules.CRM.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,7 +10,7 @@ namespace SharkTank.Modules.CRM
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Thêm / sửa / xóa lead", () => CreateDefaultView("Quản lý Leads") },
+            { "Quản lý Leads", () => new QuanLyLeadsForm() },
             { "Nguồn khách (Website / Facebook / Giới thiệu / Quảng cáo)", () => CreateDefaultView("Nguồn khách") },
             { "Trạng thái lead", () => CreateDefaultView("Trạng thái lead") },
             { "Phân loại tiềm năng", () => CreateDefaultView("Phân loại tiềm năng") },

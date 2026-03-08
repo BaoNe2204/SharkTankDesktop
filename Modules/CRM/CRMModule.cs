@@ -39,7 +39,7 @@ namespace SharkTank.Modules.CRM
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Thêm / sửa / xóa lead", ParentID = leadsId },
+                    new NavBarItem { ID = _menuId++, Text = "Quản lý Leads", ParentID = leadsId },
                     new NavBarItem { ID = _menuId++, Text = "Nguồn khách (Website / Facebook / Giới thiệu / Quảng cáo)", ParentID = leadsId },
                     new NavBarItem { ID = _menuId++, Text = "Trạng thái lead", ParentID = leadsId },
                     new NavBarItem { ID = _menuId++, Text = "Phân loại tiềm năng", ParentID = leadsId },
