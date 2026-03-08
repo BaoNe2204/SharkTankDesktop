@@ -8,6 +8,7 @@ namespace SharkTank.DAL.InMemory
     {
         private readonly List<Permission> _permissions;
         private readonly Dictionary<int, List<int>> _rolePermissionIds;
+        private readonly Dictionary<int, List<int>> _userPermissionIds;
 
         public InMemoryPermissionRepository()
         {
@@ -31,7 +32,8 @@ namespace SharkTank.DAL.InMemory
                 new Permission { PermissionId = 12, PermissionCode = "ACCOUNTING.CREATE", PermissionName = "Accounting - Create", Module = "Accounting" },
                 new Permission { PermissionId = 13, PermissionCode = "ACCOUNTING.UPDATE", PermissionName = "Accounting - Update", Module = "Accounting" },
 
-                new Permission { PermissionId = 14, PermissionCode = "ADMIN.VIEW", PermissionName = "Admin - View", Module = "Admin" }
+                new Permission { PermissionId = 14, PermissionCode = "ADMIN.VIEW", PermissionName = "Admin - View", Module = "Admin" },
+                new Permission { PermissionId = 15, PermissionCode = "CRM.VIEW", PermissionName = "CRM - View", Module = "CRM" }
             };
 
             // RoleId -> PermissionIds
@@ -52,6 +54,9 @@ namespace SharkTank.DAL.InMemory
                 // Accounting: view/create/update
                 { 5, new List<int> { 11, 12, 13 } }
             };
+
+            // UserId -> PermissionIds (chi tiết theo user, mặc định để trống)
+            _userPermissionIds = new Dictionary<int, List<int>>();
         }
 
         public IEnumerable<Permission> GetByRoleId(int roleId)
@@ -64,6 +69,16 @@ namespace SharkTank.DAL.InMemory
 
             return new List<Permission>();
         }
+
+        public IEnumerable<Permission> GetByUserId(int userId)
+        {
+            if (_userPermissionIds.TryGetValue(userId, out var permissionIds))
+            {
+                var set = new HashSet<int>(permissionIds);
+                return _permissions.Where(p => set.Contains(p.PermissionId)).ToList();
+            }
+
+            return new List<Permission>();
+        }
     }
 }
-

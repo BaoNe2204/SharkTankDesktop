@@ -24,9 +24,9 @@ namespace SharkTank.Modules.Admin.UI.Forms
         {
             ThemTaiKhoanForm form = new ThemTaiKhoanForm();
 
-            form.ShowDialog(); // mở form
+            form.ShowDialog(); 
 
-            LoadUsers(); // load lại danh sách
+            LoadUsers(); 
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -46,7 +46,6 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
             LoadUsers();
         }
-        // Load danh sách user
         private void LoadUsers()
         {
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -89,13 +88,11 @@ namespace SharkTank.Modules.Admin.UI.Forms
             }
         }
 
-        // Làm mới
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadUsers();
         }
 
-        // Xóa user
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count == 0)
@@ -124,7 +121,6 @@ namespace SharkTank.Modules.Admin.UI.Forms
             LoadUsers();
         }
 
-        // Tìm kiếm
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
