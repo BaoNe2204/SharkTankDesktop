@@ -54,6 +54,24 @@
   <ItemGroup>
     <!-- UI -->
     <Compile Include="Core\Data\DBHelper.cs" />
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.Designer.cs">
+      <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.Designer.cs">
+      <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.Designer.cs">
+      <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,8 +202,17 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
+      <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.resx">
+      <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.resx">
       <DependentUpon>QuanLyNguoiDungForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
+      <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -221,17 +248,6 @@
     <None Include="App.config" />
     <None Include="Database\00_CreateDatabase.sql" />
     <None Include="Database\CoreSystem.sql" />
-    <None Include="README.md" />
-    <None Include="HUONG_DAN_PHAN_QUYEN.md" />
-    <None Include="HUONG_DAN_THEM_MENU.md" />
-    <None Include="TEMPLATES\CHECKLIST_PHAT_TRIEN.md" />
-    <None Include="TEMPLATES\README_TEMPLATE.md" />
-    <None Include="Modules\Admin\README.md" />
-    <None Include="Modules\Accounting\README.md" />
-    <None Include="Modules\HR\README.md" />
-    <None Include="Modules\Inventory\README.md" />
-    <None Include="Modules\Sales\README.md" />
-    <None Include="Modules\CRM\README.md" />
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->

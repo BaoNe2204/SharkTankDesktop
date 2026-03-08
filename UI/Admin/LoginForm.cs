@@ -106,7 +106,7 @@ namespace SharkTank.UI.Admin
 
                 // Khởi tạo session & load quyền
                 _sessionService.StartSession(result.User);
-                _permissionService.LoadPermissionsForRole(result.User.RoleId);
+                _permissionService.LoadPermissionsForUser(result.User.UserId, result.User.RoleId);
 
                 DialogResult = DialogResult.OK;
                 Close();
@@ -141,4 +141,5 @@ namespace SharkTank.UI.Admin
         }
     }
 }
+
 
