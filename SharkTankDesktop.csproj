@@ -85,6 +85,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\CRM\UI\Forms\NguonKhachForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\NguonKhachForm.Designer.cs">
+      <DependentUpon>NguonKhachForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
     </Compile>

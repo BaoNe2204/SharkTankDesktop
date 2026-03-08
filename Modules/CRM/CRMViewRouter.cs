@@ -1,3 +1,4 @@
+using CRMSharkTank.Modules.CRM.UI.Forms;
 using SharkTank.Modules.CRM.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace SharkTank.Modules.CRM
             new Dictionary<string, Func<UserControl>>()
         {
             { "Quản lý Leads", () => new QuanLyLeadsForm() },
-            { "Nguồn khách (Website / Facebook / Giới thiệu / Quảng cáo)", () => CreateDefaultView("Nguồn khách") },
+            { "Nguồn khách (Website / Facebook / Giới thiệu / Quảng cáo)", () => new NguonKhachForm() },
             { "Trạng thái lead", () => CreateDefaultView("Trạng thái lead") },
             { "Phân loại tiềm năng", () => CreateDefaultView("Phân loại tiềm năng") },
             { "Nhân viên phụ trách", () => CreateDefaultView("Nhân viên phụ trách") },
