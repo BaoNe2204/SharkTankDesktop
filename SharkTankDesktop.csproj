@@ -85,6 +85,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.Designer.cs">
+      <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,9 +188,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <!-- CRM UI Forms -->
-    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Z80 Navigation Bar -->
     <Compile Include="Z80_NavBar\NavBarItem.cs" />
     <Compile Include="Z80_NavBar\Z80_Navigation.cs">
