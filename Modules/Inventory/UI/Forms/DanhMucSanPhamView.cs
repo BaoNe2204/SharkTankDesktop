@@ -1,67 +1,145 @@
 using System;
-using System.Drawing;
+using System.Data;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
 {
-    /// <summary>
-    /// View: Danh mục sản phẩm
-    /// Thêm/Sửa/Xóa sản phẩm, mã, nhóm hàng, đơn vị tính, giá
-    /// </summary>
     public partial class DanhMucSanPhamView : UserControl
     {
         public DanhMucSanPhamView()
         {
             InitializeComponent();
+            this.Load += DanhMucSanPhamView_Load;
         }
 
-        private void InitializeComponent()
+        private void DanhMucSanPhamView_Load(object sender, EventArgs e)
         {
-            this.SuspendLayout();
-            
-            // Panel tiêu đề
-            Panel panelTitle = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 60,
-                BackColor = Color.FromArgb(0, 120, 215)
-            };
-            
-            Label lblTitle = new Label
-            {
-                Text = "📋 Danh mục sản phẩm",
-                Font = new Font("Segoe UI", 18, FontStyle.Bold),
-                ForeColor = Color.White,
-                Location = new Point(20, 15),
-                AutoSize = true
-            };
-            panelTitle.Controls.Add(lblTitle);
-            this.Controls.Add(panelTitle);
+            LoadData();
+        }
 
-            // Panel nội dung chính
-            Panel panelContent = new Panel
+        void LoadData()
+        {
+            try
             {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(20)
-            };
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM SanPham", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-            Label lblPlaceholder = new Label
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
             {
-                Text = "📝 Hướng dẫn:\n\n" +
-                       "1. Tạo DataGridView hiển thị danh sách sản phẩm\n" +
-                       "2. Thêm TextBox cho: Mã SP, Tên SP, Nhóm hàng, Đơn vị tính, Giá nhập, Giá bán...\n" +
-                       "3. Thêm Button: Thêm, Sửa, Xóa, Nhập Excel\n" +
-                       "4. Viết code xử lý sự kiện Click cho các Button\n\n" +
-                       "Xem ví dụ trong: Modules/Admin/UI/Forms/QuanLyNguoiDungForm.cs",
-                Font = new Font("Segoe UI", 11),
-                ForeColor = Color.Gray,
-                Location = new Point(20, 20),
-                AutoSize = true
-            };
-            panelContent.Controls.Add(lblPlaceholder);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-            this.Controls.Add(panelContent);
-            this.ResumeLayout(false);
+        // Thêm sản phẩm
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    conn.Open();
+
+                    string sql = "INSERT INTO SanPham VALUES(@MaSP,@NhomHang,@DonViTinh,@GiaNhap,@GiaBan)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
+                    cmd.Parameters.AddWithValue("@NhomHang", txtNhomHang.Text);
+                    cmd.Parameters.AddWithValue("@DonViTinh", txtDonViTinh.Text);
+                    cmd.Parameters.AddWithValue("@GiaNhap", txtGiaNhap.Text);
+                    cmd.Parameters.AddWithValue("@GiaBan", txtGiaBan.Text);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Sửa sản phẩm
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    conn.Open();
+
+                    string sql = @"UPDATE SanPham 
+                                   SET NhomHang=@NhomHang,
+                                       DonViTinh=@DonViTinh,
+                                       GiaNhap=@GiaNhap,
+                                       GiaBan=@GiaBan
+                                   WHERE MaSP=@MaSP";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
+                    cmd.Parameters.AddWithValue("@NhomHang", txtNhomHang.Text);
+                    cmd.Parameters.AddWithValue("@DonViTinh", txtDonViTinh.Text);
+                    cmd.Parameters.AddWithValue("@GiaNhap", txtGiaNhap.Text);
+                    cmd.Parameters.AddWithValue("@GiaBan", txtGiaBan.Text);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Xóa sản phẩm
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    conn.Open();
+
+                    string sql = "DELETE FROM SanPham WHERE MaSP=@MaSP";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Click DataGridView
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                txtMaSP.Text = row.Cells[0].Value.ToString();
+                txtNhomHang.Text = row.Cells[1].Value.ToString();
+                txtDonViTinh.Text = row.Cells[2].Value.ToString();
+                txtGiaNhap.Text = row.Cells[3].Value.ToString();
+                txtGiaBan.Text = row.Cells[4].Value.ToString();
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using SharkTank.Modules.Inventory.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,7 +10,7 @@ namespace SharkTank.Modules.Inventory
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Thêm / sửa / xóa sản phẩm", () => CreateDefaultView("Danh mục sản phẩm") },
+            { "Thêm / sửa / xóa sản phẩm", () => new DanhMucSanPhamView() },
             { "Mã sản phẩm", () => CreateDefaultView("Mã sản phẩm") },
             { "Nhóm hàng", () => CreateDefaultView("Nhóm hàng") },
             { "Đơn vị tính", () => CreateDefaultView("Đơn vị tính") },
