@@ -54,6 +54,24 @@
   <ItemGroup>
     <!-- UI -->
     <Compile Include="Core\Data\DBHelper.cs" />
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.Designer.cs">
+      <DependentUpon>ChucVuAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuEditForm.Designer.cs">
+      <DependentUpon>ChucVuEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuForm.Designer.cs">
+      <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,6 +83,24 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.Designer.cs">
       <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanAddForm.Designer.cs">
+      <DependentUpon>PhongBanAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanEditForm.Designer.cs">
+      <DependentUpon>PhongBanEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanForm.Designer.cs">
+      <DependentUpon>PhongBanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.cs">
       <SubType>UserControl</SubType>
@@ -205,11 +241,20 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuAddForm.resx">
+      <DependentUpon>ChucVuAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuForm.resx">
+      <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
       <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.resx">
       <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhongBanForm.resx">
+      <DependentUpon>PhongBanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.resx">
       <DependentUpon>QuanLyNguoiDungForm.cs</DependentUpon>

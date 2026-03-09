@@ -16,13 +16,13 @@ namespace SharkTank.Modules.Admin
                 { "Quản lý tài khoản", () => new QuanLyNguoiDungForm() },
                 { "Phân quyền Role", () => new PhanQuyenRoleForm() },
                 { "Phân quyền chi tiết", () => new PhanQuyenChiTietForm() },
-                { "Quản lý phiên đăng nhập", () => new QuanLyPhienDangNhapForm() }
+                { "Quản lý phiên đăng nhập", () => new QuanLyPhienDangNhapForm() },
 
                 // =========================
                 // 🏢 Cơ cấu tổ chức
                 // =========================
-                // { "Phòng ban", () => new PhongBanForm() },
-                // { "Chức vụ", () => new ChucVuForm() },
+                 { "Phòng ban", () => new PhongBanForm() },
+                 { "Chức vụ", () => new ChucVuForm() },
 
                 // =========================
                 // ⚙️ Cấu hình hệ thống
