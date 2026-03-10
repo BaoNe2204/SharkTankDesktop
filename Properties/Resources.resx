@@ -121,23 +121,8 @@
   <data name="android-chrome-96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\android-chrome-96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="croniox_animation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\croniox_animation.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="factory1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\factory1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="onlinegiftool" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\onlinegiftool.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop (1).gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Untitled-design-5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Untitled-design-5.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="web-development-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\web-development-1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,26 +130,11 @@
   <data name="1-5413" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1-5413.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="croniox_animation1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\croniox_animation1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="output-onlinegiftools" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\output-onlinegiftools.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="31352-business-team" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\31352-business-team.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="d7573b3e236d935c3f87f3d5668a4695" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\d7573b3e236d935c3f87f3d5668a4695.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="animation.7eeba83c017858379914" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\animation.7eeba83c017858379914.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bell-solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bell-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="factory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\factory.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="output" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\output.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
