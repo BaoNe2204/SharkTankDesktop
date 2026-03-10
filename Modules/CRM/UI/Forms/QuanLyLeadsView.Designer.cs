@@ -19,6 +19,20 @@ namespace SharkTank.Modules.CRM.UI.Forms
         private Button btnEmail;
         private Button btnEdit;
         private Button btnDelete;
+        // PANEL EDIT LEAD
+        private Panel panelEditLead;
+        private Label lblEditTen;
+        private Label lblEditPhone;
+        private Label lblEditEmail;
+        private Label lblEditTrangThai;
+
+        private TextBox txtEditTen;
+        private TextBox txtEditPhone;
+        private TextBox txtEditEmail;
+        private ComboBox cbEditTrangThai;
+
+        private Button btnUpdate;
+        private Button btnEditCancel;
 
         // PANEL ADD LEAD
         private Panel panelAddLead;
@@ -52,6 +66,19 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panelAddLead = new System.Windows.Forms.Panel();
+            this.panelEditLead = new System.Windows.Forms.Panel();
+            this.lblEditTen = new System.Windows.Forms.Label();
+            this.lblEditPhone = new System.Windows.Forms.Label();
+            this.lblEditEmail = new System.Windows.Forms.Label();
+            this.lblEditTrangThai = new System.Windows.Forms.Label();
+
+            this.txtEditTen = new System.Windows.Forms.TextBox();
+            this.txtEditPhone = new System.Windows.Forms.TextBox();
+            this.txtEditEmail = new System.Windows.Forms.TextBox();
+            this.cbEditTrangThai = new System.Windows.Forms.ComboBox();
+
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnEditCancel = new System.Windows.Forms.Button();
             this.lblTen = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
@@ -161,6 +188,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.btnEdit.Size = new System.Drawing.Size(140, 40);
             this.btnEdit.TabIndex = 8;
             this.btnEdit.Text = "✏ Sửa";
+
             // 
             // btnDelete
             // 
@@ -201,6 +229,80 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.panelAddLead.Size = new System.Drawing.Size(400, 300);
             this.panelAddLead.TabIndex = 10;
             this.panelAddLead.Visible = false;
+            // panelEditLead
+            this.panelEditLead.BackColor = System.Drawing.Color.White;
+            this.panelEditLead.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelEditLead.Location = new System.Drawing.Point(334, 193);
+            this.panelEditLead.Size = new System.Drawing.Size(400, 260);
+            this.panelEditLead.Visible = false;
+
+
+            // lblEditTen
+            this.lblEditTen.Text = "Tên:";
+            this.lblEditTen.Location = new System.Drawing.Point(20, 30);
+
+            // txtEditTen
+            this.txtEditTen.Location = new System.Drawing.Point(120, 30);
+            this.txtEditTen.Size = new System.Drawing.Size(200, 22);
+
+
+            // lblEditPhone
+            this.lblEditPhone.Text = "Phone:";
+            this.lblEditPhone.Location = new System.Drawing.Point(20, 70);
+
+            // txtEditPhone
+            this.txtEditPhone.Location = new System.Drawing.Point(120, 70);
+            this.txtEditPhone.Size = new System.Drawing.Size(200, 22);
+
+
+            // lblEditEmail
+            this.lblEditEmail.Text = "Email:";
+            this.lblEditEmail.Location = new System.Drawing.Point(20, 110);
+
+            // txtEditEmail
+            this.txtEditEmail.Location = new System.Drawing.Point(120, 110);
+            this.txtEditEmail.Size = new System.Drawing.Size(200, 22);
+
+
+            // lblEditTrangThai
+            this.lblEditTrangThai.Text = "Trạng thái:";
+            this.lblEditTrangThai.Location = new System.Drawing.Point(20, 150);
+
+            // cbEditTrangThai
+            this.cbEditTrangThai.Items.AddRange(new object[] {
+"Mới",
+"Đang tư vấn",
+"Quan tâm",
+"Đã ký"});
+            this.cbEditTrangThai.Location = new System.Drawing.Point(120, 150);
+            this.cbEditTrangThai.Size = new System.Drawing.Size(200, 24);
+
+
+            // btnUpdate
+            this.btnUpdate.Text = "Cập nhật";
+            this.btnUpdate.BackColor = System.Drawing.Color.Green;
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(150, 200);
+            this.btnUpdate.Size = new System.Drawing.Size(80, 30);
+
+
+            // btnEditCancel
+            this.btnEditCancel.Text = "Hủy";
+            this.btnEditCancel.Location = new System.Drawing.Point(240, 200);
+            this.btnEditCancel.Size = new System.Drawing.Size(80, 30);
+
+
+            // add controls
+            this.panelEditLead.Controls.Add(this.lblEditTen);
+            this.panelEditLead.Controls.Add(this.txtEditTen);
+            this.panelEditLead.Controls.Add(this.lblEditPhone);
+            this.panelEditLead.Controls.Add(this.txtEditPhone);
+            this.panelEditLead.Controls.Add(this.lblEditEmail);
+            this.panelEditLead.Controls.Add(this.txtEditEmail);
+            this.panelEditLead.Controls.Add(this.lblEditTrangThai);
+            this.panelEditLead.Controls.Add(this.cbEditTrangThai);
+            this.panelEditLead.Controls.Add(this.btnUpdate);
+            this.panelEditLead.Controls.Add(this.btnEditCancel);
             // 
             // lblTen
             // 
@@ -297,7 +399,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnCancel
             // 

@@ -12,8 +12,7 @@ namespace SharkTank.Modules.CRM
             new Dictionary<string, Func<UserControl>>()
         {
             { "Quản lý Leads", () => new QuanLyLeadsForm() },
-            { "Phân loại tiềm năng", () => CreateDefaultView("Phân loại tiềm năng") },
-            { "Nhân viên phụ trách", () => CreateDefaultView("Nhân viên phụ trách") },
+            { "Nhân viên phụ trách", () => new NhanVienPhuTrachForm() },
             { "Lịch gọi điện", () => CreateDefaultView("Lịch gọi điện") },
             { "Lịch hẹn gặp khách", () => CreateDefaultView("Lịch hẹn gặp khách") },
             { "Ghi chú trao đổi", () => CreateDefaultView("Ghi chú trao đổi") },
