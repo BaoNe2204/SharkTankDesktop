@@ -268,26 +268,6 @@ namespace SharkTank
         {
         }
 
-        private void picBell_Paint(object sender, PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            var r = picBell.ClientRectangle;
-            if (r.Width <= 0 || r.Height <= 0) return;
-            using (var pen = new Pen(Color.Black, 1.5f))
-            using (var brush = new SolidBrush(Color.Black))
-            {
-                int w = r.Width;
-                int h = r.Height;
-                int cx = w / 2;
-                int top = 2;
-                int bottom = h - 4;
-                g.DrawArc(pen, 2, top, w - 4, (h - 4) * 3 / 4, 0, 180);
-                g.DrawLine(pen, 4, top + (h - 4) * 3 / 8, 4, bottom - 2);
-                g.DrawLine(pen, w - 4, top + (h - 4) * 3 / 8, w - 4, bottom - 2);
-                g.DrawEllipse(pen, cx - 2, bottom - 3, 4, 4);
-            }
-        }
 
         private void picChevron_Paint(object sender, PaintEventArgs e)
         {

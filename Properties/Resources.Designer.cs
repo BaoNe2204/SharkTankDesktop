@@ -63,9 +63,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Abstract_blue_sporty_background_with_grunge_effect {
+        internal static System.Drawing.Bitmap _1_5413 {
             get {
-                object obj = ResourceManager.GetObject("Abstract blue sporty background with grunge effect", resourceCulture);
+                object obj = ResourceManager.GetObject("1-5413", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,19 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Abstract_blue_sporty_background_with_grunge_effect1 {
+        internal static System.Drawing.Bitmap _31352_business_team {
             get {
-                object obj = ResourceManager.GetObject("Abstract blue sporty background with grunge effect1", resourceCulture);
+                object obj = ResourceManager.GetObject("31352-business-team", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("lock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +103,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Colorful_abstract_wallpaper_theme___Premium_Vector {
+        internal static System.Drawing.Bitmap animation_7eeba83c017858379914 {
             get {
-                object obj = ResourceManager.GetObject("Colorful abstract wallpaper theme _ Premium Vector", resourceCulture);
+                object obj = ResourceManager.GetObject("animation.7eeba83c017858379914", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +113,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Colorful_abstract_wallpaper_theme___Premium_Vector__1_ {
+        internal static System.Drawing.Bitmap bell_solid {
             get {
-                object obj = ResourceManager.GetObject("Colorful abstract wallpaper theme _ Premium Vector (1)", resourceCulture);
+                object obj = ResourceManager.GetObject("bell-solid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +123,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dreamina_2026_03_06_7441_Remove_the_texts__BANNER__and__YOUR_TITL___ {
+        internal static System.Drawing.Bitmap croniox_animation {
             get {
-                object obj = ResourceManager.GetObject("dreamina-2026-03-06-7441-Remove the texts \'BANNER\' and \'YOUR TITL...", resourceCulture);
+                object obj = ResourceManager.GetObject("croniox_animation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +133,19 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dreamina_2026_03_06_9298_Inspired_by_the_style_and_deep_blue_colo___ {
+        internal static System.Drawing.Bitmap croniox_animation1 {
             get {
-                object obj = ResourceManager.GetObject("dreamina-2026-03-06-9298-Inspired by the style and deep blue colo...", resourceCulture);
+                object obj = ResourceManager.GetObject("croniox_animation1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap d7573b3e236d935c3f87f3d5668a4695 {
+            get {
+                object obj = ResourceManager.GetObject("d7573b3e236d935c3f87f3d5668a4695", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +173,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gradient_geometric_shapes_on_dark_wallpaper_theme___Free_Vector {
+        internal static System.Drawing.Bitmap onlinegiftool {
             get {
-                object obj = ResourceManager.GetObject("Gradient geometric shapes on dark wallpaper theme _ Free Vector", resourceCulture);
+                object obj = ResourceManager.GetObject("onlinegiftool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +183,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap login_4 {
+        internal static System.Drawing.Bitmap original_147bf150b62c0b0427139ed589eb667c_ezgif_com_crop__1_ {
             get {
-                object obj = ResourceManager.GetObject("login-4", resourceCulture);
+                object obj = ResourceManager.GetObject("original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +193,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngtree_business_technology_blue_banner_background_picture_image_1576048 {
+        internal static System.Drawing.Bitmap output {
             get {
-                object obj = ResourceManager.GetObject("pngtree-business-technology-blue-banner-background-picture-image_1576048", resourceCulture);
+                object obj = ResourceManager.GetObject("output", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +203,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngtree_business_technology_blue_banner_background_picture_image_15760481 {
+        internal static System.Drawing.Bitmap output_onlinegiftools {
             get {
-                object obj = ResourceManager.GetObject("pngtree-business-technology-blue-banner-background-picture-image_15760481", resourceCulture);
+                object obj = ResourceManager.GetObject("output-onlinegiftools", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +213,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Potassium_3D {
+        internal static System.Drawing.Bitmap Untitled_design_5 {
             get {
-                object obj = ResourceManager.GetObject("Potassium-3D", resourceCulture);
+                object obj = ResourceManager.GetObject("Untitled-design-5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,29 +223,9 @@ namespace SharkTank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap snapedit_1772816993196 {
+        internal static System.Drawing.Bitmap web_development_1 {
             get {
-                object obj = ResourceManager.GetObject("snapedit_1772816993196", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tải_xuống__1_ {
-            get {
-                object obj = ResourceManager.GetObject("tải xuống (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Абстрактный_Мемфис_автономный_баннер_дергаться___Бесплатный_вектор {
-            get {
-                object obj = ResourceManager.GetObject("Абстрактный Мемфис автономный баннер дергаться _ Бесплатный вектор", resourceCulture);
+                object obj = ResourceManager.GetObject("web-development-1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

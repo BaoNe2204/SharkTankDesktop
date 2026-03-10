@@ -98,7 +98,7 @@ namespace SharkTank
             return new NavBarItem
             {
                 ID = _currentId++,
-                Text = "🚪 Đăng xuất",
+                Text = "Đăng xuất",
                 ParentID = null
             };
         }

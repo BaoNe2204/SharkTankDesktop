@@ -699,7 +699,7 @@ namespace SharkTank.Z80_NavBar
                 if (_initialized)
                 {
                     float yPos = this.Height / 2 - (_theme.FontItem(_depth).Height / 2);
-                    float xPos = 34;
+                    float xPos = 10;
 
                     if (_navItem.ParentID != null)
                         xPos = (float)_navItem.LeftChild;
