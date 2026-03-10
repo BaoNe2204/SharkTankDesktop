@@ -127,17 +127,37 @@
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.Designer.cs">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\BangCongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\CheckInOutView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\LamThemGioView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\LichSuHopDongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\NghiPhepView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
@@ -265,8 +285,8 @@
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Admin\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -277,11 +297,6 @@
     <EmbeddedResource Include="Z80_NavBar\Z80_Navigation.resx">
       <DependentUpon>Z80_Navigation.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
