@@ -303,6 +303,47 @@
     <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d7573b3e236d935c3f87f3d5668a4695.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\croniox_animation.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\croniox_animation1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\31352-business-team.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\web-development-1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled-design-5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animation.7eeba83c017858379914.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop %281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinegiftools.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\onlinegiftool.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1-5413.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

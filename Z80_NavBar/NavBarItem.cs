@@ -76,13 +76,18 @@ namespace Z80NavBar
         /// <summary>
         /// Default values
         /// </summary>
+        /// 
+        public Font Font { get; set; }
         public NavBarItem()
         {
             Enabled = true;
             Visible = true;
-            Height = 34;
+            Height = 45;
             LeftChild = 10;
             ContentBackColor = Color.FromArgb(241, 241, 241);
+
+            // chỉnh chữ
+            this.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
         }
     }
 

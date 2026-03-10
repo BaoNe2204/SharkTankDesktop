@@ -34,7 +34,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = qlnvId,
-                Text = "👥 Quản lý nhân viên",
+                Text = "Quản lý nhân viên",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -48,7 +48,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = profileId,
-                Text = "🧑‍💼 Hồ sơ nhân viên",
+                Text = "Hồ sơ nhân viên",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -64,7 +64,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = pqlnvId,
-                Text = "👥 Quản lý nhân viên",
+                Text = "Quản lý nhân viên",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -78,7 +78,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = pprofileId,
-                Text = "🧑‍💼 Hồ sơ nhân viên",
+                Text = "Hồ sơ nhân viên",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -94,7 +94,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = deptId,
-                Text = "🏢 Phòng ban & chức vụ",
+                Text = "Phòng ban & chức vụ",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -110,7 +110,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = contractId,
-                Text = "📄 Hợp đồng lao động",
+                Text = "Hợp đồng lao động",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -125,7 +125,7 @@ namespace SharkTank.Modules.HR
             menuItems.Add(new NavBarItem
             {
                 ID = rewardId,
-                Text = "🎖️ Khen thưởng & kỷ luật",
+                Text = "Khen thưởng & kỷ luật",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
