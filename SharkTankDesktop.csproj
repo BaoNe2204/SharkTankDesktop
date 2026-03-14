@@ -121,6 +121,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.Designer.cs">
+      <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.resx">
+      <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.resx">
       <DependentUpon>NhanVienPhuTrachForm.cs</DependentUpon>

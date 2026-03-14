@@ -1,4 +1,5 @@
 
+using SharkTank.Core.Data;
 using SharkTank.Modules.CRM.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,7 @@ namespace SharkTank.Modules.CRM
         {
             { "Quản lý Leads", () => new QuanLyLeadsForm() },
             { "Nhân viên phụ trách", () => new NhanVienPhuTrachForm() },
-            { "Lịch gọi điện", () => CreateDefaultView("Lịch gọi điện") },
-            { "Lịch hẹn gặp khách", () => CreateDefaultView("Lịch hẹn gặp khách") },
-            { "Ghi chú trao đổi", () => CreateDefaultView("Ghi chú trao đổi") },
-            { "Lịch sử chăm sóc khách hàng", () => CreateDefaultView("Lịch sử chăm sóc") },
+            { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm() },
             { "Chuyển Lead → Khách hàng chính thức", () => CreateDefaultView("Chuyển đổi khách hàng") },
             { "Tạo khách hàng cho module Sales", () => CreateDefaultView("Tạo khách hàng cho Sales") },
             { "Lưu lịch sử chuyển đổi", () => CreateDefaultView("Lịch sử chuyển đổi") },
