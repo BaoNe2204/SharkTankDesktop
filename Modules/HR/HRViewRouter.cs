@@ -28,14 +28,13 @@ namespace SharkTank.Modules.HR
 
             // ── HỢP ĐỒNG ──
             { "Tạo hợp đồng",               () => new TaoHopDongView() },
-            { "Gia hạn / chấm dứt",         () => CreateDefaultView("Gia hạn / chấm dứt") },
-            { "Lịch sử hợp đồng",           () => CreateDefaultView("Lịch sử hợp đồng") },
+            { "Lịch sử hợp đồng",           () => new LichSuHopDongView() },
 
             // ── CHẤM CÔNG ──
-            { "Check-in / Check-out",       () => CreateDefaultView("Check-in / Check-out") },
-            { "Bảng công theo tháng",       () => CreateDefaultView("Bảng công theo tháng") },
-            { "Nghỉ phép",                  () => CreateDefaultView("Nghỉ phép") },
-            { "Làm thêm giờ",               () => CreateDefaultView("Làm thêm giờ") },
+            { "Check-in / Check-out",       () => new CheckInOutView() },
+            { "Bảng công theo tháng",       () => new BangCongView() },
+            { "Nghỉ phép",                  () => new NghiPhepView() },
+            { "Làm thêm giờ",               () => new LamThemGioView() },
 
             // ── LƯƠNG ──
             { "Lương cơ bản",               () => CreateDefaultView("Lương cơ bản") },

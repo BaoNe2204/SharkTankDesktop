@@ -37,7 +37,7 @@ namespace SharkTank.Modules.Admin
             var securityMenu = new NavBarItem
             {
                 ID = securityId,
-                Text = "🔐 Người dùng & phân quyền",
+                Text = "Người dùng & phân quyền",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -53,7 +53,7 @@ namespace SharkTank.Modules.Admin
             var orgMenu = new NavBarItem
             {
                 ID = orgId,
-                Text = "🏢 Cơ cấu tổ chức",
+                Text = "Cơ cấu tổ chức",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -67,7 +67,7 @@ namespace SharkTank.Modules.Admin
             var configMenu = new NavBarItem
             {
                 ID = configId,
-                Text = "⚙️ Cấu hình hệ thống",
+                Text = "Cấu hình hệ thống",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -83,7 +83,7 @@ namespace SharkTank.Modules.Admin
             var notifyMenu = new NavBarItem
             {
                 ID = notifyId,
-                Text = "🔔 Thông báo hệ thống",
+                Text = "Thông báo hệ thống",
                 ParentID = null
             };
 
@@ -92,7 +92,7 @@ namespace SharkTank.Modules.Admin
             var dashboardMenu = new NavBarItem
             {
                 ID = dashboardId,
-                Text = "📊 Dashboard hệ thống",
+                Text = "Dashboard hệ thống",
                 ParentID = null
             };
 
@@ -101,7 +101,7 @@ namespace SharkTank.Modules.Admin
             var auditMenu = new NavBarItem
             {
                 ID = auditId,
-                Text = "📝 Nhật ký hệ thống",
+                Text = "Nhật ký hệ thống",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -116,7 +116,7 @@ namespace SharkTank.Modules.Admin
             var backupMenu = new NavBarItem
             {
                 ID = backupId,
-                Text = "💾 Backup & Restore",
+                Text = "Backup & Restore",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -130,7 +130,7 @@ namespace SharkTank.Modules.Admin
             var moduleMenu = new NavBarItem
             {
                 ID = moduleId,
-                Text = "📦 Quản lý module",
+                Text = "Quản lý module",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {

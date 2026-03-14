@@ -97,9 +97,9 @@ namespace SharkTank
             this.panelUserRight.Controls.Add(this.picAvatar);
             this.panelUserRight.Controls.Add(this.picBell);
             this.panelUserRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelUserRight.Location = new System.Drawing.Point(829, 8);
+            this.panelUserRight.Location = new System.Drawing.Point(817, 8);
             this.panelUserRight.Name = "panelUserRight";
-            this.panelUserRight.Size = new System.Drawing.Size(276, 44);
+            this.panelUserRight.Size = new System.Drawing.Size(288, 44);
             this.panelUserRight.TabIndex = 3;
             this.panelUserRight.Click += new System.EventHandler(this.panelUserRight_Click);
             // 
@@ -141,7 +141,7 @@ namespace SharkTank
             // 
             this.picChevron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picChevron.BackColor = System.Drawing.Color.Transparent;
-            this.picChevron.Location = new System.Drawing.Point(249, 14);
+            this.picChevron.Location = new System.Drawing.Point(261, 14);
             this.picChevron.Name = "picChevron";
             this.picChevron.Size = new System.Drawing.Size(20, 20);
             this.picChevron.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -191,13 +191,13 @@ namespace SharkTank
             // picBell
             // 
             this.picBell.BackColor = System.Drawing.Color.Transparent;
-            this.picBell.Location = new System.Drawing.Point(3, 12);
+            this.picBell.Image = global::SharkTank.Properties.Resources.bell_solid;
+            this.picBell.Location = new System.Drawing.Point(3, 6);
             this.picBell.Name = "picBell";
-            this.picBell.Size = new System.Drawing.Size(29, 24);
+            this.picBell.Size = new System.Drawing.Size(29, 35);
             this.picBell.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBell.TabIndex = 0;
             this.picBell.TabStop = false;
-            this.picBell.Paint += new System.Windows.Forms.PaintEventHandler(this.picBell_Paint);
             // 
             // lblDate
             // 

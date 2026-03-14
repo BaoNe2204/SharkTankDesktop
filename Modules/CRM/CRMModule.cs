@@ -35,7 +35,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = leadsId,
-                Text = "🎯 Quản lý khách hàng tiềm năng (Leads)",
+                Text = "Quản lý khách hàng tiềm năng (Leads)",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -48,7 +48,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = careId,
-                Text = "📞 Chăm sóc khách hàng",
+                Text = "Chăm sóc khách hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -63,7 +63,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = convertId,
-                Text = "🔄 Chuyển đổi khách hàng",
+                Text = "Chuyển đổi khách hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -77,7 +77,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = oppId,
-                Text = "💼 Quản lý cơ hội bán hàng (Opportunities)",
+                Text = "Quản lý cơ hội bán hàng (Opportunities)",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -93,7 +93,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = pipelineId,
-                Text = "📊 Pipeline bán hàng",
+                Text = "Pipeline bán hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -109,7 +109,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = activityId,
-                Text = "📝 Hoạt động & lịch làm việc",
+                Text = "Hoạt động & lịch làm việc",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -124,7 +124,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = crmReportId,
-                Text = "📈 Báo cáo CRM",
+                Text = "Báo cáo CRM",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {

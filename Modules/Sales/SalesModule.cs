@@ -35,7 +35,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = customerId,
-                Text = "👥 Quản lý khách hàng",
+                Text = "Quản lý khách hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -50,7 +50,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = quoteId,
-                Text = "📑 Báo giá",
+                Text = "Báo giá",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -64,7 +64,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = orderId,
-                Text = "🛒 Đơn bán hàng",
+                Text = "Đơn bán hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -80,7 +80,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = invoiceId,
-                Text = "🧾 Hóa đơn bán",
+                Text = "Hóa đơn bán",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -94,7 +94,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = revenueId,
-                Text = "💰 Theo dõi doanh thu",
+                Text = "Theo dõi doanh thu",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -108,7 +108,7 @@ namespace SharkTank.Modules.Sales
             menuItems.Add(new NavBarItem
             {
                 ID = stockLinkId,
-                Text = "📦 Liên kết kho",
+                Text = "Liên kết kho",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
