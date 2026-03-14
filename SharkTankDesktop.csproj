@@ -133,6 +133,12 @@
     <Compile Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.Designer.cs">
       <DependentUpon>NhanVienPhuTrachForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
+      <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.resx">
       <DependentUpon>NhanVienPhuTrachForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.resx">
+      <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\QuanLyLeadsView.resx">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>

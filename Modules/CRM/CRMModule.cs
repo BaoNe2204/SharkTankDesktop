@@ -35,7 +35,7 @@ namespace SharkTank.Modules.CRM
             menuItems.Add(new NavBarItem
             {
                 ID = leadsId,
-                Text = "Quản lý khách hàng tiềm năng (Leads)",
+                Text = "Quản lý khách hàng tiềm năng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -57,33 +57,16 @@ namespace SharkTank.Modules.CRM
                 }
             });
 
-            int convertId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = convertId,
-                Text = "Chuyển đổi khách hàng",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Chuyển Lead → Khách hàng chính thức", ParentID = convertId },
-                    new NavBarItem { ID = _menuId++, Text = "Tạo khách hàng cho module Sales", ParentID = convertId },
-                    new NavBarItem { ID = _menuId++, Text = "Lưu lịch sử chuyển đổi", ParentID = convertId }
-                }
-            });
-
             int oppId = _menuId++;
             menuItems.Add(new NavBarItem
             {
                 ID = oppId,
-                Text = "Quản lý cơ hội bán hàng (Opportunities)",
+                Text = "Quản lý cơ hội bán hàng",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Tên cơ hội bán", ParentID = oppId },
-                    new NavBarItem { ID = _menuId++, Text = "Khách hàng liên quan", ParentID = oppId },
-                    new NavBarItem { ID = _menuId++, Text = "Giá trị dự kiến", ParentID = oppId },
-                    new NavBarItem { ID = _menuId++, Text = "Xác suất thành công", ParentID = oppId },
-                    new NavBarItem { ID = _menuId++, Text = "Trạng thái cơ hội", ParentID = oppId }
+                    new NavBarItem { ID = _menuId++, Text = "Quản lý cơ hội bán hàng", ParentID = oppId },
+                   
                 }
             });
 

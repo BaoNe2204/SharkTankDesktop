@@ -383,6 +383,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             "Mới",
             "Đang tư vấn",
             "Quan tâm",
+            "Không chốt",
             "Đã ký"});
             this.cbTrangThai.Location = new System.Drawing.Point(120, 190);
             this.cbTrangThai.Name = "cbTrangThai";
