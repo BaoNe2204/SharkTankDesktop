@@ -170,6 +170,18 @@
     <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.Designer.cs">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.Designer.cs">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,9 +260,6 @@
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
     <!-- Sales UI Forms -->
-    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Inventory UI Forms -->
     <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
       <SubType>UserControl</SubType>
@@ -297,6 +306,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\QuanLyKhachHang.resx">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
