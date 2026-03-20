@@ -54,7 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+    <Compile Include="BLL\NotificationService.cs" />
     <Compile Include="Core\Data\DBHelper.cs" />
+    <Compile Include="Core\Models\SystemNotification.cs" />
+    <Compile Include="DAL\INotificationRepository.cs" />
+    <Compile Include="DAL\Sql\SqlNotificationRepository .cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +126,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .Designer.cs">
+      <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
+      <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -411,39 +427,13 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
-    <None Include="Resources\factory.gif" />
-    <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bell-solid.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\d7573b3e236d935c3f87f3d5668a4695.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\31352-business-team.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\web-development-1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Untitled-design-5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\animation.7eeba83c017858379914.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\output-onlinegiftools.gif" />
