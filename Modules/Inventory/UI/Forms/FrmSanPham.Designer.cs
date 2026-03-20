@@ -39,8 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtMaSP = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtLuu = new System.Windows.Forms.Button();
-            this.txtHuy = new System.Windows.Forms.Button();
+            this.btnLuu = new System.Windows.Forms.Button();
+            this.btnHuy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtGiaBan
@@ -148,42 +148,42 @@
             this.label7.TabIndex = 39;
             this.label7.Text = "Danh Mục Sản Phẩm";
             // 
-            // txtLuu
+            // btnLuu
             // 
-            this.txtLuu.BackColor = System.Drawing.Color.LimeGreen;
-            this.txtLuu.FlatAppearance.BorderSize = 0;
-            this.txtLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtLuu.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtLuu.ForeColor = System.Drawing.Color.White;
-            this.txtLuu.Location = new System.Drawing.Point(185, 563);
-            this.txtLuu.Name = "txtLuu";
-            this.txtLuu.Size = new System.Drawing.Size(110, 36);
-            this.txtLuu.TabIndex = 40;
-            this.txtLuu.Text = "Lưu";
-            this.txtLuu.UseVisualStyleBackColor = false;
-            this.txtLuu.Click += new System.EventHandler(this.btnLuu_Click);
+            this.btnLuu.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnLuu.FlatAppearance.BorderSize = 0;
+            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnLuu.ForeColor = System.Drawing.Color.White;
+            this.btnLuu.Location = new System.Drawing.Point(185, 563);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(110, 36);
+            this.btnLuu.TabIndex = 40;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.UseVisualStyleBackColor = false;
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
-            // txtHuy
+            // btnHuy
             // 
-            this.txtHuy.BackColor = System.Drawing.Color.Gray;
-            this.txtHuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtHuy.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtHuy.ForeColor = System.Drawing.Color.White;
-            this.txtHuy.Location = new System.Drawing.Point(419, 563);
-            this.txtHuy.Name = "txtHuy";
-            this.txtHuy.Size = new System.Drawing.Size(110, 36);
-            this.txtHuy.TabIndex = 41;
-            this.txtHuy.Text = "Hủy";
-            this.txtHuy.UseVisualStyleBackColor = false;
-            this.txtHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            this.btnHuy.BackColor = System.Drawing.Color.Gray;
+            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHuy.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnHuy.ForeColor = System.Drawing.Color.White;
+            this.btnHuy.Location = new System.Drawing.Point(419, 563);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(110, 36);
+            this.btnHuy.TabIndex = 41;
+            this.btnHuy.Text = "Hủy";
+            this.btnHuy.UseVisualStyleBackColor = false;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // FrmSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 664);
-            this.Controls.Add(this.txtHuy);
-            this.Controls.Add(this.txtLuu);
+            this.Controls.Add(this.btnHuy);
+            this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtGiaBan);
             this.Controls.Add(this.label5);
@@ -213,7 +213,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMaSP;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button txtLuu;
-        private System.Windows.Forms.Button txtHuy;
+        private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.Button btnHuy;
     }
 }

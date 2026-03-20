@@ -1,8 +1,5 @@
-using SharkTank.Core.Data;
-using System;
+﻿using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using SharkTank.Core.Data;
@@ -15,10 +12,9 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += DanhMucSanPhamView_Load;
-
-            txtSearch.KeyDown += txtSearch_KeyDown;
         }
 
+        // ================= LOAD =================
         private void DanhMucSanPhamView_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -36,7 +32,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     da.Fill(dt);
 
                     dataGridView1.DataSource = dt;
-
                     dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     dataGridView1.MultiSelect = false;
@@ -48,20 +43,20 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
             }
         }
 
-        // ================= HÀM TÌM KIẾM =================
+        // ================= TÌM KIẾM =================
         void TimKiem()
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    string sql = @"SELECT * FROM SanPham
-                                   WHERE MaSP LIKE @key
-                                   OR NhomHang LIKE @key
+                    string sql = @"SELECT * FROM SanPham 
+                                   WHERE MaSP LIKE @key 
+                                   OR NhomHang LIKE @key 
                                    OR DonViTinh LIKE @key";
 
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
@@ -75,11 +70,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
             }
         }
 
-        // ================= ENTER ĐỂ TÌM =================
+        // ================= ENTER TÌM KIẾM =================
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -88,7 +83,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 e.SuppressKeyPress = true;
             }
         }
-        
 
         // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
@@ -103,13 +97,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     {
                         conn.Open();
 
-                        string sql = @"INSERT INTO SanPham
-                        (MaSP,NhomHang,DonViTinh,GiaNhap,GiaBan)
-                        VALUES
-                        (@MaSP,@NhomHang,@DonViTinh,@GiaNhap,@GiaBan)";
+                        string sql = @"INSERT INTO SanPham 
+                                       (MaSP, NhomHang, DonViTinh, GiaNhap, GiaBan)
+                                       VALUES (@MaSP, @NhomHang, @DonViTinh, @GiaNhap, @GiaBan)";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
-
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@NhomHang", f.NhomHang);
                         cmd.Parameters.AddWithValue("@DonViTinh", f.DonViTinh);
@@ -123,7 +115,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Lỗi thêm: " + ex.Message);
                 }
             }
         }
@@ -223,7 +215,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Lỗi xóa: " + ex.Message);
                 }
             }
         }
@@ -234,7 +226,5 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             txtSearch.Clear();
             LoadData();
         }
-
-        
     }
-}// test git 123
+}

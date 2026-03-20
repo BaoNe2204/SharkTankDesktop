@@ -11,8 +11,6 @@ namespace SharkTank.Modules.Inventory
             new Dictionary<string, Func<UserControl>>()
         {
             { "Thêm / sửa / xóa sản phẩm", () => new DanhMucSanPhamView() },
-<<<<<<< HEAD
-=======
             { "📥 Nhập kho", () => new NhapKho() },
             { "Phiếu xuất", () => new XuatKho() },
             { "Tồn theo sản phẩm", () => new TonKho() },
@@ -24,7 +22,6 @@ namespace SharkTank.Modules.Inventory
             { "Vị trí lưu trữ", () => new ViTriKho() },
 
 
->>>>>>> main
             { "Mã sản phẩm", () => CreateDefaultView("Mã sản phẩm") },
             { "Nhóm hàng", () => CreateDefaultView("Nhóm hàng") },
             { "Đơn vị tính", () => CreateDefaultView("Đơn vị tính") },

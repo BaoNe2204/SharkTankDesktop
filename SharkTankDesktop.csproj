@@ -319,19 +319,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <!-- Inventory UI Forms -->
-<<<<<<< HEAD
-    <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.Designer.cs">
-  <DependentUpon>DanhMucSanPhamView.cs</DependentUpon>
-</Compile>
-
-<EmbeddedResource Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.resx">
-  <DependentUpon>DanhMucSanPhamView.cs</DependentUpon>
-</EmbeddedResource>
-=======
->>>>>>> main
     <!-- Accounting UI Forms -->
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
       <SubType>UserControl</SubType>
