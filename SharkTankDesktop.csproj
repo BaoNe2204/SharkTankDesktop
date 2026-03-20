@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -53,7 +54,65 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+    <Compile Include="BLL\NotificationService.cs" />
     <Compile Include="Core\Data\DBHelper.cs" />
+    <Compile Include="Core\Models\SystemNotification.cs" />
+    <Compile Include="DAL\INotificationRepository.cs" />
+    <Compile Include="DAL\Sql\SqlNotificationRepository .cs" />
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.Designer.cs">
+      <DependentUpon>ChucVuAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuEditForm.Designer.cs">
+      <DependentUpon>ChucVuEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ChucVuForm.Designer.cs">
+      <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.Designer.cs">
+      <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.Designer.cs">
+      <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanAddForm.Designer.cs">
+      <DependentUpon>PhongBanAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanEditForm.Designer.cs">
+      <DependentUpon>PhongBanEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\PhongBanForm.Designer.cs">
+      <DependentUpon>PhongBanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.Designer.cs">
+      <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,17 +126,123 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .Designer.cs">
+      <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
+      <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.Designer.cs">
+      <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\BangCongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\CheckInOutView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\LamThemGioView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\LichSuHopDongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\NghiPhepView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\InventoryModule.cs" />
+    <Compile Include="Modules\Inventory\InventoryViewRouter.cs" />
+    <Compile Include="Modules\Inventory\UI\Forms\.Designer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\BienBanKiemKe.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\BienBanKiemKe.Designer.cs">
+      <DependentUpon>BienBanKiemKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.Designer.cs">
+      <DependentUpon>DanhMucSanPhamView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\DieuChinhTon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\DieuChinhTon.Designer.cs">
+      <DependentUpon>DieuChinhTon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmSanPham.Designer.cs">
+      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\Kho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\Kho.Designer.cs">
+      <DependentUpon>Kho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\KiemKeDinhKy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\KiemKeDinhKy.Designer.cs">
+      <DependentUpon>KiemKeDinhKy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\NhapKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\NhapKho.Designer.cs">
+      <DependentUpon>NhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\TonKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\TonKho.Designer.cs">
+      <DependentUpon>TonKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\TonTheoKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\TonTheoKho.Designer.cs">
+      <DependentUpon>TonTheoKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\ViTriKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\XuatKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\XuatKho.Designer.cs">
+      <DependentUpon>XuatKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\Admin\LoginForm.cs">
       <SubType>Form</SubType>
@@ -142,8 +307,6 @@
     <Compile Include="Modules\HR\HRModule.cs" />
     <Compile Include="Modules\HR\HRViewRouter.cs" />
     <!-- Inventory Module -->
-    <Compile Include="Modules\Inventory\InventoryModule.cs" />
-    <Compile Include="Modules\Inventory\InventoryViewRouter.cs" />
     <!-- Sales Module -->
     <Compile Include="Modules\Sales\SalesModule.cs" />
     <Compile Include="Modules\Sales\SalesViewRouter.cs" />
@@ -156,6 +319,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <!-- Inventory UI Forms -->
+<<<<<<< HEAD
     <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,14 +330,13 @@
 <EmbeddedResource Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.resx">
   <DependentUpon>DanhMucSanPhamView.cs</DependentUpon>
 </EmbeddedResource>
+=======
+>>>>>>> main
     <!-- Accounting UI Forms -->
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <!-- CRM UI Forms -->
-    <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Z80 Navigation Bar -->
     <Compile Include="Z80_NavBar\NavBarItem.cs" />
     <Compile Include="Z80_NavBar\Z80_Navigation.cs">
@@ -191,14 +354,65 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuAddForm.resx">
+      <DependentUpon>ChucVuAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuForm.resx">
+      <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
+      <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenRoleForm.resx">
+      <DependentUpon>PhanQuyenRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\PhongBanForm.resx">
+      <DependentUpon>PhongBanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.resx">
       <DependentUpon>QuanLyNguoiDungForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
+      <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\BienBanKiemKe.resx">
+      <DependentUpon>BienBanKiemKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.resx">
+      <DependentUpon>DanhMucSanPhamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\DieuChinhTon.resx">
+      <DependentUpon>DieuChinhTon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmSanPham.resx">
+      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\Kho.resx">
+      <DependentUpon>Kho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\KiemKeDinhKy.resx">
+      <DependentUpon>KiemKeDinhKy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\NhapKho.resx">
+      <DependentUpon>NhapKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\TonKho.resx">
+      <DependentUpon>TonKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\TonTheoKho.resx">
+      <DependentUpon>TonTheoKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\ViTriKho.resx">
+      <DependentUpon>ViTriKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\XuatKho.resx">
+      <DependentUpon>XuatKho.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Admin\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -209,11 +423,6 @@
     <EmbeddedResource Include="Z80_NavBar\Z80_Navigation.resx">
       <DependentUpon>Z80_Navigation.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -228,23 +437,28 @@
     <None Include="App.config" />
     <None Include="Database\00_CreateDatabase.sql" />
     <None Include="Database\CoreSystem.sql" />
-    <None Include="README.md" />
-    <None Include="HUONG_DAN_PHAN_QUYEN.md" />
-    <None Include="HUONG_DAN_THEM_MENU.md" />
-    <None Include="TEMPLATES\CHECKLIST_PHAT_TRIEN.md" />
-    <None Include="TEMPLATES\README_TEMPLATE.md" />
-    <None Include="Modules\Admin\README.md" />
-    <None Include="Modules\Accounting\README.md" />
-    <None Include="Modules\HR\README.md" />
-    <None Include="Modules\Inventory\README.md" />
-    <None Include="Modules\Sales\README.md" />
-    <None Include="Modules\CRM\README.md" />
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
-    <None Include="Resources\factory.gif" />
-    <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\web-development-1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinegiftools.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\onlinegiftool.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1-5413.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output.gif" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

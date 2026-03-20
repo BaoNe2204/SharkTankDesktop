@@ -1,67 +1,168 @@
-using System;
-using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace SharkTank.Modules.CRM.UI.Forms
 {
-    /// <summary>
-    /// View: Quản lý khách hàng tiềm năng (Leads)
-    /// Thêm/Sửa/Xóa leads, phân loại, theo dõi
-    /// </summary>
-    public partial class QuanLyLeadsView : UserControl
+    public partial class QuanLyLeadsForm : UserControl
     {
-        public QuanLyLeadsView()
+        List<Lead> leads = new List<Lead>();
+        int currentId = 1;
+
+        public QuanLyLeadsForm()
         {
             InitializeComponent();
         }
 
-        private void InitializeComponent()
+        private void QuanLyLeadsForm_Load(object sender, EventArgs e)
         {
-            this.SuspendLayout();
-            
-            // Panel tiêu đề
-            Panel panelTitle = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 60,
-                BackColor = Color.FromArgb(0, 120, 215)
-            };
-            
-            Label lblTitle = new Label
-            {
-                Text = "🎯 Quản lý khách hàng tiềm năng (Leads)",
-                Font = new Font("Segoe UI", 18, FontStyle.Bold),
-                ForeColor = Color.White,
-                Location = new Point(20, 15),
-                AutoSize = true
-            };
-            panelTitle.Controls.Add(lblTitle);
-            this.Controls.Add(panelTitle);
+            btnAdd.Click += BtnAdd_Click;
+        }
 
-            // Panel nội dung chính
-            Panel panelContent = new Panel
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            Lead lead = new Lead()
             {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(20)
+                Id = currentId++,
+                TenKhach = txtTen.Text,
+                Phone = txtPhone.Text,
+                Email = txtEmail.Text,
+                Nguon = cbNguon.Text,
+                TrangThai = cbTrangThai.Text
             };
 
-            Label lblPlaceholder = new Label
-            {
-                Text = "📝 Hướng dẫn:\n\n" +
-                       "1. Tạo DataGridView hiển thị danh sách Leads\n" +
-                       "2. Thêm TextBox cho: Tên khách, Số điện thoại, Nguồn, Trạng thái...\n" +
-                       "3. Thêm Button: Thêm lead, Chuyển đổi, Gọi điện, Gửi email\n" +
-                       "4. Viết code xử lý sự kiện Click cho các Button\n\n" +
-                       "Xem ví dụ trong: Modules/Admin/UI/Forms/QuanLyNguoiDungForm.cs",
-                Font = new Font("Segoe UI", 11),
-                ForeColor = Color.Gray,
-                Location = new Point(20, 20),
-                AutoSize = true
-            };
-            panelContent.Controls.Add(lblPlaceholder);
+            leads.Add(lead);
 
-            this.Controls.Add(panelContent);
-            this.ResumeLayout(false);
+            dgvLeads.Rows.Add(
+                lead.Id,
+                lead.TenKhach,
+                lead.Phone,
+                lead.Email,
+                lead.Nguon,
+                lead.TrangThai,
+                ""
+            );
+
+            ClearInput();
+        }
+
+        private void ClearInput()
+        {
+            txtTen.Clear();
+            txtPhone.Clear();
+            txtEmail.Clear();
+            cbNguon.SelectedIndex = -1;
+            cbTrangThai.SelectedIndex = -1;
+        }
+
+        private void PanelTitle_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvLeads.CurrentRow != null)
+            {
+                if (!string.IsNullOrWhiteSpace(txtTen.Text))
+                    dgvLeads.CurrentRow.Cells[1].Value = txtTen.Text;
+
+                if (!string.IsNullOrWhiteSpace(txtPhone.Text))
+                    dgvLeads.CurrentRow.Cells[2].Value = txtPhone.Text;
+
+                if (!string.IsNullOrWhiteSpace(txtEmail.Text))
+                    dgvLeads.CurrentRow.Cells[3].Value = txtEmail.Text;
+
+                if (!string.IsNullOrWhiteSpace(cbNguon.Text))
+                    dgvLeads.CurrentRow.Cells[4].Value = cbNguon.Text;
+
+                if (!string.IsNullOrWhiteSpace(cbTrangThai.Text))
+                    dgvLeads.CurrentRow.Cells[5].Value = cbTrangThai.Text;
+
+                MessageBox.Show("Đã cập nhật Lead!");
+            }
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvLeads.CurrentRow != null)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc muốn xóa Lead này không?",
+                    "Xác nhận xóa",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    dgvLeads.Rows.Remove(dgvLeads.CurrentRow);
+                    MessageBox.Show("Đã xóa Lead!");
+                }
+            }
+        }
+        private void BtnCall_Click(object sender, EventArgs e)
+        {
+            if (dgvLeads.CurrentRow != null)
+            {
+                string phone = dgvLeads.CurrentRow.Cells[2].Value.ToString();
+                MessageBox.Show("Hãy gọi số: " + phone);
+            }
+        }
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            if (dgvLeads.CurrentRow != null)
+            {
+                string phone = dgvLeads.CurrentRow.Cells[2].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(phone))
+                {
+                    string zaloLink = "zalo://conversation?phone=" + phone;
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = zaloLink,
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    MessageBox.Show("Lead này chưa có số điện thoại!");
+                }
+            }
+        }
+        private void btnEmail_Click(object sender, EventArgs e)
+        {
+            if (dgvLeads.CurrentRow != null)
+            {
+                string email = dgvLeads.CurrentRow.Cells[3].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(email))
+                {
+                    string gmailUrl = "https://mail.google.com/mail/?view=cm&to=" + email;
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = gmailUrl,
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    MessageBox.Show("Lead này chưa có email!");
+                }
+            }
+        }
+        // Model Lead
+        public class Lead
+        {
+            public int Id { get; set; }
+            public string TenKhach { get; set; }
+            public string Phone { get; set; }
+            public string Email { get; set; }
+            public string Nguon { get; set; }
+            public string TrangThai { get; set; }
         }
     }
 }

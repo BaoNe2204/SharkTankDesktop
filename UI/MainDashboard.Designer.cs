@@ -1,3 +1,5 @@
+using SharkTank.BLL;
+using SharkTank.DAL.Sql;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -42,6 +44,7 @@ namespace SharkTank
         /// </summary>
         private void InitializeComponent()
         {
+            _notificationService = new NotificationService(new SqlNotificationRepository());
             this.components = new System.ComponentModel.Container();
             this.panelContent = new System.Windows.Forms.Panel();
             this.PanelTop = new System.Windows.Forms.Panel();
@@ -97,9 +100,9 @@ namespace SharkTank
             this.panelUserRight.Controls.Add(this.picAvatar);
             this.panelUserRight.Controls.Add(this.picBell);
             this.panelUserRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelUserRight.Location = new System.Drawing.Point(829, 8);
+            this.panelUserRight.Location = new System.Drawing.Point(817, 8);
             this.panelUserRight.Name = "panelUserRight";
-            this.panelUserRight.Size = new System.Drawing.Size(276, 44);
+            this.panelUserRight.Size = new System.Drawing.Size(288, 44);
             this.panelUserRight.TabIndex = 3;
             this.panelUserRight.Click += new System.EventHandler(this.panelUserRight_Click);
             // 
@@ -141,7 +144,7 @@ namespace SharkTank
             // 
             this.picChevron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picChevron.BackColor = System.Drawing.Color.Transparent;
-            this.picChevron.Location = new System.Drawing.Point(249, 14);
+            this.picChevron.Location = new System.Drawing.Point(261, 14);
             this.picChevron.Name = "picChevron";
             this.picChevron.Size = new System.Drawing.Size(20, 20);
             this.picChevron.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -191,13 +194,13 @@ namespace SharkTank
             // picBell
             // 
             this.picBell.BackColor = System.Drawing.Color.Transparent;
-            this.picBell.Location = new System.Drawing.Point(3, 12);
+            this.picBell.Image = global::SharkTank.Properties.Resources.bell_solid;
+            this.picBell.Location = new System.Drawing.Point(3, 6);
             this.picBell.Name = "picBell";
-            this.picBell.Size = new System.Drawing.Size(29, 24);
+            this.picBell.Size = new System.Drawing.Size(29, 35);
             this.picBell.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBell.TabIndex = 0;
             this.picBell.TabStop = false;
-            this.picBell.Paint += new System.Windows.Forms.PaintEventHandler(this.picBell_Paint);
             // 
             // lblDate
             // 
@@ -222,6 +225,7 @@ namespace SharkTank
             this.lblWelcome.Size = new System.Drawing.Size(184, 21);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Welcome, Mr. [Tên] 👋";
+            this.lblWelcome.Click += new System.EventHandler(this.lblWelcome_Click);
             // 
             // panelLogo
             // 
@@ -234,9 +238,9 @@ namespace SharkTank
             // 
             // z80Navigation1
             // 
-            this.z80Navigation1.Location = new System.Drawing.Point(0, 75);
+            this.z80Navigation1.Location = new System.Drawing.Point(0, 66);
             this.z80Navigation1.Name = "z80Navigation1";
-            this.z80Navigation1.Size = new System.Drawing.Size(260, 591);
+            this.z80Navigation1.Size = new System.Drawing.Size(260, 600);
             this.z80Navigation1.TabIndex = 3;
             // 
             // MainDashboard
@@ -259,12 +263,33 @@ namespace SharkTank
             ((System.ComponentModel.ISupportInitialize)(this.picChevron)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBell)).EndInit();
+            this.panelUserRight.Controls.Add(this.lblNotificationCount);
+
             this.ResumeLayout(false);
+            this.contextMenuNotifications = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lblNotificationCount = new System.Windows.Forms.Label();
+
+            this.lblNotificationCount.AutoSize = false;
+            this.lblNotificationCount.BackColor = System.Drawing.Color.Red;
+            this.lblNotificationCount.ForeColor = System.Drawing.Color.White;
+            this.lblNotificationCount.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold);
+            this.lblNotificationCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotificationCount.Location = new System.Drawing.Point(18, 2);
+            this.lblNotificationCount.Name = "lblNotificationCount";
+            this.lblNotificationCount.Size = new System.Drawing.Size(16, 16);
+            this.lblNotificationCount.TabIndex = 5;
+            this.lblNotificationCount.Text = "0";
+            this.lblNotificationCount.Visible = false;
+
+            this.picBell.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBell.Click += new System.EventHandler(this.picBell_Click);
+
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label lblNotificationCount;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNotifications;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Panel PanelTop;
         private System.Windows.Forms.Panel panelUserRight;

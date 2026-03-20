@@ -44,6 +44,7 @@ namespace SharkTank.UI.Admin
             _sessionService = new SessionService();
             _roleRepository = roleRepository;
 
+
             InitializeComponent();
         }
 
@@ -106,7 +107,7 @@ namespace SharkTank.UI.Admin
 
                 // Khởi tạo session & load quyền
                 _sessionService.StartSession(result.User);
-                _permissionService.LoadPermissionsForRole(result.User.RoleId);
+                _permissionService.LoadPermissionsForUser(result.User.UserId, result.User.RoleId);
 
                 DialogResult = DialogResult.OK;
                 Close();
@@ -116,12 +117,44 @@ namespace SharkTank.UI.Admin
                 lblMessage.Text = "Có lỗi khi đăng nhập: " + ex.Message;
             }
         }
+        private void RoundButton(Button btn, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.StartFigure();
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(btn.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(btn.Width - radius, btn.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, btn.Height - radius, radius, radius, 90, 90);
+            path.CloseFigure();
 
+            btn.Region = new Region(path);
+        }
         private void LoginForm_Load(object sender, EventArgs e)
         {
             ApplyRoundedCorners();
+            Button btnLogin = this.Controls.Find("btnLogin", true)[0] as Button;
+            RoundButton(btnLogin, 40);
+            //label3.Parent = pictureBox1;
+            //label3.BackColor = Color.Transparent;
         }
-
+        private void linkForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(
+                "Vui lòng liên hệ quản trị viên để đặt lại mật khẩu.",
+                "Quên mật khẩu",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(
+                "Tài khoản người dùng được tạo bởi quản trị viên hệ thống.\n\nVui lòng liên hệ bộ phận IT hoặc quản trị hệ thống để được cấp tài khoản.",
+                "Yêu cầu tạo tài khoản",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
         private void ApplyRoundedCorners()
         {
             if (panel1 == null) return;
@@ -139,6 +172,22 @@ namespace SharkTank.UI.Admin
             path.CloseAllFigures();
             panel1.Region = new Region(path);
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
+
 

@@ -11,25 +11,35 @@ namespace SharkTank.Modules.Inventory
             new Dictionary<string, Func<UserControl>>()
         {
             { "Thêm / sửa / xóa sản phẩm", () => new DanhMucSanPhamView() },
+<<<<<<< HEAD
+=======
+            { "📥 Nhập kho", () => new NhapKho() },
+            { "Phiếu xuất", () => new XuatKho() },
+            { "Tồn theo sản phẩm", () => new TonKho() },
+            { "Tồn theo kho", () => new TonTheoKho() },
+            { "Kiểm kê định kỳ", () => new KiemKeDinhKy() },
+            { "Điều chỉnh tồn", () => new DieuChinhTon() },
+            { "Biên bản kiểm kê", () => new BienBanKiemKe() },
+            { "Nhiều kho", () => new Kho() },
+            { "Vị trí lưu trữ", () => new ViTriKho() },
+
+
+>>>>>>> main
             { "Mã sản phẩm", () => CreateDefaultView("Mã sản phẩm") },
             { "Nhóm hàng", () => CreateDefaultView("Nhóm hàng") },
             { "Đơn vị tính", () => CreateDefaultView("Đơn vị tính") },
             { "Giá nhập / bán", () => CreateDefaultView("Giá nhập / bán") },
+
             { "Phiếu nhập", () => CreateDefaultView("Phiếu nhập") },
             { "Nhà cung cấp", () => CreateDefaultView("Nhà cung cấp") },
             { "Giá nhập", () => CreateDefaultView("Giá nhập") },
             { "Số lượng", () => CreateDefaultView("Số lượng") },
-            { "Phiếu xuất", () => CreateDefaultView("Phiếu xuất") },
+
             { "Xuất cho bán hàng", () => CreateDefaultView("Xuất cho bán hàng") },
             { "Xuất nội bộ", () => CreateDefaultView("Xuất nội bộ") },
-            { "Tồn theo sản phẩm", () => CreateDefaultView("Tồn theo sản phẩm") },
-            { "Tồn theo kho", () => CreateDefaultView("Tồn theo kho") },
+
             { "Cảnh báo hết hàng", () => CreateDefaultView("Cảnh báo hết hàng") },
-            { "Kiểm kê định kỳ", () => CreateDefaultView("Kiểm kê định kỳ") },
-            { "Điều chỉnh tồn", () => CreateDefaultView("Điều chỉnh tồn") },
-            { "Biên bản kiểm kê", () => CreateDefaultView("Biên bản kiểm kê") },
-            { "Nhiều kho", () => CreateDefaultView("Nhiều kho") },
-            { "Vị trí lưu trữ", () => CreateDefaultView("Vị trí lưu trữ") }
+
         };
 
         public static UserControl GetView(string menuText)

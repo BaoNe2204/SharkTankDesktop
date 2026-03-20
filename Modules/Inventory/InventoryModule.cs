@@ -50,16 +50,9 @@ namespace SharkTank.Modules.Inventory
             int importId = _menuId++;
             menuItems.Add(new NavBarItem
             {
-                ID = importId,
+                ID = _menuId++,
                 Text = "📥 Nhập kho",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu nhập", ParentID = importId },
-                    new NavBarItem { ID = _menuId++, Text = "Nhà cung cấp", ParentID = importId },
-                    new NavBarItem { ID = _menuId++, Text = "Giá nhập", ParentID = importId },
-                    new NavBarItem { ID = _menuId++, Text = "Số lượng", ParentID = importId }
-                }
+                ParentID = null
             });
 
             int exportId = _menuId++;

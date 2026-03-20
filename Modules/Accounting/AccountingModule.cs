@@ -35,7 +35,7 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = paymentId,
-                Text = "💸 Thu / chi",
+                Text = "Thu / chi",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -49,7 +49,7 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = cashbookId,
-                Text = "📚 Sổ quỹ",
+                Text = "Sổ quỹ",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -63,7 +63,7 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = debtId,
-                Text = "📊 Công nợ",
+                Text = "Công nợ",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -77,7 +77,7 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = invoiceAccId,
-                Text = "🧾 Hạch toán hóa đơn",
+                Text = "Hạch toán hóa đơn",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -91,7 +91,7 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = reportId,
-                Text = "📈 Báo cáo tài chính",
+                Text = "Báo cáo tài chính",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {

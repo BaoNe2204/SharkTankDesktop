@@ -6,6 +6,9 @@ using System.Windows.Forms;
 using Z80NavBar;
 using Z80NavBar.Themes;
 using SharkTank.BLL;
+using System.Linq;
+using SharkTank.Core.Models;
+using SharkTank.DAL.Sql;
 
 namespace SharkTank
 {
@@ -15,6 +18,12 @@ namespace SharkTank
         private string _currentModule = "";
         private readonly SessionService _sessionService;
         private readonly PermissionService _permissionService;
+        private Timer _sessionMonitorTimer;
+        private bool _isHandlingForcedLogout;
+        private NotificationService _notificationService;
+        private List<SystemNotification> _notifications = new List<SystemNotification>();
+        private Form _notificationsPopup;
+
         public bool RequestLogout { get; private set; }
 
         public MainDashboard(SessionService sessionService, PermissionService permissionService)
@@ -34,20 +43,6 @@ namespace SharkTank
 
         private void CreateNavigationControl()
         {
-            // z80Navigation1 đã được tạo trong Designer, chỉ cần initialize
-            // z80Navigation1 = new Z80_NavBar.Z80_Navigation
-            // {
-            //     BackColor = Color.FromArgb(35, 40, 45),
-            //     BorderStyle = BorderStyle.FixedSingle,
-            //     Location = new Point(4, 80),
-            //     Name = "z80Navigation1",
-            //     Size = new Size(250, 574),
-            //     TabIndex = 3
-            // };
-            // Controls.Add(z80Navigation1);
-            // Controls.SetChildIndex(z80Navigation1, 3);
-
-            // Đã được Designer thêm vào, chỉ cần set properties nếu cần
             z80Navigation1.BackColor = Color.FromArgb(35, 40, 45);
             z80Navigation1.BorderStyle = BorderStyle.FixedSingle;
         }
@@ -65,7 +60,6 @@ namespace SharkTank
 
         private void MainDashboard_Load(object sender, EventArgs e)
         {
-            // Hiển thị thông tin user trên PanelTop
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
             lblDate.Text = "Today is " + GetOrdinalDateString(DateTime.Now);
@@ -73,20 +67,278 @@ namespace SharkTank
             lblUserName.Text = fullName;
             lblUserRole.Text = user?.Role?.RoleName ?? "User";
 
-            // Avatar tròn
             MakePictureBoxRound(picAvatar);
-
-            // Cập nhật title với tên user
             this.Text = $"SharkTank ERP - {fullName}";
 
-            // Thêm logo và nút logout vào panelLogo
             SetupLogoPanel();
-
-            // Khởi tạo ViewManager
             _viewManager = new ViewManager(panelContent);
-
-            // Initialize Z80 Navigation
             InitializeNavigation();
+            StartSessionMonitor();
+            LoadNotifications();
+
+        }
+        private void LoadNotifications()
+        {
+            var user = _sessionService.CurrentUser;
+            if (user == null) return;
+
+            _notifications = _notificationService
+                .GetForUser(user.Role?.RoleName, user.Username)
+                .ToList();
+
+            UpdateNotificationBell();
+        }
+
+        private void UpdateNotificationBell()
+        {
+            int count = _notifications.Count;
+            lblNotificationCount.Text = count > 9 ? "9+" : count.ToString();
+            lblNotificationCount.Visible = count > 0;
+        }
+
+        private void picBell_Click(object sender, EventArgs e)
+        {
+            ShowNotificationsMenu();
+        }
+
+        private void ShowNotificationsMenu()
+        {
+            if (IsNotificationsPopupVisible())
+            {
+                HideNotificationsPopup();
+                return;
+            }
+
+            LoadNotifications();
+            if (_notifications == null) _notifications = new List<SystemNotification>();
+
+            int popupWidth = 340;
+            int popupHeight = 420;
+
+            var bellBottomLeft = picBell.PointToScreen(new Point(0, picBell.Height));
+            var bellCenter = picBell.PointToScreen(new Point(picBell.Width / 2, picBell.Height / 2));
+
+            int x = bellCenter.X - popupWidth / 2;
+            int y = bellBottomLeft.Y + 10; 
+
+            var wa = Screen.FromControl(picBell).WorkingArea;
+            if (x < wa.Left) x = wa.Left;
+            if (x + popupWidth > wa.Right) x = wa.Right - popupWidth;
+            if (y < wa.Top) y = wa.Top;
+            if (y + popupHeight > wa.Bottom) y = wa.Bottom - popupHeight;
+
+            _notificationsPopup = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                ShowInTaskbar = false,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(x, y),
+                Size = new System.Drawing.Size(popupWidth, popupHeight),
+                BackColor = Color.White,
+                TopMost = true
+            };
+
+            _notificationsPopup.Deactivate += (s, e) => HideNotificationsPopup();
+            _notificationsPopup.FormClosed += (s, e) =>
+            {
+                if (ReferenceEquals(_notificationsPopup, s as Form)) _notificationsPopup = null;
+            };
+
+            var mainPanel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.White
+            };
+
+            var header = new Label
+            {
+                Text = "Thông báo",
+                AutoSize = false,
+                Height = 42,
+                Width = popupWidth,
+                Padding = new Padding(14, 10, 0, 0),
+                Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold),
+                ForeColor = Color.Black,
+                Location = new System.Drawing.Point(0, 0),
+                BackColor = Color.White
+            };
+
+            var headerLine = new Panel
+            {
+                Height = 1,
+                Width = popupWidth,
+                Location = new System.Drawing.Point(0, header.Height),
+                BackColor = Color.FromArgb(230, 230, 230)
+            };
+
+            var listPanel = new FlowLayoutPanel
+            {
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false,
+                AutoScroll = true,
+                Padding = new Padding(10, 8, 10, 10),
+                Location = new System.Drawing.Point(0, header.Height + headerLine.Height),
+                Size = new System.Drawing.Size(popupWidth, popupHeight - header.Height - headerLine.Height)
+            };
+
+            if (_notifications.Count == 0)
+            {
+                listPanel.Controls.Add(new Label
+                {
+                    Text = "Không có thông báo nào",
+                    Dock = DockStyle.Top,
+                    AutoSize = false,
+                    Width = popupWidth - 30,
+                    Height = 60,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                    ForeColor = Color.Gray,
+                    Font = new System.Drawing.Font("Segoe UI", 9.5F)
+                });
+            }
+            else
+            {
+                foreach (var item in _notifications)
+                {
+                    listPanel.Controls.Add(CreateNotificationCard(item));
+                }
+            }
+
+            mainPanel.Controls.Add(header);
+            mainPanel.Controls.Add(headerLine);
+            mainPanel.Controls.Add(listPanel);
+            _notificationsPopup.Controls.Add(mainPanel);
+
+            _notificationsPopup.Show(this);
+        }
+
+        private void HideNotificationsPopup()
+        {
+            try
+            {
+                if (_notificationsPopup != null && !_notificationsPopup.IsDisposed)
+                    _notificationsPopup.Close();
+            }
+            catch
+            {
+            }
+            finally
+            {
+                _notificationsPopup = null;
+            }
+        }
+
+        private bool IsNotificationsPopupVisible()
+        {
+            return _notificationsPopup != null && !_notificationsPopup.IsDisposed && _notificationsPopup.Visible;
+        }
+
+        private Control CreateNotificationCard(SystemNotification item)
+        {
+            Color typeColor = GetNotificationTypeColor(item?.Type);
+
+            var card = new Panel
+            {
+                Width = 320,
+                Height = 70,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle,
+                Margin = new Padding(0, 0, 0, 10),
+                Cursor = Cursors.Hand
+            };
+
+            var iconCircle = new Panel
+            {
+                Width = 34,
+                Height = 34,
+                Left = 12,
+                Top = 18,
+                BackColor = typeColor
+            };
+            using (var path = new GraphicsPath())
+            {
+                path.AddEllipse(0, 0, iconCircle.Width, iconCircle.Height);
+                iconCircle.Region = new Region(path);
+            }
+
+            var pic = new PictureBox
+            {
+                Size = new System.Drawing.Size(16, 16),
+                Left = (iconCircle.Width - 16) / 2,
+                Top = (iconCircle.Height - 16) / 2,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Image = global::SharkTank.Properties.Resources.bell_solid,
+                BackColor = Color.Transparent
+            };
+
+            iconCircle.Controls.Add(pic);
+
+            var lblTitle = new Label
+            {
+                AutoEllipsis = true,
+                Left = 54,
+                Top = 15,
+                Width = 250,
+                Height = 24,
+                Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold),
+                ForeColor = Color.Black,
+                Text = item?.Title ?? ""
+            };
+
+            var lblTime = new Label
+            {
+                Left = 54,
+                Top = 40,
+                Width = 250,
+                Height = 18,
+                Font = new System.Drawing.Font("Segoe UI", 8.5F),
+                ForeColor = Color.Gray,
+                Text = GetRelativeTimeText(item?.CreatedAt ?? DateTime.Now)
+            };
+
+            void open()
+            {
+                if (item == null) return;
+                HideNotificationsPopup();
+                MessageBox.Show(
+                    item.Content ?? "",
+                    item.Title ?? "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+
+            card.Click += (s, e) => open();
+            iconCircle.Click += (s, e) => open();
+            pic.Click += (s, e) => open();
+            lblTitle.Click += (s, e) => open();
+            lblTime.Click += (s, e) => open();
+
+            card.Controls.Add(iconCircle);
+            card.Controls.Add(lblTitle);
+            card.Controls.Add(lblTime);
+
+            return card;
+        }
+
+        private static Color GetNotificationTypeColor(string type)
+        {
+            var t = (type ?? "").Trim().ToLowerInvariant();
+
+            if (t == "error") return Color.FromArgb(245, 87, 87);    // đỏ
+            if (t == "warning") return Color.FromArgb(255, 177, 50); // cam/vàng
+            return Color.FromArgb(70, 136, 255);                     // xanh cho Info/khác
+        }
+
+        private static string GetRelativeTimeText(DateTime createdAt)
+        {
+            var now = DateTime.Now;
+            if (createdAt > now) createdAt = now;
+
+            var diff = now - createdAt;
+            if (diff.TotalMinutes < 1) return "vừa xong";
+            if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes} phút trước";
+            if (diff.TotalHours < 24) return $"{(int)diff.TotalHours} giờ trước";
+
+            return $"{(int)diff.TotalDays} ngày trước";
         }
 
         private static string GetOrdinalDateString(DateTime d)
@@ -108,7 +360,6 @@ namespace SharkTank
 
         private void SetupLogoPanel()
         {
-            // Logo text
             Label lblLogo = new Label
             {
                 Text = "🦈 SharkTank",
@@ -119,7 +370,6 @@ namespace SharkTank
             };
             panelLogo.Controls.Add(lblLogo);
 
-            // User info
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
 
@@ -133,7 +383,6 @@ namespace SharkTank
             };
             panelLogo.Controls.Add(lblUser);
 
-            // Role
             Label lblRole = new Label
             {
                 Text = user?.Role?.RoleName ?? "User",
@@ -147,22 +396,60 @@ namespace SharkTank
 
         private void InitializeNavigation()
         {
-            // Lấy tất cả menu items từ MenuConfig với permission filtering
             List<NavBarItem> navItems = MenuConfig.GetAllMenuItems(_permissionService);
-
-            // Chọn theme (Dark hoặc Blue)
             ThemeSelector themeSelector = new ThemeSelector(Theme.Dark);
-
-            // Initialize navigation control
             z80Navigation1.Initialize(navItems, themeSelector.CurrentTheme);
-
-            // Subscribe to SelectedItem event
             z80Navigation1.SelectedItem += Z80Navigation1_SelectedItem;
+        }
+
+        private void StartSessionMonitor()
+        {
+            if (_sessionService.CurrentSession == null) return;
+
+            _sessionMonitorTimer = new Timer { Interval = 5000 };
+            _sessionMonitorTimer.Tick += SessionMonitorTimer_Tick;
+            _sessionMonitorTimer.Start();
+        }
+
+        private void StopSessionMonitor()
+        {
+            if (_sessionMonitorTimer == null) return;
+
+            _sessionMonitorTimer.Stop();
+            _sessionMonitorTimer.Tick -= SessionMonitorTimer_Tick;
+            _sessionMonitorTimer.Dispose();
+            _sessionMonitorTimer = null;
+        }
+
+        private void SessionMonitorTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isHandlingForcedLogout) return;
+
+            bool isActive = _sessionService.IsCurrentSessionActive();
+            if (isActive) return;
+
+            _isHandlingForcedLogout = true;
+            StopSessionMonitor();
+
+            MessageBox.Show(
+                "Phiên đăng nhập của bạn đã bị quản trị viên đăng xuất.",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+            _sessionService.EndSession();
+            RequestLogout = true;
+            Close();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            StopSessionMonitor();
+            base.OnFormClosed(e);
         }
 
         private void Z80Navigation1_SelectedItem(NavBarItem item)
         {
-            // Xử lý logout
             if (item.Text == "🚪 Đăng xuất")
             {
                 var result = MessageBox.Show(
@@ -174,6 +461,7 @@ namespace SharkTank
 
                 if (result == DialogResult.Yes)
                 {
+                    StopSessionMonitor();
                     _sessionService.EndSession();
                     RequestLogout = true;
                     this.Close();
@@ -181,7 +469,6 @@ namespace SharkTank
                 return;
             }
 
-            // Xác định module dựa trên menu item
             string moduleName = GetModuleNameFromMenuItem(item);
 
             if (!string.IsNullOrEmpty(moduleName))
@@ -190,28 +477,15 @@ namespace SharkTank
                 _viewManager.SetCurrentModule(_currentModule);
             }
 
-            // Hiển thị view tương ứng trong panelContent
             _viewManager.ShowView(item.Text, _currentModule);
 
-            // Cập nhật title của form
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
             this.Text = $"SharkTank ERP - {fullName} - {_currentModule} - {item.Text}";
         }
 
-        /// <summary>
-        /// Xác định module name dựa trên menu item ID range
-        /// </summary>
         private string GetModuleNameFromMenuItem(NavBarItem item)
         {
-            // Mỗi module có ID range riêng:
-            // Admin: 1000-1999
-            // HR: 2000-2999
-            // Accounting: 3000-3999
-            // Sales: 4000-4999
-            // Inventory: 5000-5999
-            // CRM: 6000-6999
-
             if (item.ID >= 1000 && item.ID < 2000)
                 return "Admin";
             else if (item.ID >= 2000 && item.ID < 3000)
@@ -225,14 +499,13 @@ namespace SharkTank
             else if (item.ID >= 6000 && item.ID < 7000)
                 return "CRM";
 
-            return _currentModule; // Giữ nguyên module hiện tại nếu không xác định được
+            return _currentModule;
         }
 
         private void panelUserRight_Click(object sender, EventArgs e)
         {
             contextMenuUser.AutoSize = false;
             contextMenuUser.Width = panelUserRight.Width;
-
             contextMenuUser.Show(panelUserRight, new Point(0, panelUserRight.Height));
         }
 
@@ -256,6 +529,7 @@ namespace SharkTank
             );
             if (result == DialogResult.Yes)
             {
+                StopSessionMonitor();
                 _sessionService.EndSession();
                 RequestLogout = true;
                 this.Close();
@@ -264,30 +538,8 @@ namespace SharkTank
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
         {
-            // Vẽ border hoặc custom paint cho panelContent nếu cần
         }
 
-        private void picBell_Paint(object sender, PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            var r = picBell.ClientRectangle;
-            if (r.Width <= 0 || r.Height <= 0) return;
-            using (var pen = new Pen(Color.Black, 1.5f))
-            using (var brush = new SolidBrush(Color.Black))
-            {
-                int w = r.Width;
-                int h = r.Height;
-                int cx = w / 2;
-                int top = 2;
-                int bottom = h - 4;
-                // Bell body: arc + two lines
-                g.DrawArc(pen, 2, top, w - 4, (h - 4) * 3 / 4, 0, 180);
-                g.DrawLine(pen, 4, top + (h - 4) * 3 / 8, 4, bottom - 2);
-                g.DrawLine(pen, w - 4, top + (h - 4) * 3 / 8, w - 4, bottom - 2);
-                g.DrawEllipse(pen, cx - 2, bottom - 3, 4, 4);
-            }
-        }
 
         private void picChevron_Paint(object sender, PaintEventArgs e)
         {
@@ -309,10 +561,13 @@ namespace SharkTank
 
         private void PanelTop_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
         {
 
         }
