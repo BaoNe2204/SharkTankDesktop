@@ -10,26 +10,26 @@ namespace SharkTank.Modules.Sales
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Thêm / sửa / xóa khách hàng", () => new QuanLyKhachHangView() },
-            { "Phân loại khách hàng", () => new QuanLyKhachHangView() },
-            { "Lịch sử mua hàng", () => new QuanLyKhachHangView() },
-            { "Công nợ khách", () => new QuanLyKhachHangView() },
-            { "Tạo báo giá", () => new QuanLyKhachHangView() },
-            { "Sửa / duyệt báo giá", () => new QuanLyKhachHangView() },
-            { "Gửi cho khách", () => new QuanLyKhachHangView() },
-            { "Tạo đơn hàng", () => new QuanLyKhachHangView() },
-            { "Trạng thái đơn", () => new QuanLyKhachHangView() },
-            { "Chi tiết sản phẩm", () => new QuanLyKhachHangView() },
-            { "Chiết khấu", () => new QuanLyKhachHangView() },
-            { "Thuế", () => new QuanLyKhachHangView() },
-            { "Xuất hóa đơn", () => new QuanLyKhachHangView() },
-            { "In / PDF", () => new QuanLyKhachHangView() },
-            { "Gửi khách hàng", () => new QuanLyKhachHangView() },
-            { "Doanh thu theo ngày/tháng", () => new QuanLyKhachHangView() },
-            { "Theo nhân viên", () => new QuanLyKhachHangView() },
-            { "Theo sản phẩm", () => new QuanLyKhachHangView() },
-            { "Kiểm tra tồn trước khi bán", () => new QuanLyKhachHangView() },
-            { "Tạo yêu cầu xuất kho", () => new QuanLyKhachHangView() }
+            { "Thêm / sửa / xóa khách hàng", () => new QuanLyKhachHang() },
+            { "Phân loại khách hàng", () => new PhanLoaiKH() },
+            { "Lịch sử mua hàng", () => new QuanLyKhachHang() },
+            { "Công nợ khách", () => new QuanLyKhachHang() },
+            { "Tạo báo giá", () => new QuanLyKhachHang() },
+            { "Sửa / duyệt báo giá", () => new QuanLyKhachHang() },
+            { "Gửi cho khách", () => new QuanLyKhachHang() },
+            { "Tạo đơn hàng", () => new QuanLyKhachHang() },
+            { "Trạng thái đơn", () => new QuanLyKhachHang() },
+            { "Chi tiết sản phẩm", () => new QuanLyKhachHang() },
+            { "Chiết khấu", () => new QuanLyKhachHang() },
+            { "Thuế", () => new QuanLyKhachHang() },
+            { "Xuất hóa đơn", () => new QuanLyKhachHang() },
+            { "In / PDF", () => new QuanLyKhachHang() },
+            { "Gửi khách hàng", () => new QuanLyKhachHang() },
+            { "Doanh thu theo ngày/tháng", () => new QuanLyKhachHang() },
+            { "Theo nhân viên", () => new QuanLyKhachHang() },
+            { "Theo sản phẩm", () => new QuanLyKhachHang() },
+            { "Kiểm tra tồn trước khi bán", () => new QuanLyKhachHang() },
+            { "Tạo yêu cầu xuất kho", () => new QuanLyKhachHang() }
         };
 
         public static UserControl GetView(string menuText)
