@@ -1,67 +1,238 @@
+using SharkTank.Core.Data;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
 {
-    /// <summary>
-    /// View: Danh mục sản phẩm
-    /// Thêm/Sửa/Xóa sản phẩm, mã, nhóm hàng, đơn vị tính, giá
-    /// </summary>
     public partial class DanhMucSanPhamView : UserControl
     {
         public DanhMucSanPhamView()
         {
             InitializeComponent();
+            this.Load += DanhMucSanPhamView_Load;
+
+            txtSearch.KeyDown += txtSearch_KeyDown;
         }
 
-        private void InitializeComponent()
+        private void DanhMucSanPhamView_Load(object sender, EventArgs e)
         {
-            this.SuspendLayout();
-            
-            // Panel tiêu đề
-            Panel panelTitle = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 60,
-                BackColor = Color.FromArgb(0, 120, 215)
-            };
-            
-            Label lblTitle = new Label
-            {
-                Text = "📋 Danh mục sản phẩm",
-                Font = new Font("Segoe UI", 18, FontStyle.Bold),
-                ForeColor = Color.White,
-                Location = new Point(20, 15),
-                AutoSize = true
-            };
-            panelTitle.Controls.Add(lblTitle);
-            this.Controls.Add(panelTitle);
-
-            // Panel nội dung chính
-            Panel panelContent = new Panel
-            {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(20)
-            };
-
-            Label lblPlaceholder = new Label
-            {
-                Text = "📝 Hướng dẫn:\n\n" +
-                       "1. Tạo DataGridView hiển thị danh sách sản phẩm\n" +
-                       "2. Thêm TextBox cho: Mã SP, Tên SP, Nhóm hàng, Đơn vị tính, Giá nhập, Giá bán...\n" +
-                       "3. Thêm Button: Thêm, Sửa, Xóa, Nhập Excel\n" +
-                       "4. Viết code xử lý sự kiện Click cho các Button\n\n" +
-                       "Xem ví dụ trong: Modules/Admin/UI/Forms/QuanLyNguoiDungForm.cs",
-                Font = new Font("Segoe UI", 11),
-                ForeColor = Color.Gray,
-                Location = new Point(20, 20),
-                AutoSize = true
-            };
-            panelContent.Controls.Add(lblPlaceholder);
-
-            this.Controls.Add(panelContent);
-            this.ResumeLayout(false);
+            LoadData();
         }
+
+        // ================= LOAD DATA =================
+        void LoadData()
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM SanPham", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dataGridView1.DataSource = dt;
+
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dataGridView1.MultiSelect = false;
+                    dataGridView1.ReadOnly = true;
+
+                    if (dataGridView1.Columns.Contains("TenSP"))
+                        dataGridView1.Columns["TenSP"].Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // ================= HÀM TÌM KIẾM =================
+        void TimKiem()
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string sql = @"SELECT * FROM SanPham
+                                   WHERE MaSP LIKE @key
+                                   OR NhomHang LIKE @key
+                                   OR DonViTinh LIKE @key";
+
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
+
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // ================= ENTER ĐỂ TÌM =================
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TimKiem();
+                e.SuppressKeyPress = true;
+            }
+        }
+        
+
+        // ================= THÊM =================
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            FrmSanPham f = new FrmSanPham();
+
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sql = @"INSERT INTO SanPham
+                        (MaSP,NhomHang,DonViTinh,GiaNhap,GiaBan)
+                        VALUES
+                        (@MaSP,@NhomHang,@DonViTinh,@GiaNhap,@GiaBan)";
+
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+
+                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                        cmd.Parameters.AddWithValue("@NhomHang", f.NhomHang);
+                        cmd.Parameters.AddWithValue("@DonViTinh", f.DonViTinh);
+                        cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                        cmd.Parameters.AddWithValue("@GiaBan", f.GiaBan);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        // ================= SỬA =================
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn sản phẩm cần sửa!");
+                return;
+            }
+
+            // Lấy dữ liệu từ dòng đang chọn
+            DataGridViewRow row = dataGridView1.CurrentRow;
+
+            string ma = row.Cells["MaSP"].Value.ToString();
+            string nhom = row.Cells["NhomHang"].Value.ToString();
+            string dvt = row.Cells["DonViTinh"].Value.ToString();
+            float giaNhap = float.Parse(row.Cells["GiaNhap"].Value.ToString());
+            float giaBan = float.Parse(row.Cells["GiaBan"].Value.ToString());
+
+            // Mở form
+            FrmSanPham f = new FrmSanPham();
+
+            // GÁN DỮ LIỆU VÀO FORM
+            f.SetData(ma, nhom, dvt, giaNhap, giaBan);
+
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sql = @"UPDATE SanPham 
+                               SET NhomHang=@NhomHang,
+                                   DonViTinh=@DonViTinh,
+                                   GiaNhap=@GiaNhap,
+                                   GiaBan=@GiaBan
+                               WHERE MaSP=@MaSP";
+
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+
+                        cmd.Parameters.AddWithValue("@MaSP", ma);
+                        cmd.Parameters.AddWithValue("@NhomHang", f.NhomHang);
+                        cmd.Parameters.AddWithValue("@DonViTinh", f.DonViTinh);
+                        cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                        cmd.Parameters.AddWithValue("@GiaBan", f.GiaBan);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        // ================= XÓA =================
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn sản phẩm cần xóa!");
+                return;
+            }
+
+            string ma = dataGridView1.CurrentRow.Cells["MaSP"].Value.ToString();
+
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc muốn xóa?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
+
+                        SqlCommand cmd = new SqlCommand(
+                            "DELETE FROM SanPham WHERE MaSP=@MaSP", conn);
+
+                        cmd.Parameters.AddWithValue("@MaSP", ma);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            LoadData();
+        }
+
+        
     }
 }
