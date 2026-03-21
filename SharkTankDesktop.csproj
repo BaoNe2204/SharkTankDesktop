@@ -143,7 +143,7 @@
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
       <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
-=======
+
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -339,7 +339,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\QuanLyLeadsView.resx">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
-=======
+
     <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
       <DependentUpon>PhanLoaiKH.cs</DependentUpon>
     </EmbeddedResource>
