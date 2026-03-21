@@ -125,25 +125,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
-
     <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.Designer.cs">
       <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.Designer.cs">
-      <DependentUpon>NhanVienPhuTrachForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
       <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
-     </Compile>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,7 +148,6 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
       <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
-
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
@@ -327,27 +319,20 @@
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.resx">
       <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\CRM\UI\Forms\NhanVienPhuTrachForm.resx">
-      <DependentUpon>NhanVienPhuTrachForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.resx">
       <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
     </EmbeddedResource>
-  
-  <EmbeddedResource Include="Modules\CRM\UI\Forms\QuanLyLeadsView.resx">
-    <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
-  </EmbeddedResource>
-
+    <EmbeddedResource Include="Modules\CRM\UI\Forms\QuanLyLeadsView.resx">
+      <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
       <DependentUpon>PhanLoaiKH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\QuanLyKhachHang.resx">
       <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
-
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">

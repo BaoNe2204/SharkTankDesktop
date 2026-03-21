@@ -13,18 +13,8 @@ namespace SharkTank.Modules.CRM
             new Dictionary<string, Func<UserControl>>()
         {
             { "Quản lý Leads", () => new QuanLyLeadsForm() },
-            { "Nhân viên phụ trách", () => new NhanVienPhuTrachForm() },
             { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm() },
             { "Quản lý cơ hội bán hàng", () => new QLCoHoiBanHangForm()},
-            { "Khách tiềm năng", () => CreateDefaultView("Pipeline - Khách tiềm năng") },
-            { "Đang tư vấn", () => CreateDefaultView("Pipeline - Đang tư vấn") },
-            { "Đang báo giá", () => CreateDefaultView("Pipeline - Đang báo giá") },
-            { "Đang đàm phán", () => CreateDefaultView("Pipeline - Đang đàm phán") },
-            { "Đã chốt / thất bại", () => CreateDefaultView("Pipeline - Đã chốt") },
-            { "Nhắc lịch chăm sóc", () => CreateDefaultView("Nhắc lịch chăm sóc") },
-            { "Nhắc gọi khách", () => CreateDefaultView("Nhắc gọi khách") },
-            { "Nhắc gửi báo giá", () => CreateDefaultView("Nhắc gửi báo giá") },
-            { "Quản lý công việc sales", () => CreateDefaultView("Quản lý công việc") },
             { "Tỷ lệ chuyển đổi khách hàng", () => CreateDefaultView("Báo cáo tỷ lệ chuyển đổi") },
             { "Hiệu quả nhân viên sales", () => CreateDefaultView("Báo cáo hiệu quả NV") },
             { "Nguồn khách hàng hiệu quả", () => CreateDefaultView("Báo cáo nguồn khách") },

@@ -40,7 +40,7 @@ namespace SharkTank.Modules.CRM
                 Childs = new List<NavBarItem>
                 {
                     new NavBarItem { ID = _menuId++, Text = "Quản lý Leads", ParentID = leadsId },
-                    new NavBarItem { ID = _menuId++, Text = "Nhân viên phụ trách", ParentID = leadsId }
+                    
                 }
             });
 
@@ -70,36 +70,6 @@ namespace SharkTank.Modules.CRM
                 }
             });
 
-            int pipelineId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = pipelineId,
-                Text = "Pipeline bán hàng",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Khách tiềm năng", ParentID = pipelineId },
-                    new NavBarItem { ID = _menuId++, Text = "Đang tư vấn", ParentID = pipelineId },
-                    new NavBarItem { ID = _menuId++, Text = "Đang báo giá", ParentID = pipelineId },
-                    new NavBarItem { ID = _menuId++, Text = "Đang đàm phán", ParentID = pipelineId },
-                    new NavBarItem { ID = _menuId++, Text = "Đã chốt / thất bại", ParentID = pipelineId }
-                }
-            });
-
-            int activityId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = activityId,
-                Text = "Hoạt động & lịch làm việc",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Nhắc lịch chăm sóc", ParentID = activityId },
-                    new NavBarItem { ID = _menuId++, Text = "Nhắc gọi khách", ParentID = activityId },
-                    new NavBarItem { ID = _menuId++, Text = "Nhắc gửi báo giá", ParentID = activityId },
-                    new NavBarItem { ID = _menuId++, Text = "Quản lý công việc sales", ParentID = activityId }
-                }
-            });
 
             int crmReportId = _menuId++;
             menuItems.Add(new NavBarItem
