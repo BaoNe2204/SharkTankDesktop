@@ -7,7 +7,7 @@ namespace SharkTank.Modules.Accounting.UI.Forms
 {
     /// <summary>
     /// View: Phiếu thu / Phiếu chi
-    /// Quản lý thu chi tiền mặt...
+    /// Quản lý thu chi tiền mặt ádasdasdasd
     /// </summary>
     public partial class PhieuThuChiView : UserControl
     {
