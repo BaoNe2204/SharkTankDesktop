@@ -53,7 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+    <Compile Include="BLL\NotificationService.cs" />
     <Compile Include="Core\Data\DBHelper.cs" />
+    <Compile Include="Core\Models\SystemNotification.cs" />
+    <Compile Include="DAL\INotificationRepository.cs" />
+    <Compile Include="DAL\Sql\SqlNotificationRepository .cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +125,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+
     <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,6 +143,19 @@
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
       <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
+=======
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .Designer.cs">
+      <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
+      <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
@@ -171,6 +189,18 @@
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\ThemNhanVienView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.Designer.cs">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.Designer.cs">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -250,9 +280,6 @@
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
     <!-- Sales UI Forms -->
-    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <!-- Inventory UI Forms -->
     <Compile Include="Modules\Inventory\UI\Forms\DanhMucSanPhamView.cs">
       <SubType>UserControl</SubType>
@@ -300,6 +327,7 @@
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.resx">
       <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +339,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\CRM\UI\Forms\QuanLyLeadsView.resx">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\QuanLyKhachHang.resx">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
+
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -344,39 +379,13 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
-    <None Include="Resources\factory.gif" />
-    <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bell-solid.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\d7573b3e236d935c3f87f3d5668a4695.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\31352-business-team.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\web-development-1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Untitled-design-5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\animation.7eeba83c017858379914.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\output-onlinegiftools.gif" />
