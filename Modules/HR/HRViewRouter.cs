@@ -15,10 +15,10 @@ namespace SharkTank.Modules.HR
             { "Thêm nhân viên mới",         () => new ThemNhanVienView() },
 
             // ── HỒ SƠ ──
-            { "Thông tin cá nhân",          () => CreateDefaultView("Thông tin cá nhân") },
-            { "Ảnh đại diện",               () => CreateDefaultView("Ảnh đại diện") },
-            { "CCCD / hộ chiếu",            () => CreateDefaultView("CCCD / hộ chiếu") },
-            { "Thông tin liên hệ",          () => CreateDefaultView("Thông tin liên hệ") },
+            { "Thông tin cá nhân",          () => new ThongTinCaNhanView() },
+            { "Ảnh đại diện",               () => new AnhDaiDienView() },
+            { "CCCD / hộ chiếu",            () => CreateDefaultView("CCCD") },
+            { "Thông tin liên hệ",          () => CreateDefaultView("TTLH") },
 
             // ── PHÒNG BAN ──
             { "Danh sách phòng ban",        () => CreateDefaultView("Danh sách phòng ban") },
@@ -55,21 +55,19 @@ namespace SharkTank.Modules.HR
             string key = menuText?.Trim() ?? "";
             if (_routes.ContainsKey(key))
                 return _routes[key]();
-
             return CreateDefaultView(menuText);
         }
 
         private static UserControl CreateDefaultView(string name)
         {
             UserControl view = new UserControl { Dock = DockStyle.Fill };
-            Label lbl = new Label
+            view.Controls.Add(new Label
             {
                 Text = $"HR - {name}\nĐang phát triển...",
                 Dock = DockStyle.Fill,
                 TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
                 Font = new System.Drawing.Font("Segoe UI", 16)
-            };
-            view.Controls.Add(lbl);
+            });
             return view;
         }
     }
