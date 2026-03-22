@@ -14,11 +14,13 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += NhapKho_Load;
         }
 
+        // ================= LOAD =================
         private void NhapKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
+        // ================= LOAD DATA =================
         void LoadData()
         {
             try
@@ -30,124 +32,156 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     da.Fill(dt);
 
                     dataGridView1.DataSource = dt;
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dataGridView1.MultiSelect = false;
+                    dataGridView1.ReadOnly = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
             }
         }
 
-        // Thêm
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
-            try
+            FrmNhapKho f = new FrmNhapKho();
+
+            if (f.ShowDialog() == DialogResult.OK) // ✅ FIX: bỏ Form trung gian
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
+                try
                 {
-                    conn.Open();
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
 
-                    string sql = @"INSERT INTO NhapKho
-                    (PhieuNhap,MaKho,MaSP,NhaCungCap,GiaNhap,SoLuong)
-                    VALUES
-                    (@PhieuNhap,@MaKho,@MaSP,@NhaCungCap,@GiaNhap,@SoLuong)";
+                        string sql = @"INSERT INTO NhapKho
+                        (PhieuNhap, MaKho, MaSP, NhaCungCap, GiaNhap, SoLuong)
+                        VALUES (@PhieuNhap, @MaKho, @MaSP, @NhaCungCap, @GiaNhap, @SoLuong)";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
+                        SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@NhaCungCap", txtNhaCungCap.Text);
-                    cmd.Parameters.AddWithValue("@GiaNhap", float.Parse(txtGiaNhap.Text));
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
+                        cmd.Parameters.AddWithValue("@PhieuNhap", f.PhieuNhap);
+                        cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                        cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
+                        cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                        cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                    MessageBox.Show("Thêm thành công!");
                 }
-
-                LoadData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi thêm: " + ex.Message);
+                }
             }
         }
 
-        // Sửa
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null)
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    conn.Open();
-
-                    string sql = @"UPDATE NhapKho 
-                           SET MaKho=@MaKho,
-                               MaSP=@MaSP,
-                               NhaCungCap=@NhaCungCap,
-                               GiaNhap=@GiaNhap,
-                               SoLuong=@SoLuong
-                           WHERE PhieuNhap=@PhieuNhap";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@NhaCungCap", txtNhaCungCap.Text);
-                    cmd.Parameters.AddWithValue("@GiaNhap", float.Parse(txtGiaNhap.Text));
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                LoadData();
+                MessageBox.Show("Chọn phiếu cần sửa!");
+                return;
             }
-            catch (Exception ex)
+
+            DataGridViewRow row = dataGridView1.CurrentRow;
+
+            string phieu = row.Cells["PhieuNhap"].Value.ToString();
+            string makho = row.Cells["MaKho"].Value.ToString();
+            string masp = row.Cells["MaSP"].Value.ToString();
+            string ncc = row.Cells["NhaCungCap"].Value.ToString();
+            float gia = float.Parse(row.Cells["GiaNhap"].Value.ToString());
+            int sl = int.Parse(row.Cells["SoLuong"].Value.ToString());
+
+            FrmNhapKho f = new FrmNhapKho();
+            f.SetData(phieu, makho, masp, ncc, gia, sl);
+
+            if (f.ShowDialog() == DialogResult.OK) // ✅ FIX
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sql = @"UPDATE NhapKho
+                        SET MaKho=@MaKho,
+                            MaSP=@MaSP,
+                            NhaCungCap=@NhaCungCap,
+                            GiaNhap=@GiaNhap,
+                            SoLuong=@SoLuong
+                        WHERE PhieuNhap=@PhieuNhap";
+
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+
+                        cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
+                        cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                        cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
+                        cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                        cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                    MessageBox.Show("Sửa thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi sửa: " + ex.Message);
+                }
             }
         }
 
-        // Xóa
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn phiếu cần xóa!");
+                return;
+            }
+
+            string phieu = dataGridView1.CurrentRow.Cells["PhieuNhap"].Value.ToString();
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No) return;
+
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
-                    string sql = "DELETE FROM NhapKho WHERE PhieuNhap=@PhieuNhap";
+                    SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM NhapKho WHERE PhieuNhap=@PhieuNhap", conn);
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-
+                    cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
+                MessageBox.Show("Xóa thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi xóa: " + ex.Message);
             }
         }
 
-        // Click DataGridView
-        private void dataGridViewNhap_CellClick(object sender, DataGridViewCellEventArgs e)
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                txtPhieuNhap.Text = row.Cells["PhieuNhap"].Value.ToString();
-                txtMaKho.Text = row.Cells["MaKho"].Value.ToString();
-                txtMaSP.Text = row.Cells["MaSP"].Value.ToString();
-                txtNhaCungCap.Text = row.Cells["NhaCungCap"].Value.ToString();
-                txtGiaNhap.Text = row.Cells["GiaNhap"].Value.ToString();
-                txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
-            }
+            LoadData();
         }
     }
 }

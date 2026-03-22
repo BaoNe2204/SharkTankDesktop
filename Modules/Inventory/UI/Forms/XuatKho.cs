@@ -14,26 +14,51 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += XuatKho_Load;
         }
 
+        // ================= LOAD =================
         private void XuatKho_Load(object sender, EventArgs e)
         {
-            cboLoaiXuat.Items.Add("Bán hàng");
-            cboLoaiXuat.Items.Add("Nội bộ");
-
             LoadData();
         }
 
-        // Load dữ liệu
+        // ================= LOAD DATA =================
         void LoadData()
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    conn.Open();
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM XuatKho", conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                    string sql = "SELECT * FROM XuatKho";
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dataGridView1.MultiSelect = false;
+                    dataGridView1.ReadOnly = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
+            }
+        }
+
+        // ================= TÌM KIẾM =================
+        void TimKiem()
+        {
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string sql = @"SELECT * FROM XuatKho
+                                   WHERE PhieuXuat LIKE @key
+                                   OR MaSP LIKE @key
+                                   OR MaKho LIKE @key";
 
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
+
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -42,118 +67,155 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
             }
         }
 
-        // Thêm
+        // ================= ENTER SEARCH =================
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                TimKiem();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
-            try
+            FrmXuatKho f = new FrmXuatKho();
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
+                try
                 {
-                    conn.Open();
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
 
-                    string sql = @"INSERT INTO XuatKho
-                    (PhieuXuat, MaKho, MaSP, SoLuong, LoaiXuat)
-                    VALUES(@PhieuXuat,@MaKho,@MaSP,@SoLuong,@LoaiXuat)";
+                        string sql = @"INSERT INTO XuatKho
+                        (PhieuXuat, MaKho, MaSP, LoaiXuat, SoLuong)
+                        VALUES (@PhieuXuat, @MaKho, @MaSP, @LoaiXuat, @SoLuong)";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
+                        SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
-                    cmd.Parameters.AddWithValue("@LoaiXuat", cboLoaiXuat.Text);
+                        cmd.Parameters.AddWithValue("@PhieuXuat", f.PhieuXuat);
+                        cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                        cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
+                        cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                    MessageBox.Show("Thêm thành công!");
                 }
-
-                LoadData();
-                MessageBox.Show("Thêm thành công");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi thêm: " + ex.Message);
+                }
             }
         }
 
-        // Sửa
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null)
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    conn.Open();
-
-                    string sql = @"UPDATE XuatKho
-                    SET MaKho=@MaKho,
-                        MaSP=@MaSP,
-                        SoLuong=@SoLuong,
-                        LoaiXuat=@LoaiXuat
-                    WHERE PhieuXuat=@PhieuXuat";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
-                    cmd.Parameters.AddWithValue("@LoaiXuat", cboLoaiXuat.Text);
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                LoadData();
-                MessageBox.Show("Sửa thành công");
+                MessageBox.Show("Chọn phiếu cần sửa!");
+                return;
             }
-            catch (Exception ex)
+
+            DataGridViewRow row = dataGridView1.CurrentRow;
+
+            string phieu = row.Cells["PhieuXuat"].Value.ToString();
+            string makho = row.Cells["MaKho"].Value.ToString();
+            string masp = row.Cells["MaSP"].Value.ToString();
+            string loai = row.Cells["LoaiXuat"].Value.ToString();
+            int sl = int.Parse(row.Cells["SoLuong"].Value.ToString());
+
+            FrmXuatKho f = new FrmXuatKho();
+            f.SetData(phieu, masp, makho, sl, loai);
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        conn.Open();
+
+                        string sql = @"UPDATE XuatKho
+                        SET MaKho=@MaKho,
+                            MaSP=@MaSP,
+                            LoaiXuat=@LoaiXuat,
+                            SoLuong=@SoLuong
+                        WHERE PhieuXuat=@PhieuXuat";
+
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+
+                        cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
+                        cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                        cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
+                        cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    LoadData();
+                    MessageBox.Show("Sửa thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi sửa: " + ex.Message);
+                }
             }
         }
 
-        // Xóa
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn phiếu cần xóa!");
+                return;
+            }
+
+            string phieu = dataGridView1.CurrentRow.Cells["PhieuXuat"].Value.ToString();
+
+            if (MessageBox.Show("Bạn có chắc muốn xóa?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No) return;
+
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
-                    string sql = "DELETE FROM XuatKho WHERE PhieuXuat=@PhieuXuat";
+                    SqlCommand cmd = new SqlCommand(
+                        "DELETE FROM XuatKho WHERE PhieuXuat=@PhieuXuat", conn);
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
-
+                    cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
-                MessageBox.Show("Xóa thành công");
+                MessageBox.Show("Xóa thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi xóa: " + ex.Message);
             }
         }
 
-        // Click DataGridView
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                txtPhieuXuat.Text = row.Cells["PhieuXuat"].Value.ToString();
-                txtMaKho.Text = row.Cells["MaKho"].Value.ToString();
-                txtMaSP.Text = row.Cells["MaSP"].Value.ToString();
-                txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
-                cboLoaiXuat.Text = row.Cells["LoaiXuat"].Value.ToString();
-            }
+            txtSearch.Clear();
+            LoadData();
         }
     }
 }

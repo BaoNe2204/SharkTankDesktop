@@ -194,11 +194,23 @@
     <Compile Include="Modules\Inventory\UI\Forms\DieuChinhTon.Designer.cs">
       <DependentUpon>DieuChinhTon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmNhapKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmNhapKho.Designer.cs">
+      <DependentUpon>FrmNhapKho.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\FrmSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\FrmSanPham.Designer.cs">
       <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmXuatKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmXuatKho.Designer.cs">
+      <DependentUpon>FrmXuatKho.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\Kho.cs">
       <SubType>UserControl</SubType>
@@ -371,8 +383,14 @@
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\DieuChinhTon.resx">
       <DependentUpon>DieuChinhTon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmNhapKho.resx">
+      <DependentUpon>FrmNhapKho.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmSanPham.resx">
       <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmXuatKho.resx">
+      <DependentUpon>FrmXuatKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\Kho.resx">
       <DependentUpon>Kho.cs</DependentUpon>
