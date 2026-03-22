@@ -272,8 +272,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.cbEditTrangThai.Items.AddRange(new object[] {
 "Mới",
 "Đang tư vấn",
-"Quan tâm",
-"Đã ký"});
+"Quan tâm"});
             this.cbEditTrangThai.Location = new System.Drawing.Point(120, 150);
             this.cbEditTrangThai.Size = new System.Drawing.Size(200, 24);
 
@@ -383,8 +382,8 @@ namespace SharkTank.Modules.CRM.UI.Forms
             "Mới",
             "Đang tư vấn",
             "Quan tâm",
-            "Không chốt",
-            "Đã ký"});
+            "Không chốt"
+            });
             this.cbTrangThai.Location = new System.Drawing.Point(120, 190);
             this.cbTrangThai.Name = "cbTrangThai";
             this.cbTrangThai.Size = new System.Drawing.Size(200, 24);
