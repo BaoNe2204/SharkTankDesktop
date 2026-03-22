@@ -1,3 +1,4 @@
+using SharkTank.Modules.Accounting.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,9 +10,7 @@ namespace SharkTank.Modules.Accounting
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Phiếu thu", () => CreateDefaultView("Phiếu thu") },
-            { "Phiếu chi", () => CreateDefaultView("Phiếu chi") },
-            { "Nguồn tiền", () => CreateDefaultView("Nguồn tiền") },
+            { "Phiếu thu chi", () => new PhieuThuChiView() },
             { "Tiền mặt", () => CreateDefaultView("Sổ quỹ tiền mặt") },
             { "Ngân hàng", () => CreateDefaultView("Sổ quỹ ngân hàng") },
             { "Số dư", () => CreateDefaultView("Số dư") },
