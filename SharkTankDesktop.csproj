@@ -142,6 +142,9 @@
     <Compile Include="Modules\HR\UI\Forms\BangCongView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\CCCDHoChieuView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\CheckInOutView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -167,6 +170,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\ThongTinCaNhanView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ThongTinLienHeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
