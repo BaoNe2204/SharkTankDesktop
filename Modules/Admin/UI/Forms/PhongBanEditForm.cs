@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -8,6 +9,7 @@ namespace SharkTank.Modules.Admin.UI.Forms
     public partial class PhongBanEditForm : Form
     {
         int id;
+        PhongBanSnapshot _oldSnap;
 
         public PhongBanEditForm(int phongBanId)
         {
@@ -35,12 +37,25 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 {
                     txtTenPhongBan.Text = reader["TenPhongBan"].ToString();
                     txtMoTa.Text = reader["MoTa"].ToString();
+                    _oldSnap = new PhongBanSnapshot
+                    {
+                        PhongBanId = id.ToString(),
+                        TenPhongBan = reader["TenPhongBan"]?.ToString(),
+                        MoTa = reader["MoTa"]?.ToString()
+                    };
                 }
             }
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            var newSnap = new PhongBanSnapshot
+            {
+                PhongBanId = id.ToString(),
+                TenPhongBan = txtTenPhongBan.Text.Trim(),
+                MoTa = txtMoTa.Text.Trim()
+            };
+
             using (SqlConnection conn = DBHelper.GetConnection())
             {
                 conn.Open();
@@ -57,6 +72,9 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                 cmd.ExecuteNonQuery();
             }
+
+            // Ghi DataChangeLogs + AuditLogs
+            AuditHelper.Update("PhongBan", id.ToString(), txtTenPhongBan.Text.Trim(), _oldSnap, newSnap);
 
             MessageBox.Show("Sửa thành công");
 

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -14,13 +15,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += NhapKho_Load;
         }
 
-        // ================= LOAD =================
         private void NhapKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        // ================= LOAD DATA =================
         void LoadData()
         {
             try
@@ -30,7 +29,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM NhapKho", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     dataGridView1.DataSource = dt;
                     dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -44,35 +42,42 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // ================= THÊM =================
+        // THÊM
         private void btnThem_Click(object sender, EventArgs e)
         {
             FrmNhapKho f = new FrmNhapKho();
-
-            if (f.ShowDialog() == DialogResult.OK) // ✅ FIX: bỏ Form trung gian
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
                         conn.Open();
-
                         string sql = @"INSERT INTO NhapKho
                         (PhieuNhap, MaKho, MaSP, NhaCungCap, GiaNhap, SoLuong)
                         VALUES (@PhieuNhap, @MaKho, @MaSP, @NhaCungCap, @GiaNhap, @SoLuong)";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
-
                         cmd.Parameters.AddWithValue("@PhieuNhap", f.PhieuNhap);
                         cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
                         cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
                         cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
-
                         cmd.ExecuteNonQuery();
-                    }
 
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Insert("NhapKho", f.PhieuNhap, f.PhieuNhap,
+                            new NhapKhoSnapshot
+                            {
+                                PhieuNhap = f.PhieuNhap,
+                                MaKho = f.MaKho,
+                                MaSP = f.MaSP,
+                                NhaCungCap = f.NhaCungCap,
+                                GiaNhap = f.GiaNhap.ToString(),
+                                SoLuong = f.SoLuong.ToString()
+                            });
+                    }
                     LoadData();
                     MessageBox.Show("Thêm thành công!");
                 }
@@ -83,7 +88,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // ================= SỬA =================
+        // SỬA
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -93,7 +98,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
 
             DataGridViewRow row = dataGridView1.CurrentRow;
-
             string phieu = row.Cells["PhieuNhap"].Value.ToString();
             string makho = row.Cells["MaKho"].Value.ToString();
             string masp = row.Cells["MaSP"].Value.ToString();
@@ -104,34 +108,41 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             FrmNhapKho f = new FrmNhapKho();
             f.SetData(phieu, makho, masp, ncc, gia, sl);
 
-            if (f.ShowDialog() == DialogResult.OK) // ✅ FIX
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
+                    // Đọc dữ liệu cũ
+                    var oldSnap = NhapKhoSnapshot.FromDb(phieu);
+                    var newSnap = new NhapKhoSnapshot
+                    {
+                        PhieuNhap = phieu,
+                        MaKho = f.MaKho,
+                        MaSP = f.MaSP,
+                        NhaCungCap = f.NhaCungCap,
+                        GiaNhap = f.GiaNhap.ToString(),
+                        SoLuong = f.SoLuong.ToString()
+                    };
+
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
                         conn.Open();
-
                         string sql = @"UPDATE NhapKho
-                        SET MaKho=@MaKho,
-                            MaSP=@MaSP,
-                            NhaCungCap=@NhaCungCap,
-                            GiaNhap=@GiaNhap,
-                            SoLuong=@SoLuong
+                        SET MaKho=@MaKho, MaSP=@MaSP, NhaCungCap=@NhaCungCap, GiaNhap=@GiaNhap, SoLuong=@SoLuong
                         WHERE PhieuNhap=@PhieuNhap";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
-
                         cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
                         cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
                         cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
                         cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
-
                         cmd.ExecuteNonQuery();
-                    }
 
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Update("NhapKho", phieu, f.PhieuNhap, oldSnap, newSnap);
+                    }
                     LoadData();
                     MessageBox.Show("Sửa thành công!");
                 }
@@ -142,7 +153,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // ================= XÓA =================
+        // XÓA
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -161,14 +172,14 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
                     SqlCommand cmd = new SqlCommand(
                         "DELETE FROM NhapKho WHERE PhieuNhap=@PhieuNhap", conn);
-
                     cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
                     cmd.ExecuteNonQuery();
-                }
 
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("NhapKho", phieu, phieu, "PhieuNhap");
+                }
                 LoadData();
                 MessageBox.Show("Xóa thành công!");
             }
@@ -178,7 +189,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // ================= LÀM MỚI =================
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LoadData();

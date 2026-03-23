@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.DAL;
 using SharkTank.DAL.Sql;
 using SharkTank.Core.Models;
@@ -170,8 +171,13 @@ namespace SharkTank.Modules.Admin.UI.Forms
             var config = _allConfigs.FirstOrDefault(c => c.ConfigKey == key);
             if (config != null)
             {
+                string oldVal = config.ConfigValue;
+                if (string.Equals(oldVal ?? "", value ?? "", StringComparison.Ordinal))
+                    return;
+
                 config.ConfigValue = value;
                 _configRepo.Save(config);
+                TryLogConfigChange("UPDATE", key, oldVal ?? "", value ?? "");
             }
             else
             {
@@ -184,6 +190,27 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 };
                 _configRepo.Save(neu);
                 _allConfigs.Add(neu);
+                TryLogConfigChange("CREATE", key, "", value ?? "");
+            }
+        }
+
+        private static void TryLogConfigChange(string auditAction, string key, string oldVal, string newVal)
+        {
+            try
+            {
+                AuditService.CreateDefault().LogDataChangeRow(
+                    auditAction,
+                    "SystemConfigs",
+                    key,
+                    key,
+                    oldVal,
+                    newVal,
+                    auditAction == "CREATE" ? "INSERT" : "UPDATE",
+                    "Cấu hình hệ thống");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Audit config: " + ex.Message);
             }
         }
 

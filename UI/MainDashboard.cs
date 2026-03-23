@@ -62,6 +62,9 @@ namespace SharkTank
 
         private void MainDashboard_Load(object sender, EventArgs e)
         {
+            // Nhật ký thao tác: LogAction / LogDataChangeRow lấy user hiện tại từ session
+            AuditService.GetCurrentUserFunc = () => _sessionService.CurrentUser;
+
             // 1) Đọc toàn bộ SystemConfigs từ SQL vào ThemeService
             ThemeService.Instance.LoadFromDatabase();
 
@@ -528,6 +531,22 @@ namespace SharkTank
             }
 
             _viewManager.ShowView(item.Text, _currentModule);
+
+            // Nhật ký thao tác: VIEW menu
+            string entityType = string.IsNullOrEmpty(_currentModule) ? "System" : _currentModule;
+            try
+            {
+                AuditService.CreateDefault().LogAction(
+                    "VIEW",
+                    entityType,
+                    null,
+                    item.Text,
+                    "Mở màn hình");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("AuditLog VIEW: " + ex.Message);
+            }
 
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -170,6 +171,8 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         cmd.ExecuteNonQuery();
                     }
 
+                    try { AuditService.CreateDefault().LogUpdate("SanPham", ma, nhom); } catch { }
+
                     LoadData();
                 }
                 catch (Exception ex)
@@ -210,6 +213,8 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         cmd.Parameters.AddWithValue("@MaSP", ma);
                         cmd.ExecuteNonQuery();
                     }
+
+                    try { AuditService.CreateDefault().LogDelete("SanPham", ma); } catch { }
 
                     LoadData();
                 }
