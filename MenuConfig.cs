@@ -17,7 +17,9 @@ namespace SharkTank
     /// </summary>
     public static class MenuConfig
     {
+#pragma warning disable 0414
         private static int _currentId = 1000;
+#pragma warning restore 0414
 
         private static AdminModule _adminModule;
         private static HRModule _hrModule;
@@ -74,7 +76,7 @@ namespace SharkTank
             }
 
             _currentId = 9999;
-            allItems.Add(GetLogoutMenu());
+            // allItems.Add(GetLogoutMenu());
 
             return allItems;
         }
@@ -93,14 +95,15 @@ namespace SharkTank
             }
         }
 
-        private static NavBarItem GetLogoutMenu()
-        {
-            return new NavBarItem
-            {
-                ID = _currentId++,
-                Text = "Đăng xuất",
-                ParentID = null
-            };
-        }
+        // private static NavBarItem GetLogoutMenu()
+        // {
+        //     return new NavBarItem
+        //     {
+        //         ID = _currentId++,
+        //         Text = "Đăng xuất",
+        //         ParentID = null
+        //     };
+        // }
+
     }
 }
