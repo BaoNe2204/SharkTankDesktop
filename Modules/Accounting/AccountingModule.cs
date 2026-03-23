@@ -39,9 +39,7 @@ namespace SharkTank.Modules.Accounting
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu thu", ParentID = paymentId },
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu chi", ParentID = paymentId },
-                    new NavBarItem { ID = _menuId++, Text = "Nguồn tiền", ParentID = paymentId }
+                    new NavBarItem { ID = _menuId++, Text = "Phiếu thu chi", ParentID = paymentId },
                 }
             });
 
