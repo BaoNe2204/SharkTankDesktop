@@ -63,6 +63,12 @@
   <ItemGroup>
     <!-- UI -->
     <Compile Include="Core\Data\DBHelper.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Core\Models\SystemNotification.cs" />
+    <Compile Include="DAL\INotificationRepository.cs" />
+    <Compile Include="DAL\Sql\SqlNotificationRepository.cs" />
+>>>>>>> 817f3b2ebb3e3fa1f2a1a4bee7f7ebdffc39be47
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,33 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.Designer.cs">
+      <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
+      <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.Designer.cs">
+      <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
+      <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
+    </Compile>
+>>>>>>> 817f3b2ebb3e3fa1f2a1a4bee7f7ebdffc39be47
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,9 +205,24 @@
     <Compile Include="Modules\HR\UI\Forms\ThongTinCaNhanView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Modules\HR\UI\Forms\ThongTinLienHeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+=======
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.Designer.cs">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.Designer.cs">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
+    </Compile>
+>>>>>>> 817f3b2ebb3e3fa1f2a1a4bee7f7ebdffc39be47
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
