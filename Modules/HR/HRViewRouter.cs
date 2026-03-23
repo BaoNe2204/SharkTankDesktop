@@ -17,8 +17,9 @@ namespace SharkTank.Modules.HR
             // ── HỒ SƠ ──
             { "Thông tin cá nhân",          () => new ThongTinCaNhanView() },
             { "Ảnh đại diện",               () => new AnhDaiDienView() },
-            { "CCCD / hộ chiếu",            () => CreateDefaultView("CCCD") },
-            { "Thông tin liên hệ",          () => CreateDefaultView("TTLH") },
+            { "CCCD / hộ chiếu",            () => new CCCDHoChieuView() },
+            { "Thông tin liên hệ",          () => new ThongTinLienHeView() },
+       
 
             // ── PHÒNG BAN ──
             { "Danh sách phòng ban",        () => CreateDefaultView("Danh sách phòng ban") },
