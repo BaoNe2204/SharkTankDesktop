@@ -67,6 +67,10 @@
     <Compile Include="Core\Models\SystemNotification.cs" />
     <Compile Include="DAL\INotificationRepository.cs" />
     <Compile Include="DAL\Sql\SqlNotificationRepository.cs" />
+    <Compile Include="DAL\IConfigRepository.cs" />
+    <Compile Include="DAL\Sql\SqlConfigRepository.cs" />
+    <Compile Include="Core\Models\Company.cs" />
+    <Compile Include="Core\Models\SystemConfig.cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,13 +154,37 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.Designer.cs">
-      <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
+      <DependentUpon>ThongBaoHeThongEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.Designer.cs">
       <DependentUpon>ThongBaoHeThongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.Designer.cs">
+      <DependentUpon>ThongTinCongTyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.Designer.cs">
+      <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.Designer.cs">
+      <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.Designer.cs">
+      <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
@@ -268,6 +296,9 @@
     <Compile Include="Modules\Inventory\UI\Forms\ViTriKho.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\ViTriKho.Designer.cs">
+      <DependentUpon>ViTriKho.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\XuatKho.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -327,6 +358,7 @@
     <!-- DAL InMemory Implementations -->
     <Compile Include="DAL\InMemory\InMemoryUserRepository.cs" />
     <Compile Include="DAL\InMemory\InMemoryRoleRepository.cs" />
+    <Compile Include="DAL\InMemory\InMemoryNotificationRepository.cs" />
     <Compile Include="DAL\InMemory\InMemoryPermissionRepository.cs" />
     <!-- DAL SQL Implementations -->
     <Compile Include="DAL\Sql\SqlConnectionFactory.cs" />
@@ -334,7 +366,10 @@
     <Compile Include="DAL\Sql\SqlPermissionRepository.cs" />
     <Compile Include="DAL\Sql\SqlRoleRepository.cs" />
     <!-- BLL Services -->
+    <Compile Include="BLL\AdminService.cs" />
     <Compile Include="BLL\AuthService.cs" />
+    <Compile Include="BLL\ThemeService.cs" />
+    <Compile Include="BLL\NotificationService.cs" />
     <Compile Include="BLL\PermissionService.cs" />
     <Compile Include="BLL\SessionService.cs" />
     <!-- UI Dashboard -->
@@ -368,7 +403,6 @@
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
     <!-- Sales UI Forms -->
-    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs" />
     <!-- Inventory UI Forms -->
     <!-- Accounting UI Forms -->
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
@@ -392,11 +426,20 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhEmailForm.resx">
+      <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.resx">
+      <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuAddForm.resx">
       <DependentUpon>ChucVuAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuForm.resx">
       <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.resx">
+      <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
       <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
@@ -412,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.resx">
+      <DependentUpon>ThongTinCongTyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\BienBanKiemKe.resx">
       <DependentUpon>BienBanKiemKe.cs</DependentUpon>
@@ -531,24 +577,5 @@
     <None Include="Resources\output.gif" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup Condition="$(VisualStudioVersion) == '18.0'">
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=18.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=18.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
-  </PropertyGroup>
-  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
 </Project>

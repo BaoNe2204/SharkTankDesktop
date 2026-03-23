@@ -27,10 +27,10 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // ⚙️ Cấu hình hệ thống
                 // =========================
-                // { "Thông tin công ty", () => new CauHinhHeThongForm("Thông tin công ty") },
-                // { "Cấu hình hệ thống", () => new CauHinhHeThongForm("Cấu hình hệ thống") },
-                // { "Cấu hình email", () => new CauHinhHeThongForm("Cấu hình email") },
-                // { "Tiền tệ / định dạng", () => new CauHinhHeThongForm("Tiền tệ / định dạng") },
+                { "Thông tin công ty", () => new ThongTinCongTyForm() },
+                { "Cấu hình hệ thống", () => new CauHinhHeThongForm() },
+                { "Cấu hình email", () => new CauHinhEmailForm() },
+                { "Tiền tệ / định dạng", () => new DinhDangTienTeForm() },
 
                 // =========================
                 // 🔔 Thông báo hệ thống

@@ -4,10 +4,17 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-// Change --- (this NameSpace to your current project NameSpace)
-//          |
-//          |
-//          V
+// ============================================================
+// CAREFUL! This code is generated and linked to the Z80_NavBar.
+// Changing namespaces may break things.
+//
+// Current project root namespace: SharkTank
+// NavBar items are referenced via "SharkTank.Modules.Admin", "SharkTank.BLL", etc.
+//
+// The Z80_NavBar library uses its own namespace internally.
+// External code should reference NavBarItem via the Z80NavBar namespace alias.
+// ============================================================
+
 namespace SharkTank.Z80_NavBar
 {
     /// <summary>

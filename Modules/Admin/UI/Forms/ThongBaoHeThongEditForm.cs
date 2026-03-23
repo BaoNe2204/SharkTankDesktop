@@ -48,9 +48,9 @@ namespace SharkTank.Modules.Admin.UI.Forms
         private void LoadComboboxData()
         {
             cboType.Items.Clear();
-            cboType.Items.Add("Info");
-            cboType.Items.Add("Warning");
-            cboType.Items.Add("Error");
+            cboType.Items.Add("Thông tin");
+            cboType.Items.Add("Cảnh báo");
+            cboType.Items.Add("Lỗi");
             cboType.SelectedIndex = 0;
 
             cboTargetType.Items.Clear();

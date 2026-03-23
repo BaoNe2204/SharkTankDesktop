@@ -8,6 +8,7 @@ using Z80NavBar.Themes;
 using SharkTank.BLL;
 using System.Linq;
 using SharkTank.Core.Models;
+using SharkTank.DAL.InMemory;
 using SharkTank.DAL.Sql;
 
 namespace SharkTank
@@ -43,7 +44,8 @@ namespace SharkTank
 
         private void CreateNavigationControl()
         {
-            z80Navigation1.BackColor = Color.FromArgb(35, 40, 45);
+            // Đồng bộ với ThemeService mặc định #282d33 (trước khi Load chạy ApplyTheme)
+            z80Navigation1.BackColor = ThemeService.Instance.GetThemeBackColor();
             z80Navigation1.BorderStyle = BorderStyle.FixedSingle;
         }
 
@@ -60,22 +62,69 @@ namespace SharkTank
 
         private void MainDashboard_Load(object sender, EventArgs e)
         {
+            // 1) Đọc toàn bộ SystemConfigs từ SQL vào ThemeService
+            ThemeService.Instance.LoadFromDatabase();
+
+            // 2) Subscribe để ApplyTheme() ngay khi Lưu trong form cấu hình
+            ThemeService.Instance.OnThemeChanged += ApplyTheme;
+
             var user = _sessionService.CurrentUser;
             var fullName = string.IsNullOrWhiteSpace(user?.FullName) ? user?.Username : user.FullName;
-            lblDate.Text = "Today is " + GetOrdinalDateString(DateTime.Now);
-            lblWelcome.Text = $"Welcome, Mr. {fullName} 👋";
+            var ts = ThemeService.Instance;
+
+            // 3) Áp dụng AppName từ config
+            lblDate.Text = ts.FormatDate(DateTime.Now);
+            lblWelcome.Text = $"Xin chào, {fullName} 👋";
             lblUserName.Text = fullName;
             lblUserRole.Text = user?.Role?.RoleName ?? "User";
 
+            // 4) Áp dụng theme màu từ config
+            ApplyTheme();
+
             MakePictureBoxRound(picAvatar);
-            this.Text = $"SharkTank ERP - {fullName}";
+            this.Text = $"{ts.AppName} - {fullName}";
 
             SetupLogoPanel();
             _viewManager = new ViewManager(panelContent);
             InitializeNavigation();
             StartSessionMonitor();
-            LoadNotifications();
 
+            _notificationService = SqlConnectionFactory.HasConnectionString()
+                ? new NotificationService(new SqlNotificationRepository())
+                : new NotificationService(new InMemoryNotificationRepository());
+
+            LoadNotifications();
+        }
+
+        private void ApplyTheme()
+        {
+            var ts = ThemeService.Instance;
+
+            BackColor = ts.GetWorkspaceBackColor();
+
+            // Sidebar + logo
+            z80Navigation1.BackColor = ts.GetThemeBackColor();
+            panelLogo.BackColor = ts.GetThemeBackColor();
+
+            // Header
+            PanelTop.BackColor = ts.GetHeaderBackColor();
+            lblWelcome.ForeColor = ts.GetHeaderForeColor();
+            lblDate.ForeColor = ts.GetHeaderForeColor();
+            lblUserName.ForeColor = ts.GetHeaderForeColor();
+            lblUserRole.ForeColor = ts.ThemeColor == "Light"
+                ? Color.DimGray
+                : Color.FromArgb(200, 200, 205);
+
+            lblWelcome.Font = ts.GetDefaultFontBold();
+            lblUserName.Font = ts.GetDefaultFont();
+            lblDate.Font = ts.GetDefaultFont();
+
+            // Vùng nội dung + mọi view đang mở (Admin, v.v.)
+            ts.ApplyWorkspaceTheme(panelContent);
+
+            z80Navigation1.Invalidate();
+            PanelTop.Invalidate();
+            panelContent.Invalidate();
         }
         private void LoadNotifications()
         {
@@ -323,9 +372,9 @@ namespace SharkTank
         {
             var t = (type ?? "").Trim().ToLowerInvariant();
 
-            if (t == "error") return Color.FromArgb(245, 87, 87);    // đỏ
-            if (t == "warning") return Color.FromArgb(255, 177, 50); // cam/vàng
-            return Color.FromArgb(70, 136, 255);                     // xanh cho Info/khác
+            if (t == "lỗi" || t == "error") return Color.FromArgb(245, 87, 87);
+            if (t == "cảnh báo" || t == "warning") return Color.FromArgb(255, 177, 50);
+            return Color.FromArgb(70, 136, 255);
         }
 
         private static string GetRelativeTimeText(DateTime createdAt)
@@ -444,6 +493,7 @@ namespace SharkTank
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
+            ThemeService.Instance.OnThemeChanged -= ApplyTheme;
             StopSessionMonitor();
             base.OnFormClosed(e);
         }
@@ -552,7 +602,12 @@ namespace SharkTank
             int bottom = r.Height - 4;
             int left = 4;
             int right = r.Width - 4;
-            using (var brush = new SolidBrush(Color.Gray))
+            var chevronColor = ThemeService.Instance.GetHeaderForeColor();
+            chevronColor = Color.FromArgb(
+                Math.Max(0, chevronColor.R - 50),
+                Math.Max(0, chevronColor.G - 50),
+                Math.Max(0, chevronColor.B - 50));
+            using (var brush = new SolidBrush(chevronColor))
             {
                 var pts = new[] { new Point(cx, bottom), new Point(left, top), new Point(right, top) };
                 g.FillPolygon(brush, pts);
@@ -561,6 +616,11 @@ namespace SharkTank
 
         private void PanelTop_Paint(object sender, PaintEventArgs e)
         {
+            // Phủ mép trên vài pixel bằng màu thanh trái (tránh vệt xanh accent / viền hệ thống).
+            const int stripH = 3;
+            var ts = ThemeService.Instance;
+            using (var b = new SolidBrush(ts.GetHeaderTopStripColor()))
+                e.Graphics.FillRectangle(b, 0, 0, PanelTop.ClientSize.Width, stripH);
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
