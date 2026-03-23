@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Modules.HR.Data;
 
 namespace SharkTank.Modules.HR.UI.Forms
@@ -486,6 +487,10 @@ namespace SharkTank.Modules.HR.UI.Forms
                         int pbId = (cmbPhongBan.SelectedItem as ComboItem)?.Value ?? 0;
                         int cvId = (cmbChucVu.SelectedItem as ComboItem)?.Value ?? 0;
 
+                        NhanVienAuditSnapshot oldSnap = null;
+                        if (_isEditMode)
+                            oldSnap = ReadNhanVienSnapshot(conn, tran, _nhanVienId);
+
                         if (_isEditMode)
                         {
                             // UPDATE
@@ -514,8 +519,10 @@ namespace SharkTank.Modules.HR.UI.Forms
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Giấy tờ
+                        // Mã NV dùng cho Giấy tờ / Hợp đồng / audit (chỉ khai báo một lần)
                         string nvId = _isEditMode ? _nhanVienId : txtNhanVienId.Text.Trim();
+
+                        // Giấy tờ
                         var cmdGT = new SqlCommand(@"
                             INSERT INTO GiayToNhanVien (NhanVienId,LoaiGiayTo,SoGiayTo,NgayCap,NoiCap,NgayHetHan)
                             VALUES (@NVId,@Loai,@So,@NgayCap,@NoiCap,@HetHan)", conn, tran);
@@ -549,6 +556,22 @@ namespace SharkTank.Modules.HR.UI.Forms
                         }
 
                         tran.Commit();
+
+                        // Ghi vào DataChangeLogs (màn "THEO DÕI THAY ĐỔI DỮ LIỆU") — không chỉ AuditLogs
+                        var newSnap = BuildNhanVienSnapshotFromForm(pbId, cvId);
+                        try
+                        {
+                            if (_isEditMode)
+                                AuditService.CreateDefault().LogActionWithChanges(
+                                    "UPDATE", "NhanVien", nvId, txtHoTen.Text.Trim(),
+                                    oldSnap, newSnap, null);
+                            else
+                                AuditService.CreateDefault().LogActionWithChanges(
+                                    "INSERT", "NhanVien", nvId, txtHoTen.Text.Trim(),
+                                    null, newSnap, null);
+                        }
+                        catch { /* không chặn lưu nếu audit lỗi */ }
+
                         MessageBox.Show("✅ Lưu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.ParentForm?.Close();
                     }
@@ -610,6 +633,65 @@ namespace SharkTank.Modules.HR.UI.Forms
                     picAnhDaiDien.Image = Image.FromFile(dlg.FileName);
                 }
             }
+        }
+
+        /// <summary>Snapshot để so sánh và ghi DataChangeLogs (LogActionWithChanges).</summary>
+        private sealed class NhanVienAuditSnapshot
+        {
+            public string HoTen { get; set; }
+            public string NgaySinh { get; set; }
+            public string GioiTinh { get; set; }
+            public string DiaChi { get; set; }
+            public string Email { get; set; }
+            public string SoDienThoai { get; set; }
+            public string PhongBanId { get; set; }
+            public string ChucVuId { get; set; }
+            public string NgayVaoLam { get; set; }
+            public string GhiChu { get; set; }
+        }
+
+        private static NhanVienAuditSnapshot ReadNhanVienSnapshot(SqlConnection conn, SqlTransaction tran, string nhanVienId)
+        {
+            using (var cmd = new SqlCommand(@"
+                SELECT HoTen, NgaySinh, GioiTinh, DiaChi, Email, SoDienThoai, PhongBanId, ChucVuId, NgayVaoLam, GhiChu
+                FROM NhanVien WHERE NhanVienId = @Id", conn, tran))
+            {
+                cmd.Parameters.AddWithValue("@Id", nhanVienId);
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    if (!rdr.Read()) return null;
+                    return new NhanVienAuditSnapshot
+                    {
+                        HoTen = rdr["HoTen"]?.ToString(),
+                        NgaySinh = rdr["NgaySinh"] == DBNull.Value ? "" : ((DateTime)rdr["NgaySinh"]).ToString("yyyy-MM-dd"),
+                        GioiTinh = rdr["GioiTinh"]?.ToString(),
+                        DiaChi = rdr["DiaChi"]?.ToString(),
+                        Email = rdr["Email"]?.ToString(),
+                        SoDienThoai = rdr["SoDienThoai"]?.ToString(),
+                        PhongBanId = rdr["PhongBanId"] == DBNull.Value ? "" : rdr["PhongBanId"].ToString(),
+                        ChucVuId = rdr["ChucVuId"] == DBNull.Value ? "" : rdr["ChucVuId"].ToString(),
+                        NgayVaoLam = rdr["NgayVaoLam"] == DBNull.Value ? "" : ((DateTime)rdr["NgayVaoLam"]).ToString("yyyy-MM-dd"),
+                        GhiChu = rdr["GhiChu"]?.ToString()
+                    };
+                }
+            }
+        }
+
+        private NhanVienAuditSnapshot BuildNhanVienSnapshotFromForm(int pbId, int cvId)
+        {
+            return new NhanVienAuditSnapshot
+            {
+                HoTen = txtHoTen.Text.Trim(),
+                NgaySinh = dtpNgaySinh.Value.Date.ToString("yyyy-MM-dd"),
+                GioiTinh = cmbGioiTinh.Text,
+                DiaChi = txtDiaChi.Text ?? "",
+                Email = txtEmail.Text ?? "",
+                SoDienThoai = txtSoDienThoai.Text ?? "",
+                PhongBanId = pbId > 0 ? pbId.ToString() : "",
+                ChucVuId = cvId > 0 ? cvId.ToString() : "",
+                NgayVaoLam = dtpNgayVaoLam.Value.Date.ToString("yyyy-MM-dd"),
+                GhiChu = txtGhiChu.Text ?? ""
+            };
         }
 
         // ── SINH MÃ ──

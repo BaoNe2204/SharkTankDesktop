@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,7 +27,25 @@ namespace SharkTank.Modules.Sales.UI.Forms
         {
             txtSearch.Enter += TxtSearch_Enter;
             txtSearch.Leave += TxtSearch_Leave;
-            txtSearch.TextChanged += TxtSearch_TextChanged; // Cái này để tìm kiếm
+            txtSearch.TextChanged += TxtSearch_TextChanged;
+            btnExport.Click += BtnExport_Click;
+            btnRefresh.Click += BtnRefresh_Click;
+            btnUpdateRule.Click += BtnUpdateRule_Click;
+        }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng xuất dữ liệu đang được phát triển.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDashboard();
+        }
+
+        private void BtnUpdateRule_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng cập nhật quy tắc đang được phát triển.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // 2. Viết hàm xử lý: Khi click vào thì xóa chữ gợi ý

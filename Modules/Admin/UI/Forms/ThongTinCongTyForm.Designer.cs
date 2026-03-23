@@ -26,7 +26,6 @@ namespace SharkTank.Modules.Admin.UI.Forms
         private Button btnChonAnh;
         private Button btnLuu;
         private Button btnHuy;
-        private Panel panelInfo;
         private Label lblNguoiDaiDien;
         private TextBox txtNguoiDaiDien;
         private Label lblChucVu;

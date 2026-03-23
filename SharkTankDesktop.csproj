@@ -17,7 +17,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SharkTank</RootNamespace>
     <AssemblyName>SharkTank</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <RuntimeIdentifier>win</RuntimeIdentifier>
     <RuntimeIdentifiers>win</RuntimeIdentifiers>
     <FileAlignment>512</FileAlignment>
@@ -71,6 +71,12 @@
     <Compile Include="DAL\Sql\SqlConfigRepository.cs" />
     <Compile Include="Core\Models\Company.cs" />
     <Compile Include="Core\Models\SystemConfig.cs" />
+    <Compile Include="Core\Models\AuditLog.cs" />
+    <Compile Include="Core\Models\DataChangeLog.cs" />
+    <Compile Include="Core\Models\LoginHistory.cs" />
+    <Compile Include="DAL\IAuditRepository.cs" />
+    <Compile Include="DAL\InMemoryAuditRepository.cs" />
+    <Compile Include="DAL\Sql\SqlAuditRepository.cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,24 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.Designer.cs">
       <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.Designer.cs">
+      <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.Designer.cs">
+      <DependentUpon>LichSuHoatDongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.Designer.cs">
+      <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
@@ -370,6 +394,8 @@
     <Compile Include="BLL\AuthService.cs" />
     <Compile Include="BLL\ThemeService.cs" />
     <Compile Include="BLL\NotificationService.cs" />
+    <Compile Include="BLL\AuditService.cs" />
+    <Compile Include="BLL\AuditHelper.cs" />
     <Compile Include="BLL\PermissionService.cs" />
     <Compile Include="BLL\SessionService.cs" />
     <!-- UI Dashboard -->
@@ -440,6 +466,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.resx">
       <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.resx">
+      <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.resx">
+      <DependentUpon>LichSuHoatDongForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.resx">
+      <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
       <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>

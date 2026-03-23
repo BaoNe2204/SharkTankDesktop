@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.CRM.UI.Forms
@@ -96,9 +97,31 @@ namespace SharkTank.Modules.CRM.UI.Forms
                             cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
                             cmd.ExecuteNonQuery();
                         }
+
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Insert("Leads", txtTen.Text, txtTen.Text,
+                            new LeadsSnapshot
+                            {
+                                Ten = txtTen.Text,
+                                SoDienThoai = txtPhone.Text,
+                                Email = txtEmail.Text,
+                                Nguon = cbNguon.Text,
+                                TrangThai = cbTrangThai.Text
+                            });
                     }
                     else
                     {
+                        // Đọc dữ liệu cũ trước khi sửa
+                        var oldSnap = LeadsSnapshot.FromDb(_editingLeadId.ToString());
+                        var newSnap = new LeadsSnapshot
+                        {
+                            Ten = txtTen.Text,
+                            SoDienThoai = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Nguon = cbNguon.Text,
+                            TrangThai = cbTrangThai.Text
+                        };
+
                         string query = @"UPDATE Leads 
                                          SET Ten = @Ten, SoDienThoai = @Phone, Email = @Email, 
                                              Nguon = @Nguon, TrangThai = @TrangThai
@@ -114,6 +137,9 @@ namespace SharkTank.Modules.CRM.UI.Forms
                             cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
                             cmd.ExecuteNonQuery();
                         }
+
+                        // Ghi DataChangeLogs + AuditLogs (so sánh tự động)
+                        AuditHelper.Update("Leads", _editingLeadId.ToString(), txtTen.Text, oldSnap, newSnap);
                     }
                 }
 
@@ -171,6 +197,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
                 try
                 {
                     int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
+                    string ten = dgvLeads.CurrentRow.Cells["Ten"].Value?.ToString();
 
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
@@ -182,6 +209,9 @@ namespace SharkTank.Modules.CRM.UI.Forms
                             cmd.ExecuteNonQuery();
                         }
                     }
+
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("Leads", id.ToString(), ten, "LeadID");
 
                     LoadLeads();
                     MessageBox.Show("Xóa thành công!");

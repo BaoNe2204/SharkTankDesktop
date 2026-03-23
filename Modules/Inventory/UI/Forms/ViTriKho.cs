@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -20,7 +21,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             LoadData();
         }
 
-        // Load danh sách Kho vào Combobox
         void LoadKho()
         {
             try
@@ -28,13 +28,10 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
                     string sql = "SELECT MaKho, TenKho FROM Kho";
-
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     cboKho.DataSource = dt;
                     cboKho.DisplayMember = "TenKho";
                     cboKho.ValueMember = "MaKho";
@@ -46,7 +43,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // Load dữ liệu vị trí
         void LoadData()
         {
             try
@@ -54,13 +50,10 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
                     string sql = @"SELECT * FROM ViTriKho";
-
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     dataGridView1.DataSource = dt;
                 }
             }
@@ -78,22 +71,20 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
-                    string sql = @"INSERT INTO ViTriKho
-                    (MaViTri, TenViTri, MaKho)
-                    VALUES(@MaViTri,@TenViTri,@MaKho)";
-
+                    string sql = @"INSERT INTO ViTriKho (MaViTri, TenViTri, MaKho) VALUES(@MaViTri,@TenViTri,@MaKho)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-
                     cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
                     cmd.Parameters.AddWithValue("@TenViTri", txtTenViTri.Text);
                     cmd.Parameters.AddWithValue("@MaKho", cboKho.SelectedValue);
-
                     cmd.ExecuteNonQuery();
-                }
 
-                LoadData();
-                MessageBox.Show("Thêm thành công");
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Insert("ViTriKho", txtMaViTri.Text, txtTenViTri.Text,
+                        new ViTriKhoSnapshot { MaViTri = txtMaViTri.Text, TenViTri = txtTenViTri.Text, MaKho = cboKho.SelectedValue?.ToString() });
+
+                    LoadData();
+                    MessageBox.Show("Thêm thành công");
+                }
             }
             catch (Exception ex)
             {
@@ -106,26 +97,31 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             try
             {
+                string maViTri = txtMaViTri.Text;
+                var oldSnap = ViTriKhoSnapshot.FromDb(maViTri);
+                var newSnap = new ViTriKhoSnapshot
+                {
+                    MaViTri = maViTri,
+                    TenViTri = txtTenViTri.Text,
+                    MaKho = cboKho.SelectedValue?.ToString()
+                };
+
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
-                    string sql = @"UPDATE ViTriKho
-                    SET TenViTri=@TenViTri,
-                        MaKho=@MaKho
-                    WHERE MaViTri=@MaViTri";
-
+                    string sql = @"UPDATE ViTriKho SET TenViTri=@TenViTri, MaKho=@MaKho WHERE MaViTri=@MaViTri";
                     SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
+                    cmd.Parameters.AddWithValue("@MaViTri", maViTri);
                     cmd.Parameters.AddWithValue("@TenViTri", txtTenViTri.Text);
                     cmd.Parameters.AddWithValue("@MaKho", cboKho.SelectedValue);
-
                     cmd.ExecuteNonQuery();
-                }
 
-                LoadData();
-                MessageBox.Show("Sửa thành công");
+                    // Ghi DataChangeLogs + AuditLogs (so sánh tự động)
+                    AuditHelper.Update("ViTriKho", maViTri, txtTenViTri.Text, oldSnap, newSnap);
+
+                    LoadData();
+                    MessageBox.Show("Sửa thành công");
+                }
             }
             catch (Exception ex)
             {
@@ -138,20 +134,23 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             try
             {
+                string maViTri = txtMaViTri.Text;
+                string tenViTri = txtTenViTri.Text;
+
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
-
                     string sql = "DELETE FROM ViTriKho WHERE MaViTri=@MaViTri";
-
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
-
+                    cmd.Parameters.AddWithValue("@MaViTri", maViTri);
                     cmd.ExecuteNonQuery();
-                }
 
-                LoadData();
-                MessageBox.Show("Xóa thành công");
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("ViTriKho", maViTri, tenViTri, "MaViTri");
+
+                    LoadData();
+                    MessageBox.Show("Xóa thành công");
+                }
             }
             catch (Exception ex)
             {
@@ -159,13 +158,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // Click DataGridView
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
                 txtMaViTri.Text = row.Cells["MaViTri"].Value.ToString();
                 txtTenViTri.Text = row.Cells["TenViTri"].Value.ToString();
                 cboKho.SelectedValue = row.Cells["MaKho"].Value.ToString();

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Models;
 using SharkTank.DAL;
 using SharkTank.DAL.Sql;
@@ -104,6 +105,17 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 DataType = "string"
             };
             _configRepo.Save(config);
+
+            // Nhật ký cấu hình email
+            try
+            {
+                AuditService.CreateDefault().LogUpdate(
+                    "SystemConfigs",
+                    key,
+                    key,
+                    $"Cấu hình email");
+            }
+            catch { }
         }
 
         private void UpdateCredentialsEnabled()

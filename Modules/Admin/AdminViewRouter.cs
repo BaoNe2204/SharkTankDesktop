@@ -45,9 +45,9 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 📝 Nhật ký hệ thống
                 // =========================
-                // { "Lịch sử đăng nhập", () => new AuditLogForm() },
-                // { "Lịch sử thao tác", () => new AuditLogForm() },
-                // { "Theo dõi thay đổi dữ liệu", () => new AuditLogForm() },
+                { "Lịch sử đăng nhập", () => new LichSuDangNhapForm() },
+                { "Lịch sử thao tác", () => new LichSuHoatDongForm() },
+                { "Theo dõi thay đổi dữ liệu", () => new NhatKyHeThongForm() },
 
                 // =========================
                 // 💾 Backup & Restore

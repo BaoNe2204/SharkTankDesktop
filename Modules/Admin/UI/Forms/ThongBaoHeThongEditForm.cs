@@ -135,6 +135,14 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                 _notificationService.Save(model);
 
+                try
+                {
+                    var act = _notificationId > 0 ? "UPDATE" : "CREATE";
+                    var id = _notificationId > 0 ? _notificationId.ToString() : (model.NotificationId > 0 ? model.NotificationId.ToString() : null);
+                    AuditService.CreateDefault().LogAction(act, "SystemNotifications", id, txtTitle.Text.Trim());
+                }
+                catch { }
+
                 DialogResult = DialogResult.OK;
                 Close();
             }
