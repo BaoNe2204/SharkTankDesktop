@@ -39,7 +39,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(86, 106);
+            this.label1.Location = new System.Drawing.Point(155, 78);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 23);
             this.label1.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             this.txtMaSP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMaSP.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtMaSP.Location = new System.Drawing.Point(237, 105);
+            this.txtMaSP.Location = new System.Drawing.Point(309, 77);
             this.txtMaSP.Multiline = true;
             this.txtMaSP.Name = "txtMaSP";
             this.txtMaSP.Size = new System.Drawing.Size(535, 33);
@@ -57,10 +57,10 @@
             // 
             // btnTim
             // 
-            this.btnTim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnTim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnTim.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnTim.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnTim.Location = new System.Drawing.Point(839, 106);
+            this.btnTim.Location = new System.Drawing.Point(896, 78);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(97, 32);
             this.btnTim.TabIndex = 13;
@@ -74,13 +74,13 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 166);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 139);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1591, 479);
+            this.dataGridView1.Size = new System.Drawing.Size(1756, 479);
             this.dataGridView1.TabIndex = 14;
             // 
             // TonKho
