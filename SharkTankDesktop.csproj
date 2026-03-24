@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC</SSDTPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,7 +17,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SharkTank</RootNamespace>
     <AssemblyName>SharkTank</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <RuntimeIdentifier>win</RuntimeIdentifier>
     <RuntimeIdentifiers>win</RuntimeIdentifiers>
     <FileAlignment>512</FileAlignment>
@@ -54,11 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
-    <Compile Include="BLL\NotificationService.cs" />
     <Compile Include="Core\Data\DBHelper.cs" />
     <Compile Include="Core\Models\SystemNotification.cs" />
     <Compile Include="DAL\INotificationRepository.cs" />
-    <Compile Include="DAL\Sql\SqlNotificationRepository .cs" />
+    <Compile Include="DAL\Sql\SqlNotificationRepository.cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,10 +134,22 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
-    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .cs">
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.Designer.cs">
+      <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.Designer.cs">
+      <DependentUpon>QLCoHoiBanHangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .Designer.cs">
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.Designer.cs">
       <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
@@ -144,7 +164,13 @@
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.Designer.cs">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\AnhDaiDienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\BangCongView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\CCCDHoChieuView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\CheckInOutView.cs">
@@ -173,9 +199,6 @@
     </Compile>
     <Compile Include="Modules\Inventory\InventoryModule.cs" />
     <Compile Include="Modules\Inventory\InventoryViewRouter.cs" />
-    <Compile Include="Modules\Inventory\UI\Forms\.Designer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\BienBanKiemKe.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -250,6 +273,24 @@
     </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\XuatKho.Designer.cs">
       <DependentUpon>XuatKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ThongTinCaNhanView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ThongTinLienHeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.Designer.cs">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.Designer.cs">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -327,9 +368,7 @@
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
     <!-- Sales UI Forms -->
-    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHangView.cs" />
     <!-- Inventory UI Forms -->
     <!-- Accounting UI Forms -->
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
@@ -445,13 +484,39 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
+    <None Include="Resources\factory.gif" />
+    <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bell-solid.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\d7573b3e236d935c3f87f3d5668a4695.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\croniox_animation.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\croniox_animation1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\31352-business-team.gif" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\web-development-1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled-design-5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\animation.7eeba83c017858379914.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\output-onlinegiftools.gif" />
@@ -466,5 +531,24 @@
     <None Include="Resources\output.gif" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup Condition="$(VisualStudioVersion) == '18.0'">
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=18.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter, Version=18.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>$(SSDTUnitTestPath)\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
+  </PropertyGroup>
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
 </Project>
