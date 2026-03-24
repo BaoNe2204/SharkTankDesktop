@@ -13,7 +13,10 @@ namespace SharkTank.Modules.Sales.UI.Forms
         public PhanLoaiKH()
         {
             InitializeComponent();
-            RefreshDashboard();
+            this.Load += (s, e) => {
+                RefreshDashboard();
+                Application.DoEvents(); // Ép Windows vẽ giao diện ngay lập tức
+            };
             RegisterEvents();
         }
 
@@ -27,7 +30,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
         {
             txtSearch.Enter += TxtSearch_Enter;
             txtSearch.Leave += TxtSearch_Leave;
-            txtSearch.TextChanged += TxtSearch_TextChanged;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             btnExport.Click += BtnExport_Click;
             btnRefresh.Click += BtnRefresh_Click;
             btnUpdateRule.Click += BtnUpdateRule_Click;
@@ -112,39 +115,47 @@ namespace SharkTank.Modules.Sales.UI.Forms
 
         private Panel CreateCard(string title, string value, Color color)
         {
-            Panel card = new Panel { Size = new Size(225, 110), BackColor = Color.White, Margin = new Padding(0, 0, 25, 0) };
+            Panel card = new Panel
+            {
+                Size = new Size(200, 100),
+                BackColor = Color.White,
+                Margin = new Padding(0, 0, 20, 0)
+            };
 
-            // Vạch màu ở dưới đáy (Bottom)
-            Panel line = new Panel { Size = new Size(225, 4), BackColor = color, Dock = DockStyle.Bottom };
-
-            // Con số tổng (To, đậm)
             Label lblValue = new Label
             {
                 Text = value,
-                Font = new Font("Segoe UI", 28, FontStyle.Bold),
+                Font = new Font("Segoe UI", 25, FontStyle.Bold),
                 ForeColor = Color.FromArgb(44, 62, 80),
                 Location = new Point(15, 10),
                 AutoSize = true
             };
 
-            // Tiêu đề (VIP/Thân thiết...)
             Label lblTitle = new Label
             {
-                Text = title.ToUpper(),
-                Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold),
-                ForeColor = color,
-                Location = new Point(18, 65),
+                Text = title,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = Color.DimGray,
+                Location = new Point(15, 60),
                 AutoSize = true
             };
 
-            card.Controls.Add(line);
+            Panel pnlLine = new Panel
+            {
+                Height = 4,
+                BackColor = color,
+                Dock = DockStyle.Bottom
+            };
+
             card.Controls.Add(lblValue);
             card.Controls.Add(lblTitle);
+            card.Controls.Add(pnlLine);
+
             return card;
         }
 
         // Khi gõ chữ vào ô tìm kiếm
-        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
 
@@ -155,7 +166,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             }
             else
             {
-                LoadData(searchText); // Tìm theo chữ vừa gõ
+                LoadData(searchText);
             }
         }
 
@@ -182,10 +193,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
                 GROUP BY kh.MaKH, kh.HoTen";
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-
-                    // Truyền giá trị tìm kiếm vào (thêm dấu % để tìm kiếm chứa chuỗi đó)
                     adapter.SelectCommand.Parameters.AddWithValue("@search", "%" + search + "%");
-
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
                     dgvPhanLoai.DataSource = dt;
@@ -196,5 +204,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
             }
         }
+
+        
     }
 }
