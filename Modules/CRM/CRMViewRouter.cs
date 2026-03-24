@@ -1,3 +1,5 @@
+
+using SharkTank.Core.Data;
 using SharkTank.Modules.CRM.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -11,31 +13,8 @@ namespace SharkTank.Modules.CRM
             new Dictionary<string, Func<UserControl>>()
         {
             { "Quản lý Leads", () => new QuanLyLeadsForm() },
-            { "Nguồn khách (Website / Facebook / Giới thiệu / Quảng cáo)", () => CreateDefaultView("Nguồn khách") },
-            { "Trạng thái lead", () => CreateDefaultView("Trạng thái lead") },
-            { "Phân loại tiềm năng", () => CreateDefaultView("Phân loại tiềm năng") },
-            { "Nhân viên phụ trách", () => CreateDefaultView("Nhân viên phụ trách") },
-            { "Lịch gọi điện", () => CreateDefaultView("Lịch gọi điện") },
-            { "Lịch hẹn gặp khách", () => CreateDefaultView("Lịch hẹn gặp khách") },
-            { "Ghi chú trao đổi", () => CreateDefaultView("Ghi chú trao đổi") },
-            { "Lịch sử chăm sóc khách hàng", () => CreateDefaultView("Lịch sử chăm sóc") },
-            { "Chuyển Lead → Khách hàng chính thức", () => CreateDefaultView("Chuyển đổi khách hàng") },
-            { "Tạo khách hàng cho module Sales", () => CreateDefaultView("Tạo khách hàng cho Sales") },
-            { "Lưu lịch sử chuyển đổi", () => CreateDefaultView("Lịch sử chuyển đổi") },
-            { "Tên cơ hội bán", () => CreateDefaultView("Cơ hội bán hàng") },
-            { "Khách hàng liên quan", () => CreateDefaultView("Khách hàng liên quan") },
-            { "Giá trị dự kiến", () => CreateDefaultView("Giá trị dự kiến") },
-            { "Xác suất thành công", () => CreateDefaultView("Xác suất thành công") },
-            { "Trạng thái cơ hội", () => CreateDefaultView("Trạng thái cơ hội") },
-            { "Khách tiềm năng", () => CreateDefaultView("Pipeline - Khách tiềm năng") },
-            { "Đang tư vấn", () => CreateDefaultView("Pipeline - Đang tư vấn") },
-            { "Đang báo giá", () => CreateDefaultView("Pipeline - Đang báo giá") },
-            { "Đang đàm phán", () => CreateDefaultView("Pipeline - Đang đàm phán") },
-            { "Đã chốt / thất bại", () => CreateDefaultView("Pipeline - Đã chốt") },
-            { "Nhắc lịch chăm sóc", () => CreateDefaultView("Nhắc lịch chăm sóc") },
-            { "Nhắc gọi khách", () => CreateDefaultView("Nhắc gọi khách") },
-            { "Nhắc gửi báo giá", () => CreateDefaultView("Nhắc gửi báo giá") },
-            { "Quản lý công việc sales", () => CreateDefaultView("Quản lý công việc") },
+            { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm() },
+            { "Quản lý cơ hội bán hàng", () => new QLCoHoiBanHangForm()},
             { "Tỷ lệ chuyển đổi khách hàng", () => CreateDefaultView("Báo cáo tỷ lệ chuyển đổi") },
             { "Hiệu quả nhân viên sales", () => CreateDefaultView("Báo cáo hiệu quả NV") },
             { "Nguồn khách hàng hiệu quả", () => CreateDefaultView("Báo cáo nguồn khách") },

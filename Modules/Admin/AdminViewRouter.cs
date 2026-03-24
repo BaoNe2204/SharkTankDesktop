@@ -35,7 +35,7 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 🔔 Thông báo hệ thống
                 // =========================
-                // { "Thông báo hệ thống", () => new ThongBaoHeThongForm() },
+                 { "Thông báo hệ thống", () => new ThongBaoHeThongForm() },
 
                 // =========================
                 // 📊 Dashboard hệ thống
