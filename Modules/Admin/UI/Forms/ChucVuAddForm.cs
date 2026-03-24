@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -35,6 +36,11 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                     cmd.ExecuteNonQuery();
                 }
+
+                AuditService.CreateDefault().LogCreate(
+                    "Roles",
+                    null,
+                    txtTenChucVu.Text.Trim());
 
                 MessageBox.Show("Thêm chức vụ thành công!");
 

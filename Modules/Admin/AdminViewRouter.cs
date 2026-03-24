@@ -27,10 +27,10 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // ⚙️ Cấu hình hệ thống
                 // =========================
-                // { "Thông tin công ty", () => new CauHinhHeThongForm("Thông tin công ty") },
-                // { "Cấu hình hệ thống", () => new CauHinhHeThongForm("Cấu hình hệ thống") },
-                // { "Cấu hình email", () => new CauHinhHeThongForm("Cấu hình email") },
-                // { "Tiền tệ / định dạng", () => new CauHinhHeThongForm("Tiền tệ / định dạng") },
+                { "Thông tin công ty", () => new ThongTinCongTyForm() },
+                { "Cấu hình hệ thống", () => new CauHinhHeThongForm() },
+                { "Cấu hình email", () => new CauHinhEmailForm() },
+                { "Tiền tệ / định dạng", () => new DinhDangTienTeForm() },
 
                 // =========================
                 // 🔔 Thông báo hệ thống
@@ -40,20 +40,20 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 📊 Dashboard hệ thống
                 // =========================
-                // { "Dashboard hệ thống", () => new DashboardTongForm() },
+                { "Dashboard hệ thống", () => new DashboardTongForm() },
 
                 // =========================
                 // 📝 Nhật ký hệ thống
                 // =========================
-                // { "Lịch sử đăng nhập", () => new AuditLogForm() },
-                // { "Lịch sử thao tác", () => new AuditLogForm() },
-                // { "Theo dõi thay đổi dữ liệu", () => new AuditLogForm() },
+                { "Lịch sử đăng nhập", () => new LichSuDangNhapForm() },
+                { "Lịch sử thao tác", () => new LichSuHoatDongForm() },
+                { "Theo dõi thay đổi dữ liệu", () => new NhatKyHeThongForm() },
 
                 // =========================
                 // 💾 Backup & Restore
                 // =========================
-                // { "Sao lưu dữ liệu", () => new BackupRestoreForm() },
-                // { "Khôi phục dữ liệu", () => new BackupRestoreForm() },
+                 { "Sao lưu dữ liệu", () => new SaoLuuDuLieuForm() },
+                 { "Khôi phục dữ liệu", () => new KhoiPhucDuLieuForm() },
 
                 // =========================
                 // 📦 Quản lý module

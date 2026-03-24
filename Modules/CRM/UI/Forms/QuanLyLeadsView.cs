@@ -1,49 +1,51 @@
-﻿using SharkTank.Core.Data;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SharkTank.BLL;
+using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.CRM.UI.Forms
 {
-    public partial class QuanLyLeadsForm : UserControl
+    public partial class QuanLyLeadsView : UserControl
     {
-        public QuanLyLeadsForm()
+        private int _editingLeadId = -1;
+
+        public QuanLyLeadsView()
         {
             InitializeComponent();
-            LoadLeads(); // load dữ liệu ngay khi mở
+            LoadLeads();
             dgvLeads.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvLeads.MultiSelect = false;
         }
 
-        private void QuanLyLeadsForm_Load(object sender, EventArgs e)
-        {
-            LoadLeads();
-        }
-
-        // LOAD DATA
         private void LoadLeads()
         {
-            using (SqlConnection conn = DBHelper.GetConnection())
+            try
             {
-                string query = "SELECT * FROM Leads";
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string query = "SELECT LeadID, Ten, SoDienThoai, Email, Nguon, TrangThai FROM Leads";
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                dgvLeads.DataSource = dt;
+                    dgvLeads.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
             }
         }
 
-        // CLICK ROW -> SHOW DATA
         private void dgvLeads_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvLeads.Rows[e.RowIndex];
-
                 txtTen.Text = row.Cells["Ten"].Value?.ToString();
                 txtPhone.Text = row.Cells["SoDienThoai"].Value?.ToString();
                 txtEmail.Text = row.Cells["Email"].Value?.ToString();
@@ -52,186 +54,130 @@ namespace SharkTank.Modules.CRM.UI.Forms
             }
         }
 
-        // ADD LEAD
         private void btnAdd_Click(object sender, EventArgs e)
         {
-           
+            _editingLeadId = -1;
             panelAddLead.Visible = true;
-            panelAddLead.BringToFront(); // đưa panel lên trên cùng
+            panelAddLead.BringToFront();
             panelAddLead.Left = (this.Width - panelAddLead.Width) / 2;
             panelAddLead.Top = (this.Height - panelAddLead.Height) / 2;
-            editingLeadId = -1;
 
             txtTen.Clear();
             txtPhone.Clear();
             txtEmail.Clear();
-
             cbNguon.SelectedIndex = -1;
             cbTrangThai.SelectedIndex = -1;
-
         }
-        // SAVE NEW LEAD
-        private void BtnSave_Click(object sender, EventArgs e)
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtTen.Text == "" || txtPhone.Text == "")
+            if (string.IsNullOrWhiteSpace(txtTen.Text) || string.IsNullOrWhiteSpace(txtPhone.Text))
             {
-                MessageBox.Show("Vui lòng nhập thông tin!");
+                MessageBox.Show("Vui lòng nhập tên và số điện thoại!");
                 return;
             }
 
-            using (SqlConnection conn = DBHelper.GetConnection())
+            try
             {
-                SqlCommand cmd;
-
-                conn.Open();
-
-                if (editingLeadId == -1)
+                using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    // INSERT
-                    string query = @"INSERT INTO Leads 
-                    (Ten,SoDienThoai,Email,Nguon,TrangThai) 
-                    VALUES(@Ten,@Phone,@Email,@Nguon,@TrangThai)";
+                    conn.Open();
 
-                    cmd = new SqlCommand(query, conn);
+                    if (_editingLeadId == -1)
+                    {
+                        string query = @"INSERT INTO Leads (Ten, SoDienThoai, Email, Nguon, TrangThai) 
+                                         VALUES(@Ten, @Phone, @Email, @Nguon, @TrangThai)";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
+                            cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                            cmd.Parameters.AddWithValue("@Email", txtEmail.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Insert("Leads", txtTen.Text, txtTen.Text,
+                            new LeadsSnapshot
+                            {
+                                Ten = txtTen.Text,
+                                SoDienThoai = txtPhone.Text,
+                                Email = txtEmail.Text,
+                                Nguon = cbNguon.Text,
+                                TrangThai = cbTrangThai.Text
+                            });
+                    }
+                    else
+                    {
+                        // Đọc dữ liệu cũ trước khi sửa
+                        var oldSnap = LeadsSnapshot.FromDb(_editingLeadId.ToString());
+                        var newSnap = new LeadsSnapshot
+                        {
+                            Ten = txtTen.Text,
+                            SoDienThoai = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Nguon = cbNguon.Text,
+                            TrangThai = cbTrangThai.Text
+                        };
+
+                        string query = @"UPDATE Leads 
+                                         SET Ten = @Ten, SoDienThoai = @Phone, Email = @Email, 
+                                             Nguon = @Nguon, TrangThai = @TrangThai
+                                         WHERE LeadID = @Id";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Id", _editingLeadId);
+                            cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
+                            cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                            cmd.Parameters.AddWithValue("@Email", txtEmail.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Ghi DataChangeLogs + AuditLogs (so sánh tự động)
+                        AuditHelper.Update("Leads", _editingLeadId.ToString(), txtTen.Text, oldSnap, newSnap);
+                    }
                 }
-                else
-                {
-                    // UPDATE
-                    string query = @"UPDATE Leads 
-                    SET Ten=@Ten,
-                        SoDienThoai=@Phone,
-                        Email=@Email,
-                        Nguon=@Nguon,
-                        TrangThai=@TrangThai
-                    WHERE LeadID=@Id";
 
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", editingLeadId);
-                }
-
-                cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
-                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text);
-                cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text);
-
-                cmd.ExecuteNonQuery();
+                _editingLeadId = -1;
+                panelAddLead.Visible = false;
+                LoadLeads();
+                MessageBox.Show("Lưu thành công!");
             }
-
-            editingLeadId = -1;
-
-            panelAddLead.Visible = false;
-
-            LoadLeads();
-
-            MessageBox.Show("Lưu thành công!");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu: " + ex.Message);
+            }
         }
-        // CANCEL ADD
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            editingLeadId = -1;
+            _editingLeadId = -1;
             panelAddLead.Visible = false;
         }
 
-        // EDIT LEAD
-        // biến lưu ID đang sửa
-        int editingLeadId = -1;
-
-
-        // =======================
-        // NÚT SỬA
-        // =======================
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgvLeads.CurrentRow == null)
             {
-                MessageBox.Show("Chọn Lead cần sửa");
+                MessageBox.Show("Chọn Lead cần sửa!");
                 return;
             }
 
-            // lấy ID
-            editingLeadId = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
-
-            // đổ dữ liệu lên panel
+            _editingLeadId = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
             txtTen.Text = dgvLeads.CurrentRow.Cells["Ten"].Value.ToString();
             txtPhone.Text = dgvLeads.CurrentRow.Cells["SoDienThoai"].Value.ToString();
-            txtEmail.Text = dgvLeads.CurrentRow.Cells["Email"].Value.ToString();
-            cbNguon.Text = dgvLeads.CurrentRow.Cells["Nguon"].Value.ToString();
-            cbTrangThai.Text = dgvLeads.CurrentRow.Cells["TrangThai"].Value.ToString();
+            txtEmail.Text = dgvLeads.CurrentRow.Cells["Email"].Value?.ToString();
+            cbNguon.Text = dgvLeads.CurrentRow.Cells["Nguon"].Value?.ToString();
+            cbTrangThai.Text = dgvLeads.CurrentRow.Cells["TrangThai"].Value?.ToString();
 
-            // mở panel
             panelAddLead.Visible = true;
         }
 
-
-        // =======================
-        // NÚT LƯU (UPDATE SQL)
-        // =======================
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (txtTen.Text == "" || txtPhone.Text == "")
-            {
-                MessageBox.Show("Vui lòng nhập thông tin!");
-                return;
-            }
-
-            using (SqlConnection conn = DBHelper.GetConnection())
-            {
-                SqlCommand cmd;
-
-                conn.Open();
-
-                if (editingLeadId == -1)
-                {
-                    // INSERT
-                    string query = @"INSERT INTO Leads 
-                    (Ten,SoDienThoai,Email,Nguon,TrangThai) 
-                    VALUES(@Ten,@Phone,@Email,@Nguon,@TrangThai)";
-
-                    cmd = new SqlCommand(query, conn);
-                }
-                else
-                {
-                    // UPDATE
-                    string query = @"UPDATE Leads 
-                    SET Ten=@Ten,
-                        SoDienThoai=@Phone,
-                        Email=@Email,
-                        Nguon=@Nguon,
-                        TrangThai=@TrangThai
-                    WHERE LeadID=@Id";
-
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", editingLeadId);
-                }
-
-                cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
-                cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text);
-                cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            editingLeadId = -1;
-
-            panelAddLead.Visible = false;
-
-            LoadLeads();
-
-            MessageBox.Show("Lưu thành công!");
-        }
-
-        // =======================
-        // NÚT HỦY
-        // =======================
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            editingLeadId = -1;
-            panelAddLead.Visible = false;
-        }
-        // DELETE LEAD
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvLeads.CurrentRow == null)
@@ -242,29 +188,41 @@ namespace SharkTank.Modules.CRM.UI.Forms
 
             DialogResult result = MessageBox.Show(
                 "Bạn có chắc muốn xóa Lead này?",
-                "Xác nhận",
-                MessageBoxButtons.YesNo);
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
-
-                using (SqlConnection conn = DBHelper.GetConnection())
+                try
                 {
-                    string query = "DELETE FROM Leads WHERE LeadID=@Id";
+                    int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
+                    string ten = dgvLeads.CurrentRow.Cells["Ten"].Value?.ToString();
 
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        string query = "DELETE FROM Leads WHERE LeadID = @Id";
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Id", id);
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("Leads", id.ToString(), ten, "LeadID");
+
+                    LoadLeads();
+                    MessageBox.Show("Xóa thành công!");
                 }
-
-                LoadLeads();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa: " + ex.Message);
+                }
             }
         }
 
-        // CALL ZALO
         private void btnCall_Click(object sender, EventArgs e)
         {
             if (dgvLeads.CurrentRow == null)
@@ -273,7 +231,13 @@ namespace SharkTank.Modules.CRM.UI.Forms
                 return;
             }
 
-            string phone = dgvLeads.CurrentRow.Cells["SoDienThoai"].Value.ToString();
+            string phone = dgvLeads.CurrentRow.Cells["SoDienThoai"].Value?.ToString();
+
+            if (string.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Không có số điện thoại!");
+                return;
+            }
 
             try
             {
@@ -285,7 +249,6 @@ namespace SharkTank.Modules.CRM.UI.Forms
             }
         }
 
-        // EMAIL
         private void btnEmail_Click(object sender, EventArgs e)
         {
             if (dgvLeads.CurrentRow == null) return;
@@ -294,13 +257,19 @@ namespace SharkTank.Modules.CRM.UI.Forms
 
             if (!string.IsNullOrEmpty(email))
             {
-                string url = "https://mail.google.com/mail/?view=cm&to=" + email;
-
-                Process.Start(new ProcessStartInfo
+                try
                 {
-                    FileName = url,
-                    UseShellExecute = true
-                });
+                    string url = "https://mail.google.com/mail/?view=cm&to=" + email;
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = url,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
             }
             else
             {
@@ -308,7 +277,6 @@ namespace SharkTank.Modules.CRM.UI.Forms
             }
         }
 
-        // CONVERT LEAD
         private void btnConvert_Click(object sender, EventArgs e)
         {
             if (dgvLeads.CurrentRow == null)
@@ -319,22 +287,28 @@ namespace SharkTank.Modules.CRM.UI.Forms
 
             int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
 
-            using (SqlConnection conn = DBHelper.GetConnection())
+            try
             {
-                string query = "UPDATE Leads SET TrangThai='KhachHang' WHERE LeadID=@Id";
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string query = "UPDATE Leads SET TrangThai = 'KhachHang' WHERE LeadID = @Id";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", id);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                LoadLeads();
+                MessageBox.Show("Chuyển thành khách hàng thành công!");
             }
-
-            LoadLeads();
-            MessageBox.Show("Chuyển thành khách hàng thành công!");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
         }
 
-        // PHONE ONLY NUMBER
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -342,25 +316,24 @@ namespace SharkTank.Modules.CRM.UI.Forms
                 e.Handled = true;
             }
         }
-        // SEARCH
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
 
-            DataTable dt = (DataTable)dgvLeads.DataSource;
-
-            if (string.IsNullOrEmpty(keyword))
+            if (dgvLeads.DataSource is DataTable dt)
             {
-                dt.DefaultView.RowFilter = "";
-            }
-            else
-            {
-                dt.DefaultView.RowFilter =
-                    $"Ten LIKE '%{keyword}%' OR SoDienThoai LIKE '%{keyword}%'";
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    dt.DefaultView.RowFilter = "";
+                }
+                else
+                {
+                    dt.DefaultView.RowFilter =
+                        $"Ten LIKE '%{keyword}%' OR SoDienThoai LIKE '%{keyword}%'";
+                }
             }
         }
-
-        
     }
-    }
+}
     

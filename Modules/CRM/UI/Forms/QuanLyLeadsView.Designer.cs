@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SharkTank.Modules.CRM.UI.Forms
 {
-    partial class QuanLyLeadsForm
+    partial class QuanLyLeadsView
     {
         private Panel panelTitle;
         private Label lblTitle;
@@ -399,7 +399,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -410,7 +410,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.btnCancel.Text = "Hủy";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // QuanLyLeadsForm
+            // QuanLyLeadsView
             // 
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.txtSearch);
@@ -423,7 +423,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.panelAddLead);
-            this.Name = "QuanLyLeadsForm";
+            this.Name = "QuanLyLeadsView";
             this.Size = new System.Drawing.Size(1100, 600);
             this.panelTitle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeads)).EndInit();

@@ -1,4 +1,4 @@
-﻿namespace SharkTank.Modules.Admin.UI.Forms
+namespace SharkTank.Modules.Admin.UI.Forms
 {
     partial class ThongBaoHeThongForm
     {
@@ -39,16 +39,16 @@
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(0, 120, 215);
             this.lblTitle.Location = new System.Drawing.Point(20, 20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(250, 30);
+            this.lblTitle.Size = new System.Drawing.Size(310, 30);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "THONG BAO HE THONG";
+            this.lblTitle.Text = "THÔNG BÁO HỆ THỐNG";
 
             // btnThem
             this.btnThem.Location = new System.Drawing.Point(25, 70);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(90, 32);
             this.btnThem.TabIndex = 1;
-            this.btnThem.Text = "Them";
+            this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
 
@@ -57,7 +57,7 @@
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(90, 32);
             this.btnSua.TabIndex = 2;
-            this.btnSua.Text = "Sua";
+            this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
 
@@ -66,7 +66,7 @@
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(90, 32);
             this.btnXoa.TabIndex = 3;
-            this.btnXoa.Text = "Xoa";
+            this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
 
@@ -75,7 +75,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(90, 32);
             this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Text = "Làm mới";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
 

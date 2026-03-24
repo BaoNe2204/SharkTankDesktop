@@ -95,15 +95,5 @@ namespace SharkTank
             }
         }
 
-        // private static NavBarItem GetLogoutMenu()
-        // {
-        //     return new NavBarItem
-        //     {
-        //         ID = _currentId++,
-        //         Text = "Đăng xuất",
-        //         ParentID = null
-        //     };
-        // }
-
     }
 }
