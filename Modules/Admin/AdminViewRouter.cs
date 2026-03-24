@@ -40,7 +40,7 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 📊 Dashboard hệ thống
                 // =========================
-                // { "Dashboard hệ thống", () => new DashboardTongForm() },
+                { "Dashboard hệ thống", () => new DashboardTongForm() },
 
                 // =========================
                 // 📝 Nhật ký hệ thống
