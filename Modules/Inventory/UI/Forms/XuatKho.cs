@@ -1,8 +1,7 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -15,11 +14,13 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += XuatKho_Load;
         }
 
+        // ================= LOAD =================
         private void XuatKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
+        // ================= LOAD DATA =================
         void LoadData()
         {
             try
@@ -29,6 +30,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM XuatKho", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+
                     dataGridView1.DataSource = dt;
                     dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -42,6 +44,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
+        // ================= TÌM KIẾM =================
         void TimKiem()
         {
             try
@@ -49,11 +52,16 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     string sql = @"SELECT * FROM XuatKho
-                                   WHERE PhieuXuat LIKE @key OR MaSP LIKE @key OR MaKho LIKE @key";
+                                   WHERE PhieuXuat LIKE @key
+                                   OR MaSP LIKE @key
+                                   OR MaKho LIKE @key";
+
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
+
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+
                     dataGridView1.DataSource = dt;
                 }
             }
@@ -63,6 +71,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
+        // ================= ENTER SEARCH =================
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -72,10 +81,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // THÊM
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
             FrmXuatKho f = new FrmXuatKho();
+
             if (f.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -83,29 +93,22 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
                         conn.Open();
+
                         string sql = @"INSERT INTO XuatKho
                         (PhieuXuat, MaKho, MaSP, LoaiXuat, SoLuong)
                         VALUES (@PhieuXuat, @MaKho, @MaSP, @LoaiXuat, @SoLuong)";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
+
                         cmd.Parameters.AddWithValue("@PhieuXuat", f.PhieuXuat);
                         cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
                         cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
-                        cmd.ExecuteNonQuery();
 
-                        // Ghi DataChangeLogs + AuditLogs
-                        AuditHelper.Insert("XuatKho", f.PhieuXuat, f.PhieuXuat,
-                            new XuatKhoSnapshot
-                            {
-                                PhieuXuat = f.PhieuXuat,
-                                MaKho = f.MaKho,
-                                MaSP = f.MaSP,
-                                LoaiXuat = f.LoaiXuat,
-                                SoLuong = f.SoLuong.ToString()
-                            });
+                        cmd.ExecuteNonQuery();
                     }
+
                     LoadData();
                     MessageBox.Show("Thêm thành công!");
                 }
@@ -116,7 +119,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // SỬA
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -126,6 +129,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
 
             DataGridViewRow row = dataGridView1.CurrentRow;
+
             string phieu = row.Cells["PhieuXuat"].Value.ToString();
             string makho = row.Cells["MaKho"].Value.ToString();
             string masp = row.Cells["MaSP"].Value.ToString();
@@ -139,35 +143,28 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             {
                 try
                 {
-                    // Đọc dữ liệu cũ
-                    var oldSnap = XuatKhoSnapshot.FromDb(phieu);
-                    var newSnap = new XuatKhoSnapshot
-                    {
-                        PhieuXuat = phieu,
-                        MaKho = f.MaKho,
-                        MaSP = f.MaSP,
-                        LoaiXuat = f.LoaiXuat,
-                        SoLuong = f.SoLuong.ToString()
-                    };
-
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
                         conn.Open();
+
                         string sql = @"UPDATE XuatKho
-                        SET MaKho=@MaKho, MaSP=@MaSP, LoaiXuat=@LoaiXuat, SoLuong=@SoLuong
+                        SET MaKho=@MaKho,
+                            MaSP=@MaSP,
+                            LoaiXuat=@LoaiXuat,
+                            SoLuong=@SoLuong
                         WHERE PhieuXuat=@PhieuXuat";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
+
                         cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
                         cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
                         cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
-                        cmd.ExecuteNonQuery();
 
-                        // Ghi DataChangeLogs + AuditLogs
-                        AuditHelper.Update("XuatKho", phieu, f.PhieuXuat, oldSnap, newSnap);
+                        cmd.ExecuteNonQuery();
                     }
+
                     LoadData();
                     MessageBox.Show("Sửa thành công!");
                 }
@@ -178,7 +175,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // XÓA
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -197,14 +194,14 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
+
                     SqlCommand cmd = new SqlCommand(
                         "DELETE FROM XuatKho WHERE PhieuXuat=@PhieuXuat", conn);
+
                     cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
                     cmd.ExecuteNonQuery();
-
-                    // Ghi DataChangeLogs + AuditLogs
-                    AuditHelper.Delete("XuatKho", phieu, phieu, "PhieuXuat");
                 }
+
                 LoadData();
                 MessageBox.Show("Xóa thành công!");
             }
@@ -214,6 +211,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
+        // ================= LÀM MỚI =================
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
