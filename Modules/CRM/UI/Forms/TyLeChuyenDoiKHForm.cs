@@ -9,7 +9,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
     {
         private TyLeChuyenDoiService service = new TyLeChuyenDoiService();
 
-        private int percent = 0; // 🔥 dùng thật
+        private int percent = 0; 
 
         public TyLeChuyenDoiKHForm()
         {
@@ -42,7 +42,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
             else
                 lblPercent.ForeColor = Color.Green;
 
-            this.Invalidate(); // 🔥 vẽ lại vòng tròn
+            this.Invalidate(); 
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
