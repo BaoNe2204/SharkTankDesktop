@@ -86,6 +86,7 @@ namespace SharkTank.Modules.Admin.UI.Forms
             if (confirm == DialogResult.Yes)
             {
                 _notificationService.Delete(item.NotificationId);
+                try { AuditService.CreateDefault().LogDelete("SystemNotifications", item.NotificationId.ToString(), item.Title); } catch { }
                 LoadData();
             }
         }

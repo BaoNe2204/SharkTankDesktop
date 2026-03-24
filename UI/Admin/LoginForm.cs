@@ -109,6 +109,33 @@ namespace SharkTank.UI.Admin
                 _sessionService.StartSession(result.User);
                 _permissionService.LoadPermissionsForUser(result.User.UserId, result.User.RoleId);
 
+                // Ghi nhật ký đăng nhập (bảng LoginHistory) — màn "Lịch sử đăng nhập" đọc từ đây
+                try
+                {
+                    var audit = AuditService.CreateDefault();
+                    var sess = _sessionService.CurrentSession;
+                    audit.LogLogin(
+                        result.User.UserId,
+                        result.User.Username,
+                        result.User.FullName,
+                        result.User.Role != null ? result.User.Role.RoleName : null,
+                        sess != null ? (sess.IpAddress ?? string.Empty) : string.Empty,
+                        sess != null ? (sess.DeviceInfo ?? string.Empty) : (Environment.MachineName),
+                        "Success");
+                    // Lịch sử thao tác (AuditLogs)
+                    audit.LogActionForUser(
+                        result.User,
+                        "LOGIN",
+                        "System",
+                        result.User.UserId.ToString(),
+                        result.User.Username,
+                        "Đăng nhập thành công");
+                }
+                catch (Exception logEx)
+                {
+                    System.Diagnostics.Debug.WriteLine("LoginHistory insert: " + logEx.Message);
+                }
+
                 DialogResult = DialogResult.OK;
                 Close();
             }

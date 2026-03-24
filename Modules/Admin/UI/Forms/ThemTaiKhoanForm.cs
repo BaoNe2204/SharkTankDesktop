@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -188,6 +189,16 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                 cmd.ExecuteNonQuery();
             }
+
+            // Ghi DataChangeLogs + AuditLogs
+            AuditHelper.Insert("Users", txtUsername.Text, txtUsername.Text,
+                new UsersSnapshot
+                {
+                    Username = txtUsername.Text,
+                    FullName = txtUsername.Text,
+                    RoleId = cboRole.SelectedValue?.ToString(),
+                    IsActive = cboStatus.Text == "Active" ? "1" : "0"
+                });
 
             MessageBox.Show("Tạo tài khoản thành công");
             Close();

@@ -33,7 +33,10 @@ namespace SharkTank.DAL.InMemory
                 new Permission { PermissionId = 13, PermissionCode = "ACCOUNTING.UPDATE", PermissionName = "Accounting - Update", Module = "Accounting" },
 
                 new Permission { PermissionId = 14, PermissionCode = "ADMIN.VIEW", PermissionName = "Admin - View", Module = "Admin" },
-                new Permission { PermissionId = 15, PermissionCode = "CRM.VIEW", PermissionName = "CRM - View", Module = "CRM" }
+                new Permission { PermissionId = 15, PermissionCode = "CRM.VIEW", PermissionName = "CRM - View", Module = "CRM" },
+                new Permission { PermissionId = 16, PermissionCode = "CRM.CREATE", PermissionName = "CRM - Create", Module = "CRM" },
+                new Permission { PermissionId = 17, PermissionCode = "CRM.UPDATE", PermissionName = "CRM - Update", Module = "CRM" },
+                new Permission { PermissionId = 18, PermissionCode = "CRM.DELETE", PermissionName = "CRM - Delete", Module = "CRM" }
             };
 
             // RoleId -> PermissionIds

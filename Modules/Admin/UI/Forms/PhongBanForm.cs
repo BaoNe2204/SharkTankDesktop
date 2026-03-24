@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -96,15 +97,15 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
+            string tenPB = "";
             using (SqlConnection conn = DBHelper.GetConnection())
             {
                 conn.Open();
+                using (var c = new SqlCommand("SELECT TenPhongBan FROM PhongBan WHERE PhongBanId=@Id", conn)) { c.Parameters.AddWithValue("@Id", selectedId); var r = c.ExecuteScalar(); if (r != null) tenPB = r.ToString(); }
+                using (var c = new SqlCommand("DELETE FROM PhongBan WHERE PhongBanId=@Id", conn)) { c.Parameters.AddWithValue("@Id", selectedId); c.ExecuteNonQuery(); }
 
-                string query = "DELETE FROM PhongBan WHERE PhongBanId=@Id";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", selectedId);
-                cmd.ExecuteNonQuery();
+                // Ghi DataChangeLogs + AuditLogs
+                AuditHelper.Delete("PhongBan", selectedId.ToString(), tenPB, "PhongBanId");
             }
 
             LoadData();

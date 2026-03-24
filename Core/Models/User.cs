@@ -12,6 +12,8 @@ namespace SharkTank.Core.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public int RoleId { get; set; }
+        public string Department { get; set; }
+        public DateTime? LastPasswordResetAt { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsLocked { get; set; }
         public int FailedLoginAttempts { get; set; }

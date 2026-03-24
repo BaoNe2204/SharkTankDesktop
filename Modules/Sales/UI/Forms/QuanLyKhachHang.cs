@@ -1,13 +1,14 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
+using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Sales.UI.Forms
 {
     public partial class QuanLyKhachHang : UserControl
     {
-        // Chuỗi kết nối chuẩn của An
         private string strCon = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SharkTankERP;Integrated Security=True;TrustServerCertificate=True";
 
         public QuanLyKhachHang()
@@ -19,24 +20,18 @@ namespace SharkTank.Modules.Sales.UI.Forms
 
         private void RegisterEvents()
         {
-            // Gán sự kiện cho các nút bấm
-            //btnThem.Click += BtnThem_Click;
             btnSua.Click += BtnSua_Click;
             btnXoa.Click += BtnXoa_Click;
             btnInBaoCao.Click += (s, e) => MessageBox.Show("Chức năng in báo cáo đang được phát triển!", "Thông báo");
-
-            // Sự kiện click vào bảng
             dgvKhachHang.CellClick += DgvKhachHang_CellClick;
         }
 
-        // 1. Tải dữ liệu từ SQL lên bảng
         private void LoadData()
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(strCon))
                 {
-                    // Lấy đủ 5 cột, đặt tên Alias cho đẹp trên Header bảng
                     string query = "SELECT MaKH AS [Mã], HoTen AS [Tên Khách], DienThoai AS [Điện Thoại], DiaChi AS [Địa Chỉ], Email FROM KhachHang";
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
@@ -50,10 +45,9 @@ namespace SharkTank.Modules.Sales.UI.Forms
             }
         }
 
-        // 2. Chức năng THÊM MỚI
+        // THÊM MỚI
         private void BtnThem_Click(object sender, EventArgs e)
         {
-            // Kiểm tra nhập liệu
             if (string.IsNullOrWhiteSpace(txtMaKhach.Text) || string.IsNullOrWhiteSpace(txtTenKhach.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Nhắc nhở");
@@ -74,8 +68,19 @@ namespace SharkTank.Modules.Sales.UI.Forms
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Thêm khách hàng mới thành công!", "Thành công");
 
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Insert("KhachHang", txtMaKhach.Text.Trim(), txtTenKhach.Text.Trim(),
+                        new KhachHangSnapshot
+                        {
+                            MaKH = txtMaKhach.Text.Trim(),
+                            HoTen = txtTenKhach.Text.Trim(),
+                            DienThoai = txtDienThoai.Text.Trim(),
+                            DiaChi = txtDiaChi.Text.Trim(),
+                            Email = txtEmail.Text.Trim()
+                        });
+
+                    MessageBox.Show("Thêm khách hàng mới thành công!", "Thành công");
                     LoadData();
                     ClearInputs();
                 }
@@ -89,7 +94,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             }
         }
 
-        // 3. Chức năng SỬA
+        // SỬA
         private void BtnSua_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaKhach.Text))
@@ -100,18 +105,34 @@ namespace SharkTank.Modules.Sales.UI.Forms
 
             try
             {
+                string maKH = txtMaKhach.Text.Trim();
+
+                // Đọc dữ liệu cũ trước khi sửa
+                var oldSnap = KhachHangSnapshot.FromDb(maKH);
+                var newSnap = new KhachHangSnapshot
+                {
+                    MaKH = maKH,
+                    HoTen = txtTenKhach.Text.Trim(),
+                    DienThoai = txtDienThoai.Text.Trim(),
+                    DiaChi = txtDiaChi.Text.Trim(),
+                    Email = txtEmail.Text.Trim()
+                };
+
                 using (SqlConnection conn = new SqlConnection(strCon))
                 {
+                    conn.Open();
                     string sql = "UPDATE KhachHang SET HoTen=@name, DienThoai=@phone, DiaChi=@address, Email=@email WHERE MaKH=@ma";
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@name", txtTenKhach.Text.Trim());
                     cmd.Parameters.AddWithValue("@phone", txtDienThoai.Text.Trim());
                     cmd.Parameters.AddWithValue("@address", txtDiaChi.Text.Trim());
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@ma", txtMaKhach.Text.Trim());
-
-                    conn.Open();
+                    cmd.Parameters.AddWithValue("@ma", maKH);
                     cmd.ExecuteNonQuery();
+
+                    // Ghi DataChangeLogs + AuditLogs (so sánh tự động)
+                    AuditHelper.Update("KhachHang", maKH, txtTenKhach.Text.Trim(), oldSnap, newSnap);
+
                     MessageBox.Show("Cập nhật thông tin thành công!", "Thành công");
                     LoadData();
                 }
@@ -122,7 +143,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             }
         }
 
-        // 4. Chức năng XÓA
+        // XÓA
         private void BtnXoa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMaKhach.Text)) return;
@@ -132,14 +153,20 @@ namespace SharkTank.Modules.Sales.UI.Forms
             {
                 try
                 {
+                    string maKH = txtMaKhach.Text.Trim();
+                    string tenKH = txtTenKhach.Text.Trim();
+
                     using (SqlConnection conn = new SqlConnection(strCon))
                     {
+                        conn.Open();
                         string sql = "DELETE FROM KhachHang WHERE MaKH=@ma";
                         SqlCommand cmd = new SqlCommand(sql, conn);
-                        cmd.Parameters.AddWithValue("@ma", txtMaKhach.Text.Trim());
-
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@ma", maKH);
                         cmd.ExecuteNonQuery();
+
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Delete("KhachHang", maKH, tenKH, "MaKH");
+
                         MessageBox.Show("Đã xóa khách hàng!");
                         LoadData();
                         ClearInputs();
@@ -152,7 +179,6 @@ namespace SharkTank.Modules.Sales.UI.Forms
             }
         }
 
-        // 5. Click vào bảng đổ dữ liệu lên ô nhập
         private void DgvKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -163,25 +189,17 @@ namespace SharkTank.Modules.Sales.UI.Forms
                 txtDienThoai.Text = row.Cells["Điện Thoại"].Value.ToString();
                 txtDiaChi.Text = row.Cells["Địa Chỉ"].Value.ToString();
                 txtEmail.Text = row.Cells["Email"].Value.ToString();
-
-                //txtMaKhach.ReadOnly = true;
                 txtMaKhach.Focus();
             }
         }
 
         private void dgvKhachHang_MouseDown(object sender, MouseEventArgs e)
         {
-            // Kiểm tra xem vị trí click chuột có trúng dòng nào không
             var hit = dgvKhachHang.HitTest(e.X, e.Y);
-
-            // Nếu click vào vùng trống (None) hoặc vùng tiêu đề mà không phải dòng dữ liệu
             if (hit.Type == DataGridViewHitTestType.None)
-            {
-                ClearInputs(); // Gọi hàm xóa trắng và MỞ KHÓA mã khách
-            }
+                ClearInputs();
         }
 
-        // 6. Xóa trắng các ô nhập liệu
         private void ClearInputs()
         {
             txtMaKhach.Clear();

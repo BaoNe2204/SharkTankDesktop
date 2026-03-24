@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -10,6 +11,7 @@ namespace SharkTank.Modules.Admin.UI.Forms
     public class SuaTaiKhoanForm : Form
     {
         int userId;
+        UsersSnapshot _oldSnap;
 
         TextBox txtUsername;
         ComboBox cboRole;
@@ -170,17 +172,32 @@ namespace SharkTank.Modules.Admin.UI.Forms
                     txtUsername.Text = rd["Username"].ToString();
                     cboRole.SelectedValue = rd["RoleId"];
                     cboStatus.Text = (bool)rd["IsActive"] ? "Active" : "Locked";
+                    _oldSnap = new UsersSnapshot
+                    {
+                        UserId = userId.ToString(),
+                        Username = rd["Username"]?.ToString(),
+                        RoleId = rd["RoleId"]?.ToString(),
+                        IsActive = rd["IsActive"]?.ToString()
+                    };
                 }
             }
         }
 
         void UpdateUser(object sender, EventArgs e)
         {
+            bool active = cboStatus.Text == "Active";
+
+            var newSnap = new UsersSnapshot
+            {
+                UserId = userId.ToString(),
+                Username = txtUsername.Text.Trim(),
+                RoleId = cboRole.SelectedValue?.ToString(),
+                IsActive = active ? "1" : "0"
+            };
+
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-
-                bool active = cboStatus.Text == "Active";
 
                 SqlCommand cmd = new SqlCommand(@"
             UPDATE Users
@@ -199,6 +216,9 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                 cmd.ExecuteNonQuery();
             }
+
+            // Ghi DataChangeLogs + AuditLogs
+            AuditHelper.Update("Users", userId.ToString(), txtUsername.Text.Trim(), _oldSnap, newSnap);
 
             MessageBox.Show("Cập nhật tài khoản thành công");
             Close();

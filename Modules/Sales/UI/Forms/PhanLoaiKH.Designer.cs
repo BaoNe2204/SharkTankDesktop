@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace SharkTank.Modules.Sales.UI.Forms
 {
@@ -24,6 +24,9 @@ namespace SharkTank.Modules.Sales.UI.Forms
             this.flowCards = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlTopActions = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnUpdateRule = new System.Windows.Forms.Button();
             this.dgvPhanLoai = new System.Windows.Forms.DataGridView();
 
 
@@ -62,6 +65,41 @@ namespace SharkTank.Modules.Sales.UI.Forms
             this.txtSearch.Size = new System.Drawing.Size(450, 30);
             this.txtSearch.Text = "🔍 Tìm kiếm khách hàng...";
             this.txtSearch.ForeColor = System.Drawing.Color.Gray;
+
+            // --- btnUpdateRule ---
+            this.btnUpdateRule.Text = "Cập nhật quy tắc";
+            this.btnUpdateRule.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnUpdateRule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateRule.FlatAppearance.BorderSize = 0;
+            this.btnUpdateRule.BackColor = System.Drawing.Color.FromArgb(155, 89, 182);
+            this.btnUpdateRule.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateRule.Location = new System.Drawing.Point(620, 12);
+            this.btnUpdateRule.Size = new System.Drawing.Size(110, 30);
+
+            // --- btnExport ---
+            this.btnExport.Text = "📥 Xuất Excel";
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(52, 73, 94);
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(740, 12);
+            this.btnExport.Size = new System.Drawing.Size(100, 30);
+
+            // --- btnRefresh ---
+            this.btnRefresh.Text = "🔄 Làm mới";
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(0, 112, 192);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(850, 12);
+            this.btnRefresh.Size = new System.Drawing.Size(95, 30);
+
+            // Thêm 3 button vào pnlTopActions
+            this.pnlTopActions.Controls.Add(this.btnRefresh);
+            this.pnlTopActions.Controls.Add(this.btnExport);
+            this.pnlTopActions.Controls.Add(this.btnUpdateRule);
 
             // --- dgvPhanLoai (Màn lột xác thực sự ở đây) ---
             this.dgvPhanLoai.Dock = System.Windows.Forms.DockStyle.Fill;

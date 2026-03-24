@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Modules;
 using SharkTank.Modules.Accounting;
 using SharkTank.Modules.Admin;
@@ -87,6 +88,7 @@ namespace SharkTank
                         System.Diagnostics.Debug.WriteLine($"ViewManager: Successfully loaded view for '{viewName}'");
                         view.Dock = DockStyle.Fill;
                         _contentPanel.Controls.Add(view);
+                        ThemeService.Instance.ApplyWorkspaceTheme(_contentPanel);
                     }
                     else
                     {
@@ -129,6 +131,7 @@ namespace SharkTank
 
             _contentPanel.Controls.Add(lblTitle);
             _contentPanel.Controls.Add(lblDesc);
+            ThemeService.Instance.ApplyWorkspaceTheme(_contentPanel);
         }
 
         private void ShowDefaultView(string menuText)
@@ -143,6 +146,7 @@ namespace SharkTank
             };
 
             _contentPanel.Controls.Add(lblDefault);
+            ThemeService.Instance.ApplyWorkspaceTheme(_contentPanel);
         }
 
         public void SetCurrentModule(string moduleName)
