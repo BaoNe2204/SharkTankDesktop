@@ -154,6 +154,12 @@
     <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.Designer.cs">
       <DependentUpon>ChamSocKhachHangForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\NguonKhachHangForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\NguonKhachHangForm.Designer.cs">
+      <DependentUpon>NguonKhachHangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QLCoHoiBanHangForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
