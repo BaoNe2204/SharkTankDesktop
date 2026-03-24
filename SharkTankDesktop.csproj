@@ -188,6 +188,12 @@
     <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.Designer.cs">
       <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.Designer.cs">
+      <DependentUpon>DashboardTongForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -482,6 +488,9 @@
     </Compile>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhEmailForm.resx">
       <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\DashboardTongForm.resx">
+      <DependentUpon>DashboardTongForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.resx">
       <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
