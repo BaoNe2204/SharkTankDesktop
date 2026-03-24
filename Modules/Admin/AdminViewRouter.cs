@@ -52,8 +52,8 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 💾 Backup & Restore
                 // =========================
-                // { "Sao lưu dữ liệu", () => new BackupRestoreForm() },
-                // { "Khôi phục dữ liệu", () => new BackupRestoreForm() },
+                 { "Sao lưu dữ liệu", () => new SaoLuuDuLieuForm() },
+                 { "Khôi phục dữ liệu", () => new KhoiPhucDuLieuForm() },
 
                 // =========================
                 // 📦 Quản lý module

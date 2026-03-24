@@ -58,6 +58,8 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -209,6 +211,18 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.Designer.cs">
       <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.Designer.cs">
+      <DependentUpon>SaoLuuDuLieuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.Designer.cs">
+      <DependentUpon>KhoiPhucDuLieuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
@@ -410,6 +424,8 @@
     <Compile Include="BLL\AuditHelper.cs" />
     <Compile Include="BLL\PermissionService.cs" />
     <Compile Include="BLL\SessionService.cs" />
+    <Compile Include="BLL\BackupService.cs" />
+    <Compile Include="DAL\IBackupService.cs" />
     <!-- UI Dashboard -->
     <Compile Include="UI\MainDashboard.cs">
       <SubType>Form</SubType>
@@ -479,6 +495,9 @@
     <EmbeddedResource Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.resx">
       <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.resx">
+      <DependentUpon>KhoiPhucDuLieuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.resx">
       <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -502,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.resx">
       <DependentUpon>QuanLyPhienDangNhapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.resx">
+      <DependentUpon>SaoLuuDuLieuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.resx">
       <DependentUpon>ThongTinCongTyForm.cs</DependentUpon>
