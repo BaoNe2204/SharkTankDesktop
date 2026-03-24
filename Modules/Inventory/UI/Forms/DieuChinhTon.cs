@@ -1,8 +1,7 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -132,8 +131,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
 
                     cmd.ExecuteNonQuery();
                 }
-
-                try { AuditService.CreateDefault().LogUpdate("DieuChinhTon", masp, masp, $"Điều chỉnh: {soluong}"); } catch { }
 
                 MessageBox.Show("Điều chỉnh tồn thành công");
 
