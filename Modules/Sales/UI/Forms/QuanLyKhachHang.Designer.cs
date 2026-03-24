@@ -198,7 +198,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             this.lblDiaChi.Size = new System.Drawing.Size(138, 61);
             this.lblDiaChi.TabIndex = 8;
             this.lblDiaChi.Text = "Địa chỉ:";
-            this.lblDiaChi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblDiaChi.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtDiaChi
             // 

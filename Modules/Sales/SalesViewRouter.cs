@@ -12,8 +12,8 @@ namespace SharkTank.Modules.Sales
         {
             { "Thêm / sửa / xóa khách hàng", () => new QuanLyKhachHang() },
             { "Phân loại khách hàng", () => new PhanLoaiKH() },
-            { "Lịch sử mua hàng", () => new QuanLyKhachHang() },
-            { "Công nợ khách", () => new QuanLyKhachHang() },
+            { "Lịch sử mua hàng", () => new LichSuMuaHang() },
+            { "Công nợ khách", () => new QLCongNoKH() },
             { "Tạo báo giá", () => new QuanLyKhachHang() },
             { "Sửa / duyệt báo giá", () => new QuanLyKhachHang() },
             { "Gửi cho khách", () => new QuanLyKhachHang() },

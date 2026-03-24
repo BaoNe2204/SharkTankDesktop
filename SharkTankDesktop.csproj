@@ -335,6 +335,18 @@
     <Compile Include="Modules\HR\UI\Forms\ThongTinLienHeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QLCongNoKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\QLCongNoKH.Designer.cs">
+      <DependentUpon>QLCongNoKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\LichSuMuaHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\LichSuMuaHang.Designer.cs">
+      <DependentUpon>LichSuMuaHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Sales\UI\Forms\PhanLoaiKH.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -532,6 +544,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\XuatKho.resx">
       <DependentUpon>XuatKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\LichSuMuaHang.resx">
+      <DependentUpon>LichSuMuaHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
+      <DependentUpon>PhanLoaiKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\QLCongNoKH.resx">
+      <DependentUpon>QLCongNoKH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\QuanLyKhachHang.resx">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <!-- Resources & Settings -->
     <EmbeddedResource Include="Properties\Resources.resx">
