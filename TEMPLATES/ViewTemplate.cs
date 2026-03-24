@@ -16,7 +16,7 @@ namespace SharkTank.Modules.Templates
     /// Template để tạo View mới
     /// Copy file này và thay thế [TenModule] và [TenView] bằng tên thực tế
     /// </summary>
-    public class ViewTemplate : UserControl
+    public class SoQuyView : UserControl
     {
         // ============================================
         // KHAI BÁO CONTROLS
@@ -31,7 +31,7 @@ namespace SharkTank.Modules.Templates
         // ============================================
         // CONSTRUCTOR
         // ============================================
-        public ViewTemplate()
+        public SoQuyView()
         {
             InitializeComponent();
             LoadData();

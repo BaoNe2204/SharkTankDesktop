@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -108,16 +109,16 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
+            string tenChucVu = "";
             using (SqlConnection conn = DBHelper.GetConnection())
             {
                 conn.Open();
+                var q = "SELECT TenChucVu FROM ChucVu WHERE ChucVuId=@Id";
+                using (var c = new SqlCommand(q, conn)) { c.Parameters.AddWithValue("@Id", selectedId); var r = c.ExecuteScalar(); if (r != null) tenChucVu = r.ToString(); }
+                using (var c = new SqlCommand("DELETE FROM ChucVu WHERE ChucVuId=@Id", conn)) { c.Parameters.AddWithValue("@Id", selectedId); c.ExecuteNonQuery(); }
 
-                string query = "DELETE FROM ChucVu WHERE ChucVuId=@Id";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Id", selectedId);
-
-                cmd.ExecuteNonQuery();
+                // Ghi DataChangeLogs + AuditLogs
+                AuditHelper.Delete("ChucVu", selectedId.ToString(), tenChucVu, "ChucVuId");
             }
 
             MessageBox.Show("Xóa thành công");

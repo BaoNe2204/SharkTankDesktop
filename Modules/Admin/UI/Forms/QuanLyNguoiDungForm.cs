@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using SharkTank.BLL;
+
 namespace SharkTank.Modules.Admin.UI.Forms
 {
     public partial class QuanLyNguoiDungForm : UserControl
@@ -105,6 +107,8 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 dgvUsers.SelectedRows[0].Cells[0].Value
             );
 
+            string username = dgvUsers.SelectedRows[0].Cells[1].Value.ToString();
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 string query = "DELETE FROM Users WHERE UserId=@id";
@@ -114,6 +118,9 @@ namespace SharkTank.Modules.Admin.UI.Forms
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
+
+                // Ghi DataChangeLogs + AuditLogs
+                AuditHelper.Delete("Users", userId.ToString(), username, "UserId");
             }
 
             MessageBox.Show("Xóa thành công");

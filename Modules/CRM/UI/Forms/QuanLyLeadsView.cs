@@ -1,55 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Data;
-using System.Windows.Forms;
+using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Windows.Forms;
+using SharkTank.BLL;
+using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.CRM.UI.Forms
 {
-    public partial class QuanLyLeadsForm : UserControl
+    public partial class QuanLyLeadsView : UserControl
     {
-        List<Lead> leads = new List<Lead>();
-        int currentId = 1;
+        private int _editingLeadId = -1;
 
-        public QuanLyLeadsForm()
+        public QuanLyLeadsView()
         {
             InitializeComponent();
+            LoadLeads();
+            dgvLeads.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvLeads.MultiSelect = false;
         }
 
-        private void QuanLyLeadsForm_Load(object sender, EventArgs e)
+        private void LoadLeads()
         {
-            btnAdd.Click += BtnAdd_Click;
-        }
-
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            Lead lead = new Lead()
+            try
             {
-                Id = currentId++,
-                TenKhach = txtTen.Text,
-                Phone = txtPhone.Text,
-                Email = txtEmail.Text,
-                Nguon = cbNguon.Text,
-                TrangThai = cbTrangThai.Text
-            };
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string query = "SELECT LeadID, Ten, SoDienThoai, Email, Nguon, TrangThai FROM Leads";
 
-            leads.Add(lead);
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-            dgvLeads.Rows.Add(
-                lead.Id,
-                lead.TenKhach,
-                lead.Phone,
-                lead.Email,
-                lead.Nguon,
-                lead.TrangThai,
-                ""
-            );
-
-            ClearInput();
+                    dgvLeads.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
         }
 
-        private void ClearInput()
+        private void dgvLeads_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvLeads.Rows[e.RowIndex];
+                txtTen.Text = row.Cells["Ten"].Value?.ToString();
+                txtPhone.Text = row.Cells["SoDienThoai"].Value?.ToString();
+                txtEmail.Text = row.Cells["Email"].Value?.ToString();
+                cbNguon.Text = row.Cells["Nguon"].Value?.ToString();
+                cbTrangThai.Text = row.Cells["TrangThai"].Value?.ToString();
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _editingLeadId = -1;
+            panelAddLead.Visible = true;
+            panelAddLead.BringToFront();
+            panelAddLead.Left = (this.Width - panelAddLead.Width) / 2;
+            panelAddLead.Top = (this.Height - panelAddLead.Height) / 2;
+
             txtTen.Clear();
             txtPhone.Clear();
             txtEmail.Clear();
@@ -57,112 +69,271 @@ namespace SharkTank.Modules.CRM.UI.Forms
             cbTrangThai.SelectedIndex = -1;
         }
 
-        private void PanelTitle_Paint(object sender, PaintEventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtTen.Text) || string.IsNullOrWhiteSpace(txtPhone.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên và số điện thoại!");
+                return;
+            }
 
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    conn.Open();
+
+                    if (_editingLeadId == -1)
+                    {
+                        string query = @"INSERT INTO Leads (Ten, SoDienThoai, Email, Nguon, TrangThai) 
+                                         VALUES(@Ten, @Phone, @Email, @Nguon, @TrangThai)";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
+                            cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                            cmd.Parameters.AddWithValue("@Email", txtEmail.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Ghi DataChangeLogs + AuditLogs
+                        AuditHelper.Insert("Leads", txtTen.Text, txtTen.Text,
+                            new LeadsSnapshot
+                            {
+                                Ten = txtTen.Text,
+                                SoDienThoai = txtPhone.Text,
+                                Email = txtEmail.Text,
+                                Nguon = cbNguon.Text,
+                                TrangThai = cbTrangThai.Text
+                            });
+                    }
+                    else
+                    {
+                        // Đọc dữ liệu cũ trước khi sửa
+                        var oldSnap = LeadsSnapshot.FromDb(_editingLeadId.ToString());
+                        var newSnap = new LeadsSnapshot
+                        {
+                            Ten = txtTen.Text,
+                            SoDienThoai = txtPhone.Text,
+                            Email = txtEmail.Text,
+                            Nguon = cbNguon.Text,
+                            TrangThai = cbTrangThai.Text
+                        };
+
+                        string query = @"UPDATE Leads 
+                                         SET Ten = @Ten, SoDienThoai = @Phone, Email = @Email, 
+                                             Nguon = @Nguon, TrangThai = @TrangThai
+                                         WHERE LeadID = @Id";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Id", _editingLeadId);
+                            cmd.Parameters.AddWithValue("@Ten", txtTen.Text);
+                            cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                            cmd.Parameters.AddWithValue("@Email", txtEmail.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Nguon", cbNguon.Text ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@TrangThai", cbTrangThai.Text ?? (object)DBNull.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Ghi DataChangeLogs + AuditLogs (so sánh tự động)
+                        AuditHelper.Update("Leads", _editingLeadId.ToString(), txtTen.Text, oldSnap, newSnap);
+                    }
+                }
+
+                _editingLeadId = -1;
+                panelAddLead.Visible = false;
+                LoadLeads();
+                MessageBox.Show("Lưu thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu: " + ex.Message);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            _editingLeadId = -1;
+            panelAddLead.Visible = false;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvLeads.CurrentRow != null)
+            if (dgvLeads.CurrentRow == null)
             {
-                if (!string.IsNullOrWhiteSpace(txtTen.Text))
-                    dgvLeads.CurrentRow.Cells[1].Value = txtTen.Text;
-
-                if (!string.IsNullOrWhiteSpace(txtPhone.Text))
-                    dgvLeads.CurrentRow.Cells[2].Value = txtPhone.Text;
-
-                if (!string.IsNullOrWhiteSpace(txtEmail.Text))
-                    dgvLeads.CurrentRow.Cells[3].Value = txtEmail.Text;
-
-                if (!string.IsNullOrWhiteSpace(cbNguon.Text))
-                    dgvLeads.CurrentRow.Cells[4].Value = cbNguon.Text;
-
-                if (!string.IsNullOrWhiteSpace(cbTrangThai.Text))
-                    dgvLeads.CurrentRow.Cells[5].Value = cbTrangThai.Text;
-
-                MessageBox.Show("Đã cập nhật Lead!");
+                MessageBox.Show("Chọn Lead cần sửa!");
+                return;
             }
+
+            _editingLeadId = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
+            txtTen.Text = dgvLeads.CurrentRow.Cells["Ten"].Value.ToString();
+            txtPhone.Text = dgvLeads.CurrentRow.Cells["SoDienThoai"].Value.ToString();
+            txtEmail.Text = dgvLeads.CurrentRow.Cells["Email"].Value?.ToString();
+            cbNguon.Text = dgvLeads.CurrentRow.Cells["Nguon"].Value?.ToString();
+            cbTrangThai.Text = dgvLeads.CurrentRow.Cells["TrangThai"].Value?.ToString();
+
+            panelAddLead.Visible = true;
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvLeads.CurrentRow != null)
+            if (dgvLeads.CurrentRow == null)
             {
-                DialogResult result = MessageBox.Show(
-                    "Bạn có chắc muốn xóa Lead này không?",
-                    "Xác nhận xóa",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
+                MessageBox.Show("Chọn Lead cần xóa!");
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc muốn xóa Lead này?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
                 {
-                    dgvLeads.Rows.Remove(dgvLeads.CurrentRow);
-                    MessageBox.Show("Đã xóa Lead!");
+                    int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
+                    string ten = dgvLeads.CurrentRow.Cells["Ten"].Value?.ToString();
+
+                    using (SqlConnection conn = DBHelper.GetConnection())
+                    {
+                        string query = "DELETE FROM Leads WHERE LeadID = @Id";
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Id", id);
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("Leads", id.ToString(), ten, "LeadID");
+
+                    LoadLeads();
+                    MessageBox.Show("Xóa thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa: " + ex.Message);
                 }
             }
         }
-        private void BtnCall_Click(object sender, EventArgs e)
-        {
-            if (dgvLeads.CurrentRow != null)
-            {
-                string phone = dgvLeads.CurrentRow.Cells[2].Value.ToString();
-                MessageBox.Show("Hãy gọi số: " + phone);
-            }
-        }
+
         private void btnCall_Click(object sender, EventArgs e)
         {
-            if (dgvLeads.CurrentRow != null)
+            if (dgvLeads.CurrentRow == null)
             {
-                string phone = dgvLeads.CurrentRow.Cells[2].Value?.ToString();
+                MessageBox.Show("Vui lòng chọn khách cần gọi!");
+                return;
+            }
 
-                if (!string.IsNullOrEmpty(phone))
-                {
-                    string zaloLink = "zalo://conversation?phone=" + phone;
+            string phone = dgvLeads.CurrentRow.Cells["SoDienThoai"].Value?.ToString();
 
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = zaloLink,
-                        UseShellExecute = true
-                    });
-                }
-                else
-                {
-                    MessageBox.Show("Lead này chưa có số điện thoại!");
-                }
+            if (string.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Không có số điện thoại!");
+                return;
+            }
+
+            try
+            {
+                System.Diagnostics.Process.Start("zalo://conversation?phone=" + phone);
+            }
+            catch
+            {
+                MessageBox.Show("Không mở được ứng dụng Zalo!");
             }
         }
+
         private void btnEmail_Click(object sender, EventArgs e)
         {
-            if (dgvLeads.CurrentRow != null)
+            if (dgvLeads.CurrentRow == null) return;
+
+            string email = dgvLeads.CurrentRow.Cells["Email"].Value?.ToString();
+
+            if (!string.IsNullOrEmpty(email))
             {
-                string email = dgvLeads.CurrentRow.Cells[3].Value?.ToString();
-
-                if (!string.IsNullOrEmpty(email))
+                try
                 {
-                    string gmailUrl = "https://mail.google.com/mail/?view=cm&to=" + email;
-
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    string url = "https://mail.google.com/mail/?view=cm&to=" + email;
+                    Process.Start(new ProcessStartInfo
                     {
-                        FileName = gmailUrl,
+                        FileName = url,
                         UseShellExecute = true
                     });
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Lead này chưa có email!");
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
+            else
+            {
+                MessageBox.Show("Lead chưa có email!");
+            }
         }
-        // Model Lead
-        public class Lead
+
+        private void btnConvert_Click(object sender, EventArgs e)
         {
-            public int Id { get; set; }
-            public string TenKhach { get; set; }
-            public string Phone { get; set; }
-            public string Email { get; set; }
-            public string Nguon { get; set; }
-            public string TrangThai { get; set; }
+            if (dgvLeads.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn Lead cần chuyển!");
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvLeads.CurrentRow.Cells["LeadID"].Value);
+
+            try
+            {
+                using (SqlConnection conn = DBHelper.GetConnection())
+                {
+                    string query = "UPDATE Leads SET TrangThai = 'KhachHang' WHERE LeadID = @Id";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                LoadLeads();
+                MessageBox.Show("Chuyển thành khách hàng thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+
+            if (dgvLeads.DataSource is DataTable dt)
+            {
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    dt.DefaultView.RowFilter = "";
+                }
+                else
+                {
+                    dt.DefaultView.RowFilter =
+                        $"Ten LIKE '%{keyword}%' OR SoDienThoai LIKE '%{keyword}%'";
+                }
+            }
         }
     }
 }
+    

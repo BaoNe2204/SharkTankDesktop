@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Modules.HR.Data;
 
 namespace SharkTank.Modules.HR.UI.Forms
@@ -221,6 +222,16 @@ namespace SharkTank.Modules.HR.UI.Forms
                     cmd.Parameters.AddWithValue("@SoNgay", soNgay);
                     cmd.Parameters.AddWithValue("@LyDo", txtLyDo.Text);
                     cmd.ExecuteNonQuery();
+
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Insert("NghiPhep", nvId, $"{nvId} - {cmbLoaiPhep.Text}",
+                        new NghiPhepSnapshot
+                        {
+                            NhanVienId = nvId,
+                            LoaiPhep = cmbLoaiPhep.Text,
+                            SoNgay = soNgay.ToString(),
+                            TrangThai = "Đã duyệt"
+                        });
                 }
                 MessageBox.Show("✅ Đăng ký nghỉ phép thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtLyDo.Text = "";
@@ -283,6 +294,9 @@ namespace SharkTank.Modules.HR.UI.Forms
                     var cmd = new SqlCommand("DELETE FROM NghiPhep WHERE Id=@Id", conn);
                     cmd.Parameters.AddWithValue("@Id", id);
                     cmd.ExecuteNonQuery();
+
+                    // Ghi DataChangeLogs + AuditLogs
+                    AuditHelper.Delete("NghiPhep", id.ToString(), id.ToString(), "Id");
                 }
                 LoadNghiPhep();
             }

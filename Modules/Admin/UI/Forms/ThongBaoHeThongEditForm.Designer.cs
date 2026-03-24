@@ -1,4 +1,4 @@
-﻿namespace SharkTank.Modules.Admin.UI.Forms
+namespace SharkTank.Modules.Admin.UI.Forms
 {
     partial class ThongBaoHeThongEditForm
     {
@@ -59,25 +59,25 @@
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblHeader.Location = new System.Drawing.Point(25, 20);
-            this.lblHeader.Text = "Thong bao he thong";
+            this.lblHeader.Text = "THÔNG BÁO HỆ THỐNG";
 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Location = new System.Drawing.Point(30, 70);
-            this.lblTitle.Text = "Tieu de";
+            this.lblTitle.Text = "Tiêu đề";
 
             this.txtTitle.Location = new System.Drawing.Point(150, 67);
             this.txtTitle.Size = new System.Drawing.Size(420, 22);
 
             this.lblContent.AutoSize = true;
             this.lblContent.Location = new System.Drawing.Point(30, 110);
-            this.lblContent.Text = "Noi dung";
+            this.lblContent.Text = "Nội dung";
 
             this.rtbContent.Location = new System.Drawing.Point(150, 110);
             this.rtbContent.Size = new System.Drawing.Size(420, 120);
 
             this.lblType.AutoSize = true;
             this.lblType.Location = new System.Drawing.Point(30, 250);
-            this.lblType.Text = "Loai";
+            this.lblType.Text = "Loại";
 
             this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.Location = new System.Drawing.Point(150, 247);
@@ -85,7 +85,7 @@
 
             this.lblTargetType.AutoSize = true;
             this.lblTargetType.Location = new System.Drawing.Point(30, 290);
-            this.lblTargetType.Text = "Doi tuong";
+            this.lblTargetType.Text = "Đối tượng";
 
             this.cboTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTargetType.Location = new System.Drawing.Point(150, 287);
@@ -93,14 +93,14 @@
 
             this.lblTargetValue.AutoSize = true;
             this.lblTargetValue.Location = new System.Drawing.Point(30, 330);
-            this.lblTargetValue.Text = "Gia tri doi tuong";
+            this.lblTargetValue.Text = "Giá trị đối tượng";
 
             this.txtTargetValue.Location = new System.Drawing.Point(150, 327);
             this.txtTargetValue.Size = new System.Drawing.Size(420, 22);
 
             this.lblStartAt.AutoSize = true;
             this.lblStartAt.Location = new System.Drawing.Point(30, 370);
-            this.lblStartAt.Text = "Bat dau";
+            this.lblStartAt.Text = "Bắt đầu";
 
             this.dtpStartAt.CustomFormat = "dd/MM/yyyy HH:mm";
             this.dtpStartAt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -109,7 +109,7 @@
 
             this.lblEndAt.AutoSize = true;
             this.lblEndAt.Location = new System.Drawing.Point(30, 410);
-            this.lblEndAt.Text = "Ket thuc";
+            this.lblEndAt.Text = "Kết thúc";
 
             this.dtpEndAt.CustomFormat = "dd/MM/yyyy HH:mm";
             this.dtpEndAt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -118,22 +118,22 @@
 
             this.chkNoEndDate.AutoSize = true;
             this.chkNoEndDate.Location = new System.Drawing.Point(350, 409);
-            this.chkNoEndDate.Text = "Khong co ngay ket thuc";
+            this.chkNoEndDate.Text = "Không có ngày kết thúc";
             this.chkNoEndDate.CheckedChanged += new System.EventHandler(this.chkNoEndDate_CheckedChanged);
 
             this.chkIsActive.AutoSize = true;
             this.chkIsActive.Location = new System.Drawing.Point(150, 445);
-            this.chkIsActive.Text = "Dang hoat dong";
+            this.chkIsActive.Text = "Đang hoạt động";
             this.chkIsActive.Checked = true;
 
             this.btnSave.Location = new System.Drawing.Point(310, 490);
             this.btnSave.Size = new System.Drawing.Size(120, 35);
-            this.btnSave.Text = "Luu";
+            this.btnSave.Text = "Lưu";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
 
             this.btnCancel.Location = new System.Drawing.Point(450, 490);
             this.btnCancel.Size = new System.Drawing.Size(120, 35);
-            this.btnCancel.Text = "Dong";
+            this.btnCancel.Text = "Đóng";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 
             this.ClientSize = new System.Drawing.Size(620, 550);
@@ -158,7 +158,7 @@
             this.Controls.Add(this.btnCancel);
             this.Name = "ThongBaoHeThongEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Thong bao he thong";
+            this.Text = "Thông báo hệ thống";
             this.Load += new System.EventHandler(this.ThongBaoHeThongEditForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

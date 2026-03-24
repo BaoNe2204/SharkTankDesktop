@@ -35,9 +35,37 @@ namespace SharkTank.BLL
         {
             if (_currentSession != null)
             {
+                int userId = _currentSession.UserId;
                 _currentSession.IsActive = false;
                 _currentSession.LogoutTime = DateTime.Now;
                 PersistSessionEnd(_currentSession);
+
+                try
+                {
+                    AuditService.CreateDefault().LogLogout(userId);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("LoginHistory logout update: " + ex.Message);
+                }
+
+                try
+                {
+                    if (_currentUser != null)
+                    {
+                        AuditService.CreateDefault().LogActionForUser(
+                            _currentUser,
+                            "LOGOUT",
+                            "System",
+                            _currentUser.UserId.ToString(),
+                            _currentUser.Username,
+                            "Đăng xuất hệ thống");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("AuditLog logout: " + ex.Message);
+                }
             }
 
             _currentUser = null;

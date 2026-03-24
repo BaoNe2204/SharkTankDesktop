@@ -7,13 +7,13 @@ namespace SharkTank.DAL.Sql
     {
         public static SqlConnection Create()
         {
-            var cs = ConfigurationManager.ConnectionStrings["SharkTankDb"]?.ConnectionString;
+            var cs = ConfigurationManager.ConnectionStrings["SharkTankDB"]?.ConnectionString;
             return new SqlConnection(cs);
         }
 
         public static bool HasConnectionString()
         {
-            var cs = ConfigurationManager.ConnectionStrings["SharkTankDb"]?.ConnectionString;
+            var cs = ConfigurationManager.ConnectionStrings["SharkTankDB"]?.ConnectionString;
             return !string.IsNullOrWhiteSpace(cs);
         }
     }

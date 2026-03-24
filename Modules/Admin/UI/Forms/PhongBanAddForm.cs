@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Admin.UI.Forms
@@ -28,6 +29,14 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 cmd.Parameters.AddWithValue("@MoTa", txtMoTa.Text);
 
                 cmd.ExecuteNonQuery();
+
+                // Ghi DataChangeLogs + AuditLogs
+                AuditHelper.Insert("PhongBan", txtTenPhongBan.Text.Trim(), txtTenPhongBan.Text.Trim(),
+                    new PhongBanSnapshot
+                    {
+                        TenPhongBan = txtTenPhongBan.Text.Trim(),
+                        MoTa = txtMoTa.Text.Trim()
+                    });
             }
 
             MessageBox.Show("Thêm phòng ban thành công");

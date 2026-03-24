@@ -44,7 +44,6 @@ namespace SharkTank
         /// </summary>
         private void InitializeComponent()
         {
-            _notificationService = new NotificationService(new SqlNotificationRepository());
             this.components = new System.ComponentModel.Container();
             this.panelContent = new System.Windows.Forms.Panel();
             this.PanelTop = new System.Windows.Forms.Panel();
@@ -58,10 +57,12 @@ namespace SharkTank
             this.lblUserName = new System.Windows.Forms.Label();
             this.picAvatar = new System.Windows.Forms.PictureBox();
             this.picBell = new System.Windows.Forms.PictureBox();
+            this.lblNotificationCount = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.z80Navigation1 = new SharkTank.Z80_NavBar.Z80_Navigation();
+            this.contextMenuNotifications = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PanelTop.SuspendLayout();
             this.panelUserRight.SuspendLayout();
             this.contextMenuUser.SuspendLayout();
@@ -94,6 +95,7 @@ namespace SharkTank
             // 
             this.panelUserRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelUserRight.ContextMenuStrip = this.contextMenuUser;
+            this.panelUserRight.Controls.Add(this.lblNotificationCount);
             this.panelUserRight.Controls.Add(this.picChevron);
             this.panelUserRight.Controls.Add(this.lblUserRole);
             this.panelUserRight.Controls.Add(this.lblUserName);
@@ -194,6 +196,7 @@ namespace SharkTank
             // picBell
             // 
             this.picBell.BackColor = System.Drawing.Color.Transparent;
+            this.picBell.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picBell.Image = global::SharkTank.Properties.Resources.bell_solid;
             this.picBell.Location = new System.Drawing.Point(3, 6);
             this.picBell.Name = "picBell";
@@ -201,6 +204,20 @@ namespace SharkTank
             this.picBell.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBell.TabIndex = 0;
             this.picBell.TabStop = false;
+            this.picBell.Click += new System.EventHandler(this.picBell_Click);
+            // 
+            // lblNotificationCount
+            // 
+            this.lblNotificationCount.BackColor = System.Drawing.Color.Red;
+            this.lblNotificationCount.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold);
+            this.lblNotificationCount.ForeColor = System.Drawing.Color.White;
+            this.lblNotificationCount.Location = new System.Drawing.Point(25, 5);
+            this.lblNotificationCount.Name = "lblNotificationCount";
+            this.lblNotificationCount.Size = new System.Drawing.Size(11, 18);
+            this.lblNotificationCount.TabIndex = 5;
+            this.lblNotificationCount.Text = "0";
+            this.lblNotificationCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotificationCount.Visible = false;
             // 
             // lblDate
             // 
@@ -229,19 +246,24 @@ namespace SharkTank
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(45)))));
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(45)))), ((int)(((byte)(51)))));
             this.panelLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelLogo.Location = new System.Drawing.Point(-1, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(261, 74);
+            this.panelLogo.Size = new System.Drawing.Size(261, 68);
             this.panelLogo.TabIndex = 4;
             // 
             // z80Navigation1
             // 
-            this.z80Navigation1.Location = new System.Drawing.Point(0, 66);
+            this.z80Navigation1.Location = new System.Drawing.Point(-1, 66);
             this.z80Navigation1.Name = "z80Navigation1";
-            this.z80Navigation1.Size = new System.Drawing.Size(260, 600);
+            this.z80Navigation1.Size = new System.Drawing.Size(261, 600);
             this.z80Navigation1.TabIndex = 3;
+            // 
+            // contextMenuNotifications
+            // 
+            this.contextMenuNotifications.Name = "contextMenuNotifications";
+            this.contextMenuNotifications.Size = new System.Drawing.Size(61, 4);
             // 
             // MainDashboard
             // 
@@ -263,27 +285,7 @@ namespace SharkTank
             ((System.ComponentModel.ISupportInitialize)(this.picChevron)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBell)).EndInit();
-            this.panelUserRight.Controls.Add(this.lblNotificationCount);
-
             this.ResumeLayout(false);
-            this.contextMenuNotifications = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lblNotificationCount = new System.Windows.Forms.Label();
-
-            this.lblNotificationCount.AutoSize = false;
-            this.lblNotificationCount.BackColor = System.Drawing.Color.Red;
-            this.lblNotificationCount.ForeColor = System.Drawing.Color.White;
-            this.lblNotificationCount.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold);
-            this.lblNotificationCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNotificationCount.Location = new System.Drawing.Point(18, 2);
-            this.lblNotificationCount.Name = "lblNotificationCount";
-            this.lblNotificationCount.Size = new System.Drawing.Size(16, 16);
-            this.lblNotificationCount.TabIndex = 5;
-            this.lblNotificationCount.Text = "0";
-            this.lblNotificationCount.Visible = false;
-
-            this.picBell.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBell.Click += new System.EventHandler(this.picBell_Click);
-
 
         }
 
