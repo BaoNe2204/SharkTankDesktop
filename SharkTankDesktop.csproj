@@ -79,6 +79,15 @@
     <Compile Include="DAL\IAuditRepository.cs" />
     <Compile Include="DAL\InMemoryAuditRepository.cs" />
     <Compile Include="DAL\Sql\SqlAuditRepository.cs" />
+    <Compile Include="Modules\Accounting\UI\Forms\BaoCaoTaiChinhView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\CongNoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\SoQuyView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
