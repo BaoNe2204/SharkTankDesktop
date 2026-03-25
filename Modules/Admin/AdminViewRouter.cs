@@ -55,10 +55,6 @@ namespace SharkTank.Modules.Admin
                  { "Sao lưu dữ liệu", () => new SaoLuuDuLieuForm() },
                  { "Khôi phục dữ liệu", () => new KhoiPhucDuLieuForm() },
 
-                // =========================
-                // 📦 Quản lý module
-                // =========================
-                // { "Bật / tắt module ERP", () => new ModuleManagerForm() }
             };
 
         public static UserControl GetView(string menuText)
