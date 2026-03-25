@@ -274,6 +274,9 @@
     <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\DanhSachPhongBanView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
       <SubType>Form</SubType>
     </Compile>
