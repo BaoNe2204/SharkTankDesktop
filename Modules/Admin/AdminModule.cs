@@ -125,18 +125,6 @@ namespace SharkTank.Modules.Admin
                 }
             };
 
-            // 📦 Quản lý module
-            int moduleId = _menuId++;
-            var moduleMenu = new NavBarItem
-            {
-                ID = moduleId,
-                Text = "Quản lý module",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Bật / tắt module ERP", ParentID = moduleId }
-                }
-            };
 
             menuItems.Add(securityMenu);
             menuItems.Add(orgMenu);
@@ -145,7 +133,6 @@ namespace SharkTank.Modules.Admin
             menuItems.Add(dashboardMenu);
             menuItems.Add(auditMenu);
             menuItems.Add(backupMenu);
-            menuItems.Add(moduleMenu);
 
             return menuItems;
         }

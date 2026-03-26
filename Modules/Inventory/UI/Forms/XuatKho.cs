@@ -2,7 +2,6 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -15,6 +14,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += XuatKho_Load;
         }
 
+        // ================= LOAD =================
         private void XuatKho_Load(object sender, EventArgs e)
         {
             cboLoaiXuat.Items.Add("Bán hàng");
@@ -36,6 +36,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
 
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
+
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -52,6 +53,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         private void btnThem_Click(object sender, EventArgs e)
         {
             FrmXuatKho f = new FrmXuatKho();
+
             if (f.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -75,17 +77,9 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         cmd.ExecuteNonQuery();
                 }
 
-                        // Ghi DataChangeLogs + AuditLogs
-                        AuditHelper.Insert("XuatKho", f.PhieuXuat, f.PhieuXuat,
-                            new XuatKhoSnapshot
-                            {
-                                PhieuXuat = f.PhieuXuat,
-                                MaKho = f.MaKho,
-                                MaSP = f.MaSP,
-                                LoaiXuat = f.LoaiXuat,
-                                SoLuong = f.SoLuong.ToString()
-                            });
+                        cmd.ExecuteNonQuery();
                     }
+
                     LoadData();
                 MessageBox.Show("Thêm thành công");
                 }
@@ -105,6 +99,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
 
             DataGridViewRow row = dataGridView1.CurrentRow;
+
             string phieu = row.Cells["PhieuXuat"].Value.ToString();
             string makho = row.Cells["MaKho"].Value.ToString();
             string masp = row.Cells["MaSP"].Value.ToString();
@@ -118,17 +113,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             {
                 try
                 {
-                    // Đọc dữ liệu cũ
-                    var oldSnap = XuatKhoSnapshot.FromDb(phieu);
-                    var newSnap = new XuatKhoSnapshot
-                    {
-                        PhieuXuat = phieu,
-                        MaKho = f.MaKho,
-                        MaSP = f.MaSP,
-                        LoaiXuat = f.LoaiXuat,
-                        SoLuong = f.SoLuong.ToString()
-                    };
-
                     using (SqlConnection conn = DBHelper.GetConnection())
                     {
                         conn.Open();
@@ -141,12 +125,15 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         WHERE PhieuXuat=@PhieuXuat";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
+
                         cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
                         cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
                         cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
                         cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
                         cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
+
                         cmd.ExecuteNonQuery();
+                    }
 
                     cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
                     cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
@@ -194,9 +181,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     cmd.ExecuteNonQuery();
                 }
 
-                    // Ghi DataChangeLogs + AuditLogs
-                    AuditHelper.Delete("XuatKho", phieu, phieu, "PhieuXuat");
-                }
                 LoadData();
                 MessageBox.Show("Xóa thành công");
             }

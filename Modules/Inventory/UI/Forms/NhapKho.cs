@@ -14,11 +14,13 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += NhapKho_Load;
         }
 
+        // ================= LOAD =================
         private void NhapKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
+        // ================= LOAD DATA =================
         void LoadData()
         {
             try
@@ -53,6 +55,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                     (@PhieuNhap,@MaKho,@MaSP,@NhaCungCap,@GiaNhap,@SoLuong)";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
+                    }
 
                     cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
                     cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
@@ -100,6 +103,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
 
                     cmd.ExecuteNonQuery();
                 }
+                    }
 
                 LoadData();
             }
