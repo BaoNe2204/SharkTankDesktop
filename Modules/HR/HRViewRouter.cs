@@ -24,7 +24,7 @@ namespace SharkTank.Modules.HR
             // ── PHÒNG BAN ──
             { "Danh sách phòng ban",        () => new DanhSachPhongBanView() },
             { "Sơ đồ tổ chức",              () => CreateDefaultView("Sơ đồ tổ chức") },
-            { "Chức danh",                  () => CreateDefaultView("Chức danh") },
+            { "Chức danh",                  () => new ChucDanhView() },
             { "Điều chuyển nhân sự",        () => CreateDefaultView("Điều chuyển nhân sự") },
 
             // ── HỢP ĐỒNG ──

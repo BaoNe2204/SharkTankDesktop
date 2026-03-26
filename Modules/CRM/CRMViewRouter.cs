@@ -13,9 +13,8 @@ namespace SharkTank.Modules.CRM
             { "Quản lý Leads", () => new QuanLyLeadsView() },
             { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm() },
             { "Quản lý cơ hội bán hàng", () => new QLCoHoiBanHangForm()},
-            { "Tỷ lệ chuyển đổi khách hàng", () => CreateDefaultView("Báo cáo tỷ lệ chuyển đổi") },
-            { "Hiệu quả nhân viên sales", () => CreateDefaultView("Báo cáo hiệu quả NV") },
-            { "Nguồn khách hàng hiệu quả", () => CreateDefaultView("Báo cáo nguồn khách") },
+            { "Tỷ lệ chuyển đổi khách hàng", () => new TyLeChuyenDoiKHForm()},
+            { "Nguồn khách hàng hiệu quả", () => new NguonKhachHangForm()},
             { "Số lượng lead theo thời gian", () => CreateDefaultView("Báo cáo số lượng lead") }
         };
 
