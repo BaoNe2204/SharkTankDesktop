@@ -280,6 +280,9 @@
     <Compile Include="Modules\HR\UI\Forms\DanhSachPhongBanView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\DieuChuyenNhanSuView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +293,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\NghiPhepView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\SoDoToChucView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
