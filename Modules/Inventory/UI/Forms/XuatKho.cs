@@ -17,16 +17,27 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         // ================= LOAD =================
         private void XuatKho_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             LoadData();
         }
 
         // ================= LOAD DATA =================
+=======
+            cboLoaiXuat.Items.Add("Bán hàng");
+            cboLoaiXuat.Items.Add("Nội bộ");
+
+            LoadData();
+        }
+
+        // Load dữ liệu
+>>>>>>> main
         void LoadData()
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
+<<<<<<< HEAD
                     SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM XuatKho", conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -55,6 +66,11 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                                    WHERE PhieuXuat LIKE @key
                                    OR MaSP LIKE @key
                                    OR MaKho LIKE @key";
+=======
+                    conn.Open();
+
+                    string sql = "SELECT * FROM XuatKho";
+>>>>>>> main
 
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                     da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
@@ -67,6 +83,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
             }
         }
@@ -82,6 +99,13 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         }
 
         // ================= THÊM =================
+=======
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Thêm
+>>>>>>> main
         private void btnThem_Click(object sender, EventArgs e)
         {
             FrmXuatKho f = new FrmXuatKho();
@@ -95,31 +119,33 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         conn.Open();
 
                         string sql = @"INSERT INTO XuatKho
-                        (PhieuXuat, MaKho, MaSP, LoaiXuat, SoLuong)
-                        VALUES (@PhieuXuat, @MaKho, @MaSP, @LoaiXuat, @SoLuong)";
+                    (PhieuXuat, MaKho, MaSP, SoLuong, LoaiXuat)
+                    VALUES(@PhieuXuat,@MaKho,@MaSP,@SoLuong,@LoaiXuat)";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
 
-                        cmd.Parameters.AddWithValue("@PhieuXuat", f.PhieuXuat);
-                        cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
-                        cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
-                        cmd.Parameters.AddWithValue("@LoaiXuat", f.LoaiXuat);
-                        cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
+                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
+                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
+                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
+                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
+                    cmd.Parameters.AddWithValue("@LoaiXuat", cboLoaiXuat.Text);
+
+                        cmd.ExecuteNonQuery();
+                }
 
                         cmd.ExecuteNonQuery();
                     }
 
                     LoadData();
-                    MessageBox.Show("Thêm thành công!");
+                MessageBox.Show("Thêm thành công");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi thêm: " + ex.Message);
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
-        // ================= SỬA =================
+        // Sửa
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -148,10 +174,10 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         conn.Open();
 
                         string sql = @"UPDATE XuatKho
-                        SET MaKho=@MaKho,
-                            MaSP=@MaSP,
-                            LoaiXuat=@LoaiXuat,
-                            SoLuong=@SoLuong
+                    SET MaKho=@MaKho,
+                        MaSP=@MaSP,
+                        SoLuong=@SoLuong,
+                        LoaiXuat=@LoaiXuat
                         WHERE PhieuXuat=@PhieuXuat";
 
                         SqlCommand cmd = new SqlCommand(sql, conn);
@@ -165,17 +191,25 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         cmd.ExecuteNonQuery();
                     }
 
+                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
+                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
+                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
+                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
+                    cmd.Parameters.AddWithValue("@LoaiXuat", cboLoaiXuat.Text);
+
+                    cmd.ExecuteNonQuery();
+                    }
+
                     LoadData();
-                    MessageBox.Show("Sửa thành công!");
+                MessageBox.Show("Sửa thành công");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi sửa: " + ex.Message);
-                }
+                MessageBox.Show(ex.Message);
             }
         }
 
-        // ================= XÓA =================
+        // Xóa
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -195,14 +229,23 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 {
                     conn.Open();
 
+<<<<<<< HEAD
                     SqlCommand cmd = new SqlCommand(
                         "DELETE FROM XuatKho WHERE PhieuXuat=@PhieuXuat", conn);
 
                     cmd.Parameters.AddWithValue("@PhieuXuat", phieu);
+=======
+                    string sql = "DELETE FROM XuatKho WHERE PhieuXuat=@PhieuXuat";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@PhieuXuat", txtPhieuXuat.Text);
+
+>>>>>>> main
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
+<<<<<<< HEAD
                 MessageBox.Show("Xóa thành công!");
             }
             catch (Exception ex)
@@ -216,6 +259,29 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             txtSearch.Clear();
             LoadData();
+=======
+                MessageBox.Show("Xóa thành công");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // Click DataGridView
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+        {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                txtPhieuXuat.Text = row.Cells["PhieuXuat"].Value.ToString();
+                txtMaKho.Text = row.Cells["MaKho"].Value.ToString();
+                txtMaSP.Text = row.Cells["MaSP"].Value.ToString();
+                txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
+                cboLoaiXuat.Text = row.Cells["LoaiXuat"].Value.ToString();
+            }
+>>>>>>> main
         }
     }
 }
