@@ -149,7 +149,7 @@
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm .Designer.cs">
+    <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongEditForm.Designer.cs">
       <DependentUpon>ThongBaoHeThongEditForm .cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ThongBaoHeThongForm.cs">
