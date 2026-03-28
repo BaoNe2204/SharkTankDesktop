@@ -39,13 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtMaSP = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-<<<<<<< HEAD
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnHuy = new System.Windows.Forms.Button();
-=======
-            this.txtLuu = new System.Windows.Forms.Button();
-            this.txtHuy = new System.Windows.Forms.Button();
->>>>>>> main
             this.SuspendLayout();
             // 
             // txtGiaBan
@@ -147,18 +142,13 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-<<<<<<< HEAD
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(119)))), ((int)(((byte)(182)))));
             this.label7.Location = new System.Drawing.Point(245, 43);
-=======
-            this.label7.Location = new System.Drawing.Point(245, 38);
->>>>>>> main
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(284, 35);
             this.label7.TabIndex = 39;
             this.label7.Text = "Danh Mục Sản Phẩm";
             // 
-<<<<<<< HEAD
             // btnLuu
             // 
             this.btnLuu.BackColor = System.Drawing.Color.LimeGreen;
@@ -187,49 +177,14 @@
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = false;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
-=======
-            // txtLuu
-            // 
-            this.txtLuu.BackColor = System.Drawing.Color.LimeGreen;
-            this.txtLuu.FlatAppearance.BorderSize = 0;
-            this.txtLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtLuu.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtLuu.ForeColor = System.Drawing.Color.White;
-            this.txtLuu.Location = new System.Drawing.Point(185, 563);
-            this.txtLuu.Name = "txtLuu";
-            this.txtLuu.Size = new System.Drawing.Size(110, 36);
-            this.txtLuu.TabIndex = 40;
-            this.txtLuu.Text = "Lưu";
-            this.txtLuu.UseVisualStyleBackColor = false;
-            this.txtLuu.Click += new System.EventHandler(this.btnLuu_Click);
-            // 
-            // txtHuy
-            // 
-            this.txtHuy.BackColor = System.Drawing.Color.Gray;
-            this.txtHuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtHuy.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtHuy.ForeColor = System.Drawing.Color.White;
-            this.txtHuy.Location = new System.Drawing.Point(419, 563);
-            this.txtHuy.Name = "txtHuy";
-            this.txtHuy.Size = new System.Drawing.Size(110, 36);
-            this.txtHuy.TabIndex = 41;
-            this.txtHuy.Text = "Hủy";
-            this.txtHuy.UseVisualStyleBackColor = false;
-            this.txtHuy.Click += new System.EventHandler(this.btnHuy_Click);
->>>>>>> main
             // 
             // FrmSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 664);
-<<<<<<< HEAD
             this.Controls.Add(this.btnHuy);
             this.Controls.Add(this.btnLuu);
-=======
-            this.Controls.Add(this.txtHuy);
-            this.Controls.Add(this.txtLuu);
->>>>>>> main
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtGiaBan);
             this.Controls.Add(this.label5);
@@ -259,12 +214,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMaSP;
         private System.Windows.Forms.Label label7;
-<<<<<<< HEAD
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnHuy;
-=======
-        private System.Windows.Forms.Button txtLuu;
-        private System.Windows.Forms.Button txtHuy;
->>>>>>> main
     }
 }
