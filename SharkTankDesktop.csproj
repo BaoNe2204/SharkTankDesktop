@@ -472,9 +472,6 @@
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmXuatKho.resx">
       <DependentUpon>FrmXuatKho.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmSanPham.resx">
-      <DependentUpon>FrmSanPham.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\Kho.resx">
       <DependentUpon>Kho.cs</DependentUpon>
     </EmbeddedResource>
