@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 ﻿using System;
+=======
+﻿using SharkTank.Core.Data;
+using System;
+>>>>>>> main
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SharkTank.Core.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
 {
@@ -12,6 +18,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += DanhMucSanPhamView_Load;
+<<<<<<< HEAD
         }
 
         // ================= LOAD =================
@@ -225,6 +232,19 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             txtSearch.Clear();
             LoadData();
+=======
+
+            txtSearch.KeyDown += txtSearch_KeyDown;
+        }
+
+        private void DanhMucSanPhamView_Load(object sender, EventArgs e)
+        {
+            LoadData();
+>>>>>>> main
         }
     }
+<<<<<<< HEAD
 }
+=======
+}// test git 123
+>>>>>>> main
