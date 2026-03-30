@@ -10,7 +10,7 @@ namespace SharkTank.Modules.HR.UI.Forms
     {
         private DataGridView dgvPhongBan;
         private TextBox txtTenPB, txtMoTa, txtTimKiem;
-        private Button btnThem, btnSua, btnXoa, btnLuu, btnHuy, btnTimKiem;
+        private Button btnThem, btnSua, btnXoa, btnLuu, btnHuy;
         private Panel panelForm;
         private Label lblFormTitle;
         private int _editingId = -1;
