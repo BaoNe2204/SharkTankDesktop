@@ -640,8 +640,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Database\00_CreateDatabase.sql" />
-    <None Include="Database\CoreSystem.sql" />
+    <None Include="Database\FullSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
