@@ -41,7 +41,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.Location = new System.Drawing.Point(232, 116);
+            this.label1.Location = new System.Drawing.Point(104, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 23);
             this.label1.TabIndex = 2;
@@ -51,7 +51,7 @@
             // 
             this.txtMaSP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMaSP.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtMaSP.Location = new System.Drawing.Point(393, 115);
+            this.txtMaSP.Location = new System.Drawing.Point(284, 65);
             this.txtMaSP.Multiline = true;
             this.txtMaSP.Name = "txtMaSP";
             this.txtMaSP.Size = new System.Drawing.Size(535, 33);
@@ -59,14 +59,17 @@
             // 
             // btnTim
             // 
-            this.btnTim.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnTim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnTim.FlatAppearance.BorderSize = 0;
+            this.btnTim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTim.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnTim.Location = new System.Drawing.Point(970, 116);
+            this.btnTim.ForeColor = System.Drawing.Color.White;
+            this.btnTim.Location = new System.Drawing.Point(870, 65);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(97, 32);
             this.btnTim.TabIndex = 15;
             this.btnTim.Text = "Tìm";
-            this.btnTim.UseVisualStyleBackColor = true;
+            this.btnTim.UseVisualStyleBackColor = false;
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // dataGridView1
@@ -75,38 +78,44 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(147, 180);
+            this.dataGridView1.Location = new System.Drawing.Point(31, 118);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1224, 466);
+            this.dataGridView1.Size = new System.Drawing.Size(1444, 485);
             this.dataGridView1.TabIndex = 16;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // btnKiemKe
             // 
-            this.btnKiemKe.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnKiemKe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(138)))), ((int)(((byte)(173)))));
+            this.btnKiemKe.FlatAppearance.BorderSize = 0;
+            this.btnKiemKe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKiemKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnKiemKe.Location = new System.Drawing.Point(393, 676);
+            this.btnKiemKe.ForeColor = System.Drawing.Color.White;
+            this.btnKiemKe.Location = new System.Drawing.Point(1018, 65);
             this.btnKiemKe.Name = "btnKiemKe";
             this.btnKiemKe.Size = new System.Drawing.Size(97, 32);
             this.btnKiemKe.TabIndex = 17;
             this.btnKiemKe.Text = "Kiểm kê";
-            this.btnKiemKe.UseVisualStyleBackColor = true;
+            this.btnKiemKe.UseVisualStyleBackColor = false;
             this.btnKiemKe.Click += new System.EventHandler(this.btnKiemKe_Click);
             // 
             // btnLuu
             // 
-            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnLuu.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnLuu.FlatAppearance.BorderSize = 0;
+            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuu.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnLuu.Location = new System.Drawing.Point(831, 676);
+            this.btnLuu.ForeColor = System.Drawing.Color.White;
+            this.btnLuu.Location = new System.Drawing.Point(1167, 66);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(97, 32);
             this.btnLuu.TabIndex = 18;
             this.btnLuu.Text = "Lưu";
-            this.btnLuu.UseVisualStyleBackColor = true;
+            this.btnLuu.UseVisualStyleBackColor = false;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // KiemKeDinhKy
