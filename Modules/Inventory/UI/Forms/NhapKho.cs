@@ -14,144 +14,129 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             this.Load += NhapKho_Load;
         }
 
-        // ================= LOAD =================
         private void NhapKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        // ================= LOAD DATA =================
         void LoadData()
         {
-            try
+            using (SqlConnection conn = DBHelper.GetConnection())
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM NhapKho", conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dataGridView1.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM NhapKho", conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGridView1.DataSource = dt;
             }
         }
 
-        // Thêm
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
-            try
+            FrmNhapKho f = new FrmNhapKho();
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
                     string sql = @"INSERT INTO NhapKho
-                    (PhieuNhap,MaKho,MaSP,NhaCungCap,GiaNhap,SoLuong)
-                    VALUES
-                    (@PhieuNhap,@MaKho,@MaSP,@NhaCungCap,@GiaNhap,@SoLuong)";
+                    (PhieuNhap, MaKho, MaSP, NhaCungCap, GiaNhap, SoLuong)
+                    VALUES (@PhieuNhap, @MaKho, @MaSP, @NhaCungCap, @GiaNhap, @SoLuong)";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    }
 
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@NhaCungCap", txtNhaCungCap.Text);
-                    cmd.Parameters.AddWithValue("@GiaNhap", float.Parse(txtGiaNhap.Text));
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
+                    cmd.Parameters.AddWithValue("@PhieuNhap", f.PhieuNhap);
+                    cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                    cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                    cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
+                    cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                    cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
 
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
-        // Sửa
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null) return;
+
+            var row = dataGridView1.CurrentRow;
+
+            string phieu = row.Cells["PhieuNhap"].Value.ToString();
+
+            FrmNhapKho f = new FrmNhapKho();
+            f.SetData(
+                phieu,
+                row.Cells["MaKho"].Value.ToString(),
+                row.Cells["MaSP"].Value.ToString(),
+                row.Cells["NhaCungCap"].Value.ToString(),
+                float.Parse(row.Cells["GiaNhap"].Value.ToString()),
+                int.Parse(row.Cells["SoLuong"].Value.ToString())
+            );
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
-                    string sql = @"UPDATE NhapKho 
-                           SET MaKho=@MaKho,
-                               MaSP=@MaSP,
-                               NhaCungCap=@NhaCungCap,
-                               GiaNhap=@GiaNhap,
-                               SoLuong=@SoLuong
-                           WHERE PhieuNhap=@PhieuNhap";
+                    string sql = @"UPDATE NhapKho
+                    SET MaKho=@MaKho,
+                        MaSP=@MaSP,
+                        NhaCungCap=@NhaCungCap,
+                        GiaNhap=@GiaNhap,
+                        SoLuong=@SoLuong
+                    WHERE PhieuNhap=@PhieuNhap";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@MaSP", txtMaSP.Text);
-                    cmd.Parameters.AddWithValue("@NhaCungCap", txtNhaCungCap.Text);
-                    cmd.Parameters.AddWithValue("@GiaNhap", float.Parse(txtGiaNhap.Text));
-                    cmd.Parameters.AddWithValue("@SoLuong", int.Parse(txtSoLuong.Text));
+                    cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
+                    cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                    cmd.Parameters.AddWithValue("@MaSP", f.MaSP);
+                    cmd.Parameters.AddWithValue("@NhaCungCap", f.NhaCungCap);
+                    cmd.Parameters.AddWithValue("@GiaNhap", f.GiaNhap);
+                    cmd.Parameters.AddWithValue("@SoLuong", f.SoLuong);
 
                     cmd.ExecuteNonQuery();
                 }
-                    }
 
                 LoadData();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
-        // Xóa
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null) return;
+
+            string phieu = dataGridView1.CurrentRow.Cells["PhieuNhap"].Value.ToString();
+
+            if (MessageBox.Show("Xóa?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            using (SqlConnection conn = DBHelper.GetConnection())
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    conn.Open();
+                conn.Open();
 
-                    string sql = "DELETE FROM NhapKho WHERE PhieuNhap=@PhieuNhap";
+                SqlCommand cmd = new SqlCommand(
+                    "DELETE FROM NhapKho WHERE PhieuNhap=@PhieuNhap", conn);
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@PhieuNhap", txtPhieuNhap.Text);
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                LoadData();
+                cmd.Parameters.AddWithValue("@PhieuNhap", phieu);
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            LoadData();
         }
 
-        // Click DataGridView
-        private void dataGridViewNhap_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                txtPhieuNhap.Text = row.Cells["PhieuNhap"].Value.ToString();
-                txtMaKho.Text = row.Cells["MaKho"].Value.ToString();
-                txtMaSP.Text = row.Cells["MaSP"].Value.ToString();
-                txtNhaCungCap.Text = row.Cells["NhaCungCap"].Value.ToString();
-                txtGiaNhap.Text = row.Cells["GiaNhap"].Value.ToString();
-                txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
-            }
+            LoadData();
         }
     }
 }
