@@ -40,7 +40,7 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 📊 Dashboard hệ thống
                 // =========================
-                // { "Dashboard hệ thống", () => new DashboardTongForm() },
+                { "Dashboard hệ thống", () => new DashboardTongForm() },
 
                 // =========================
                 // 📝 Nhật ký hệ thống
@@ -52,13 +52,9 @@ namespace SharkTank.Modules.Admin
                 // =========================
                 // 💾 Backup & Restore
                 // =========================
-                // { "Sao lưu dữ liệu", () => new BackupRestoreForm() },
-                // { "Khôi phục dữ liệu", () => new BackupRestoreForm() },
+                 { "Sao lưu dữ liệu", () => new SaoLuuDuLieuForm() },
+                 { "Khôi phục dữ liệu", () => new KhoiPhucDuLieuForm() },
 
-                // =========================
-                // 📦 Quản lý module
-                // =========================
-                // { "Bật / tắt module ERP", () => new ModuleManagerForm() }
             };
 
         public static UserControl GetView(string menuText)

@@ -80,7 +80,6 @@ namespace SharkTank.Modules.CRM
                 Childs = new List<NavBarItem>
                 {
                     new NavBarItem { ID = _menuId++, Text = "Tỷ lệ chuyển đổi khách hàng", ParentID = crmReportId },
-                    new NavBarItem { ID = _menuId++, Text = "Hiệu quả nhân viên sales", ParentID = crmReportId },
                     new NavBarItem { ID = _menuId++, Text = "Nguồn khách hàng hiệu quả", ParentID = crmReportId },
                     new NavBarItem { ID = _menuId++, Text = "Số lượng lead theo thời gian", ParentID = crmReportId }
                 }

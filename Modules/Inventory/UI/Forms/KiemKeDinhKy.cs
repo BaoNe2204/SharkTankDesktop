@@ -1,8 +1,7 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SharkTank.BLL;
 using SharkTank.Core.Data;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
@@ -121,8 +120,6 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                         cmd.Parameters.AddWithValue("@ChenhLech", chenhLech);
 
                         cmd.ExecuteNonQuery();
-
-                        try { AuditService.CreateDefault().LogCreate("BienBanKiemKe", masp, masp); } catch { }
                     }
                 }
 

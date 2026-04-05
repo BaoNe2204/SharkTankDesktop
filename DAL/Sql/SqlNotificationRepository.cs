@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,144 +8,129 @@ namespace SharkTank.DAL.Sql
 {
     public class SqlNotificationRepository : INotificationRepository
     {
+        // ================= GET ALL =================
         public IEnumerable<SystemNotification> GetAll()
         {
             var list = new List<SystemNotification>();
-            try
+
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-SELECT NotificationId, Title, Content, Type, TargetType, TargetValue, StartAt, EndAt, IsActive, CreatedBy, CreatedAt
+                cmd.CommandText = @"
+SELECT NotificationId, Title, Content, Type, TargetType, TargetValue,
+       StartAt, EndAt, IsActive, CreatedBy, CreatedAt
 FROM dbo.SystemNotifications
 ORDER BY CreatedAt DESC;";
 
-                    conn.Open();
-                    using (var r = cmd.ExecuteReader())
+                conn.Open();
+
+                using (var r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
                     {
-                        while (r.Read())
-                        {
-                            list.Add(MapNotification(r));
-                        }
+                        list.Add(Map(r));
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.GetAll error: {ex.Message}");
-            }
+
             return list;
         }
 
+        // ================= GET ACTIVE =================
         public IEnumerable<SystemNotification> GetActiveForUser(string roleName, string username)
         {
             var list = new List<SystemNotification>();
-            try
+
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-SELECT NotificationId, Title, Content, Type, TargetType, TargetValue, StartAt, EndAt, IsActive, CreatedBy, CreatedAt
+                cmd.CommandText = @"
+SELECT NotificationId, Title, Content, Type, TargetType, TargetValue,
+       StartAt, EndAt, IsActive, CreatedBy, CreatedAt
 FROM dbo.SystemNotifications
 WHERE IsActive = 1
   AND StartAt <= GETDATE()
   AND (EndAt IS NULL OR EndAt >= GETDATE())
-  AND (
-    TargetType = 'ALL'
-    OR (TargetType = 'ROLE' AND TargetValue = @RoleName)
-    OR (TargetType = 'USER' AND TargetValue = @Username)
+  AND
+  (
+      TargetType = 'ALL'
+      OR (TargetType = 'ROLE' AND TargetValue = @RoleName)
+      OR (TargetType = 'USER' AND TargetValue = @Username)
   )
 ORDER BY CreatedAt DESC;";
-                    cmd.Parameters.AddWithValue("@RoleName", (object)roleName ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Username", (object)username ?? DBNull.Value);
 
-                    conn.Open();
-                    using (var r = cmd.ExecuteReader())
+                cmd.Parameters.Add("@RoleName", SqlDbType.NVarChar).Value =
+                    (object)roleName ?? DBNull.Value;
+
+                cmd.Parameters.Add("@Username", SqlDbType.NVarChar).Value =
+                    (object)username ?? DBNull.Value;
+
+                conn.Open();
+
+                using (var r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
                     {
-                        while (r.Read())
-                        {
-                            list.Add(MapNotification(r));
-                        }
+                        list.Add(Map(r));
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.GetActiveForUser error: {ex.Message}");
-            }
+
             return list;
         }
 
+        // ================= GET BY ID =================
         public SystemNotification GetById(int id)
         {
-            try
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-SELECT NotificationId, Title, Content, Type, TargetType, TargetValue, StartAt, EndAt, IsActive, CreatedBy, CreatedAt
+                cmd.CommandText = @"
+SELECT TOP 1 NotificationId, Title, Content, Type, TargetType, TargetValue,
+       StartAt, EndAt, IsActive, CreatedBy, CreatedAt
 FROM dbo.SystemNotifications
-WHERE NotificationId = @NotificationId;";
-                    cmd.Parameters.Add(new SqlParameter("@NotificationId", SqlDbType.Int) { Value = id });
+WHERE NotificationId = @Id;";
 
-                    conn.Open();
-                    using (var r = cmd.ExecuteReader())
-                    {
-                        if (r.Read())
-                            return MapNotification(r);
-                    }
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                conn.Open();
+
+                using (var r = cmd.ExecuteReader())
+                {
+                    if (r.Read())
+                        return Map(r);
                 }
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.GetById error: {ex.Message}");
-            }
+
             return null;
         }
 
+        // ================= INSERT =================
         public void Insert(SystemNotification notification)
         {
-            try
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-INSERT INTO dbo.SystemNotifications (Title, Content, Type, TargetType, TargetValue, StartAt, EndAt, IsActive, CreatedBy, CreatedAt)
-VALUES (@Title, @Content, @Type, @TargetType, @TargetValue, @StartAt, @EndAt, @IsActive, @CreatedBy, @CreatedAt);";
+                cmd.CommandText = @"
+INSERT INTO dbo.SystemNotifications
+(Title, Content, Type, TargetType, TargetValue, StartAt, EndAt, IsActive, CreatedBy, CreatedAt)
+VALUES
+(@Title, @Content, @Type, @TargetType, @TargetValue, @StartAt, @EndAt, @IsActive, @CreatedBy, @CreatedAt);";
 
-                    cmd.Parameters.AddWithValue("@Title", notification.Title ?? "");
-                    cmd.Parameters.AddWithValue("@Content", notification.Content ?? "");
-                    cmd.Parameters.AddWithValue("@Type", notification.Type ?? "Info");
-                    cmd.Parameters.AddWithValue("@TargetType", notification.TargetType ?? "ALL");
-                    cmd.Parameters.AddWithValue("@TargetValue", (object)notification.TargetValue ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@StartAt", notification.StartAt);
-                    cmd.Parameters.AddWithValue("@EndAt", (object)notification.EndAt ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@IsActive", notification.IsActive);
-                    cmd.Parameters.AddWithValue("@CreatedBy", (object)notification.CreatedBy ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CreatedAt", notification.CreatedAt);
+                AddParameters(cmd, notification);
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.Insert error: {ex.Message}");
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
+        // ================= UPDATE =================
         public void Update(SystemNotification notification)
         {
-            try
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
+                cmd.CommandText = @"
 UPDATE dbo.SystemNotifications
 SET Title = @Title,
     Content = @Content,
@@ -155,63 +140,81 @@ SET Title = @Title,
     StartAt = @StartAt,
     EndAt = @EndAt,
     IsActive = @IsActive
-WHERE NotificationId = @NotificationId;";
+WHERE NotificationId = @Id;";
 
-                    cmd.Parameters.AddWithValue("@NotificationId", notification.NotificationId);
-                    cmd.Parameters.AddWithValue("@Title", notification.Title ?? "");
-                    cmd.Parameters.AddWithValue("@Content", notification.Content ?? "");
-                    cmd.Parameters.AddWithValue("@Type", notification.Type ?? "Info");
-                    cmd.Parameters.AddWithValue("@TargetType", notification.TargetType ?? "ALL");
-                    cmd.Parameters.AddWithValue("@TargetValue", (object)notification.TargetValue ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@StartAt", notification.StartAt);
-                    cmd.Parameters.AddWithValue("@EndAt", (object)notification.EndAt ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@IsActive", notification.IsActive);
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = notification.NotificationId;
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.Update error: {ex.Message}");
+                AddParameters(cmd, notification);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
+        // ================= DELETE =================
         public void Delete(int id)
         {
-            try
+            using (var conn = SqlConnectionFactory.Create())
+            using (var cmd = conn.CreateCommand())
             {
-                using (var conn = SqlConnectionFactory.Create())
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "DELETE FROM dbo.SystemNotifications WHERE NotificationId = @NotificationId;";
-                    cmd.Parameters.Add(new SqlParameter("@NotificationId", SqlDbType.Int) { Value = id });
+                cmd.CommandText = "DELETE FROM dbo.SystemNotifications WHERE NotificationId = @Id;";
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SqlNotificationRepository.Delete error: {ex.Message}");
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
-        private static SystemNotification MapNotification(SqlDataReader r)
+        // ================= PARAM =================
+        private static void AddParameters(SqlCommand cmd, SystemNotification n)
+        {
+            cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value =
+                (object)n.Title ?? DBNull.Value;
+
+            cmd.Parameters.Add("@Content", SqlDbType.NVarChar).Value =
+                (object)n.Content ?? DBNull.Value;
+
+            cmd.Parameters.Add("@Type", SqlDbType.NVarChar).Value =
+                (object)n.Type ?? "Info";
+
+            cmd.Parameters.Add("@TargetType", SqlDbType.NVarChar).Value =
+                (object)n.TargetType ?? "ALL";
+
+            cmd.Parameters.Add("@TargetValue", SqlDbType.NVarChar).Value =
+                (object)n.TargetValue ?? DBNull.Value;
+
+            cmd.Parameters.Add("@StartAt", SqlDbType.DateTime).Value =
+                n.StartAt == default ? DateTime.Now : n.StartAt;
+
+            cmd.Parameters.Add("@EndAt", SqlDbType.DateTime).Value =
+                (object)n.EndAt ?? DBNull.Value;
+
+            cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value =
+                n.IsActive;
+
+            cmd.Parameters.Add("@CreatedBy", SqlDbType.Int).Value =
+                (object)n.CreatedBy ?? DBNull.Value;
+
+            cmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime).Value =
+                n.CreatedAt == default ? DateTime.Now : n.CreatedAt;
+        }
+
+        // ================= MAP =================
+        private static SystemNotification Map(SqlDataReader r)
         {
             return new SystemNotification
             {
-                NotificationId = r.GetInt32(r.GetOrdinal("NotificationId")),
-                Title = r.IsDBNull(r.GetOrdinal("Title")) ? null : r.GetString(r.GetOrdinal("Title")),
-                Content = r.IsDBNull(r.GetOrdinal("Content")) ? null : r.GetString(r.GetOrdinal("Content")),
-                Type = r.IsDBNull(r.GetOrdinal("Type")) ? null : r.GetString(r.GetOrdinal("Type")),
-                TargetType = r.IsDBNull(r.GetOrdinal("TargetType")) ? null : r.GetString(r.GetOrdinal("TargetType")),
-                TargetValue = r.IsDBNull(r.GetOrdinal("TargetValue")) ? null : r.GetString(r.GetOrdinal("TargetValue")),
-                StartAt = r.GetDateTime(r.GetOrdinal("StartAt")),
-                EndAt = r.IsDBNull(r.GetOrdinal("EndAt")) ? (DateTime?)null : r.GetDateTime(r.GetOrdinal("EndAt")),
-                IsActive = r.GetBoolean(r.GetOrdinal("IsActive")),
-                CreatedBy = r.IsDBNull(r.GetOrdinal("CreatedBy")) ? (int?)null : r.GetInt32(r.GetOrdinal("CreatedBy")),
-                CreatedAt = r.GetDateTime(r.GetOrdinal("CreatedAt"))
+                NotificationId = Convert.ToInt32(r["NotificationId"]),
+                Title = r["Title"]?.ToString(),
+                Content = r["Content"]?.ToString(),
+                Type = r["Type"]?.ToString(),
+                TargetType = r["TargetType"]?.ToString(),
+                TargetValue = r["TargetValue"] == DBNull.Value ? null : r["TargetValue"].ToString(),
+                StartAt = Convert.ToDateTime(r["StartAt"]),
+                EndAt = r["EndAt"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["EndAt"]),
+                IsActive = Convert.ToBoolean(r["IsActive"]),
+                CreatedBy = r["CreatedBy"] == DBNull.Value ? (int?)null : Convert.ToInt32(r["CreatedBy"]),
+                CreatedAt = Convert.ToDateTime(r["CreatedAt"])
             };
         }
     }

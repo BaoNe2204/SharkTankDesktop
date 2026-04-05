@@ -1,7 +1,12 @@
+using SharkTank.Core.Models;
 using SharkTank.Modules.Accounting.UI.Forms;
+using SharkTank.Modules.Debt.Views;
+using SharkTank.Modules.Finance.Views;
+using SharkTank.Modules.Reports.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SharkTank.Modules.Accounting
 {
@@ -11,19 +16,13 @@ namespace SharkTank.Modules.Accounting
             new Dictionary<string, Func<UserControl>>()
         {
             { "Phiếu thu chi", () => new PhieuThuChiView() },
-            { "Tiền mặt", () => CreateDefaultView("Sổ quỹ tiền mặt") },
-            { "Ngân hàng", () => CreateDefaultView("Sổ quỹ ngân hàng") },
-            { "Số dư", () => CreateDefaultView("Số dư") },
-            { "Công nợ khách hàng", () => CreateDefaultView("Công nợ khách hàng") },
-            { "Công nợ nhà cung cấp", () => CreateDefaultView("Công nợ nhà cung cấp") },
-            { "Lịch sử thanh toán", () => CreateDefaultView("Lịch sử thanh toán") },
+            { "Quản lý sổ quỹ", () => new SoQuyView() },
+            { "Quản lý Công nợ", () => new CongNoView() },
             { "Nhận dữ liệu từ Sales", () => CreateDefaultView("Nhận dữ liệu từ Sales") },
             { "Ghi nhận doanh thu", () => CreateDefaultView("Ghi nhận doanh thu") },
             { "Ghi nhận chi phí", () => CreateDefaultView("Ghi nhận chi phí") },
-            { "Báo cáo thu chi", () => CreateDefaultView("Báo cáo thu chi") },
-            { "Lãi lỗ", () => CreateDefaultView("Báo cáo lãi lỗ") },
-            { "Sổ cái đơn giản", () => CreateDefaultView("Sổ cái") },
-            { "Tổng hợp tài chính", () => CreateDefaultView("Tổng hợp tài chính") }
+            { "Báo cáo tài chính", () => new BaoCaoTaiChinhView() },
+
         };
 
         public static UserControl GetView(string menuText)
