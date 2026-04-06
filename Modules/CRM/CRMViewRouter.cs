@@ -10,12 +10,12 @@ namespace SharkTank.Modules.CRM
         private static Dictionary<string, Func<UserControl>> _routes =
             new Dictionary<string, Func<UserControl>>()
         {
-            { "Quản lý Leads", () => new QuanLyLeadsView() },
-            { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm() },
+            { "Quản lý Leads", () => new QuanLyLeadsView()},
+            { "Chăm sóc khách hàng", () => new ChamSocKhachHangForm()},
             { "Quản lý cơ hội bán hàng", () => new QLCoHoiBanHangForm()},
             { "Tỷ lệ chuyển đổi khách hàng", () => new TyLeChuyenDoiKHForm()},
             { "Nguồn khách hàng hiệu quả", () => new NguonKhachHangForm()},
-            { "Số lượng lead theo thời gian", () => CreateDefaultView("Báo cáo số lượng lead") }
+            { "Số lượng lead theo thời gian", () => new SLLeadsForm()}
         };
 
         public static UserControl GetView(string menuText)

@@ -208,6 +208,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\DBHepler.cs" />
+    <Compile Include="Modules\CRM\BLL\SLLeadsService.cs" />
     <Compile Include="Modules\CRM\BLL\TyLeChuyenDoiService.cs" />
     <Compile Include="Modules\CRM\UI\Forms\ChamSocKhachHangForm.cs">
       <SubType>UserControl</SubType>
@@ -250,6 +251,12 @@
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.Designer.cs">
       <DependentUpon>QuanLyLeadsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\SLLeadsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CRM\UI\Forms\SLLeadsForm.Designer.cs">
+      <DependentUpon>SLLeadsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\CRM\UI\Forms\TyLeChuyenDoiKHForm.cs">
       <SubType>UserControl</SubType>
@@ -572,6 +579,9 @@
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.resx">
       <DependentUpon>ThongTinCongTyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\CRM\UI\Forms\SLLeadsForm.resx">
+      <DependentUpon>SLLeadsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\BienBanKiemKe.resx">
       <DependentUpon>BienBanKiemKe.cs</DependentUpon>
     </EmbeddedResource>
@@ -616,6 +626,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\LichSuMuaHang.resx">
       <DependentUpon>LichSuMuaHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\CRM\UI\Forms\TyLeChuyenDoiKHForm.resx">
+      <DependentUpon>TyLeChuyenDoiKHForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
       <DependentUpon>PhanLoaiKH.cs</DependentUpon>
