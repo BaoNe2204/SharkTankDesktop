@@ -12,6 +12,9 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += NhapKho_Load;
+
+            // 🔥 ENTER để tìm
+            txtSearch.KeyDown += txtMaSP_KeyDown;
         }
 
         private void NhapKho_Load(object sender, EventArgs e)
@@ -19,14 +22,37 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             LoadData();
         }
 
-        void LoadData()
+        // ================= LOAD + TÌM =================
+        void LoadData(string keyword = "")
         {
             using (SqlConnection conn = DBHelper.GetConnection())
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM NhapKho", conn);
+                string sql = @"
+SELECT * FROM NhapKho
+WHERE 
+    PhieuNhap LIKE @kw OR
+    MaKho LIKE @kw OR
+    MaSP LIKE @kw OR
+    NhaCungCap LIKE @kw";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+
                 dataGridView1.DataSource = dt;
+            }
+        }
+
+        // ================= ENTER TÌM =================
+        private void txtMaSP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData(txtSearch.Text);
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -134,8 +160,10 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             LoadData();
         }
 
+        // ================= LÀM MỚI =================
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
+            txtSearch.Clear();
             LoadData();
         }
     }
