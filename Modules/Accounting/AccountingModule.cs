@@ -35,40 +35,24 @@ namespace SharkTank.Modules.Accounting
             menuItems.Add(new NavBarItem
             {
                 ID = paymentId,
-                Text = "Thu / chi",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu thu chi", ParentID = paymentId },
-                }
+                Text = "Phiếu thu chi",
+                ParentID = null
             });
 
             int cashbookId = _menuId++;
             menuItems.Add(new NavBarItem
             {
                 ID = cashbookId,
-                Text = "Sổ quỹ",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Tiền mặt", ParentID = cashbookId },
-                    new NavBarItem { ID = _menuId++, Text = "Ngân hàng", ParentID = cashbookId },
-                    new NavBarItem { ID = _menuId++, Text = "Số dư", ParentID = cashbookId }
-                }
+                Text = "Quản lý sổ quỹ",
+                ParentID = null
             });
 
             int debtId = _menuId++;
             menuItems.Add(new NavBarItem
             {
                 ID = debtId,
-                Text = "Công nợ",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Công nợ khách hàng", ParentID = debtId },
-                    new NavBarItem { ID = _menuId++, Text = "Công nợ nhà cung cấp", ParentID = debtId },
-                    new NavBarItem { ID = _menuId++, Text = "Lịch sử thanh toán", ParentID = debtId }
-                }
+                Text = "Quản lý Công nợ",
+                ParentID = null
             });
 
             int invoiceAccId = _menuId++;
@@ -90,14 +74,7 @@ namespace SharkTank.Modules.Accounting
             {
                 ID = reportId,
                 Text = "Báo cáo tài chính",
-                ParentID = null,
-                Childs = new List<NavBarItem>
-                {
-                    new NavBarItem { ID = _menuId++, Text = "Báo cáo thu chi", ParentID = reportId },
-                    new NavBarItem { ID = _menuId++, Text = "Lãi lỗ", ParentID = reportId },
-                    new NavBarItem { ID = _menuId++, Text = "Sổ cái đơn giản", ParentID = reportId },
-                    new NavBarItem { ID = _menuId++, Text = "Tổng hợp tài chính", ParentID = reportId }
-                }
+                ParentID = null
             });
 
             return menuItems;

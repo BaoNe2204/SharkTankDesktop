@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using SharkTank.DAL;
 using SharkTank.DAL.Sql;
@@ -16,6 +18,25 @@ namespace SharkTank.Modules.Admin.UI.Forms
             InitializeComponent();
             _companyRepo = new SqlCompanyRepository(SqlConnectionFactory.Create());
             LoadData();
+        }
+
+        private void SetLogoImage(string imagePath)
+        {
+            if (picLogo.Image != null)
+            {
+                var oldImage = picLogo.Image;
+                picLogo.Image = null;
+                oldImage.Dispose();
+            }
+
+            if (string.IsNullOrWhiteSpace(imagePath) || !File.Exists(imagePath))
+                return;
+
+            using (var stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var sourceImage = Image.FromStream(stream))
+            {
+                picLogo.Image = new Bitmap(sourceImage);
+            }
         }
 
         private void LoadData()
@@ -39,13 +60,17 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 txtChucVu.Text = _company.RepresentativePosition;
                 txtHotline.Text = _company.Hotline;
 
-                if (!string.IsNullOrEmpty(_company.LogoPath) && System.IO.File.Exists(_company.LogoPath))
+                if (!string.IsNullOrEmpty(_company.LogoPath) && File.Exists(_company.LogoPath))
                 {
                     try
                     {
-                        picLogo.Image = System.Drawing.Image.FromFile(_company.LogoPath);
+                        SetLogoImage(_company.LogoPath);
                     }
                     catch { }
+                }
+                else
+                {
+                    SetLogoImage(null);
                 }
             }
             catch (Exception ex)
@@ -64,7 +89,7 @@ namespace SharkTank.Modules.Admin.UI.Forms
                 {
                     try
                     {
-                        picLogo.Image = System.Drawing.Image.FromFile(dlg.FileName);
+                        SetLogoImage(dlg.FileName);
                         _company.LogoPath = dlg.FileName;
                     }
                     catch (Exception ex)

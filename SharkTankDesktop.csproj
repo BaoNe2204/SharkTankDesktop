@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC</SSDTPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,7 +37,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="System.Memory" Version="4.5.5" GeneratePathProperty="true" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" GeneratePathProperty="true" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" GeneratePathProperty="true" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" GeneratePathProperty="true" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>$(PkgSystem_Resources_Extensions)\lib\net462\System.Resources.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>$(PkgSystem_Memory)\lib\net461\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>$(PkgSystem_Buffers)\lib\net461\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>$(PkgSystem_Runtime_CompilerServices_Unsafe)\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>$(PkgSystem_Numerics_Vectors)\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -59,32 +74,36 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <!-- UI -->
+    <Compile Include="BLL\NotificationService.cs" />
+    <Compile Include="BLL\AuditHelper.cs" />
+    <Compile Include="BLL\AuditService.cs" />
+    <Compile Include="BLL\ThemeService.cs" />
     <Compile Include="Core\Data\DBHelper.cs" />
     <Compile Include="Core\Models\SystemNotification.cs" />
     <Compile Include="DAL\INotificationRepository.cs" />
     <Compile Include="DAL\Sql\SqlNotificationRepository.cs" />
-    <Compile Include="DAL\IConfigRepository.cs" />
-    <Compile Include="DAL\Sql\SqlConfigRepository.cs" />
-    <Compile Include="Core\Models\Company.cs" />
-    <Compile Include="Core\Models\SystemConfig.cs" />
-    <Compile Include="Core\Models\AuditLog.cs" />
-    <Compile Include="Core\Models\DataChangeLog.cs" />
-    <Compile Include="Core\Models\LoginHistory.cs" />
-    <Compile Include="DAL\IAuditRepository.cs" />
-    <Compile Include="DAL\InMemoryAuditRepository.cs" />
-    <Compile Include="DAL\Sql\SqlAuditRepository.cs" />
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ChucVuAddForm.Designer.cs">
       <DependentUpon>ChucVuAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.Designer.cs">
+      <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.Designer.cs">
+      <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ChucVuEditForm.cs">
       <SubType>Form</SubType>
@@ -97,6 +116,18 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\ChucVuForm.Designer.cs">
       <DependentUpon>ChucVuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.Designer.cs">
+      <DependentUpon>DashboardTongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.Designer.cs">
+      <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.cs">
       <SubType>UserControl</SubType>
@@ -128,6 +159,30 @@
     <Compile Include="Modules\Admin\UI\Forms\PhongBanForm.Designer.cs">
       <DependentUpon>PhongBanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.Designer.cs">
+      <DependentUpon>KhoiPhucDuLieuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.Designer.cs">
+      <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.Designer.cs">
+      <DependentUpon>LichSuHoatDongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.Designer.cs">
+      <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Admin\UI\Forms\QuanLyPhienDangNhapForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -139,6 +194,12 @@
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\QuanLyNguoiDungForm.Designer.cs">
       <DependentUpon>QuanLyNguoiDungForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.Designer.cs">
+      <DependentUpon>SaoLuuDuLieuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\UI\Forms\SuaTaiKhoanForm.cs">
       <SubType>Form</SubType>
@@ -184,60 +245,6 @@
     <Compile Include="Modules\Admin\UI\Forms\ThongTinCongTyForm.Designer.cs">
       <DependentUpon>ThongTinCongTyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.Designer.cs">
-      <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\CauHinhEmailForm.Designer.cs">
-      <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\DashboardTongForm.Designer.cs">
-      <DependentUpon>DashboardTongForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.Designer.cs">
-      <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.Designer.cs">
-      <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.Designer.cs">
-      <DependentUpon>LichSuHoatDongForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.Designer.cs">
-      <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\SaoLuuDuLieuForm.Designer.cs">
-      <DependentUpon>SaoLuuDuLieuForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.Designer.cs">
-      <DependentUpon>KhoiPhucDuLieuForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\CRM\UI\Forms\QuanLyLeadsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -262,7 +269,16 @@
     <Compile Include="Modules\HR\UI\Forms\CheckInOutView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\HR\UI\Forms\ChucDanhView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\HR\UI\Forms\DanhSachNhanVienView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\DanhSachPhongBanView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\DieuChuyenNhanSuView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\GiaHanHopDongForm.cs">
@@ -275,6 +291,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\NghiPhepView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HR\UI\Forms\SoDoToChucView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\HR\UI\Forms\TaoHopDongView.cs">
@@ -369,6 +388,13 @@
     <Compile Include="Modules\HR\UI\Forms\ThongTinLienHeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Sales\BLL\BaoGiaBLL.cs" />
+    <Compile Include="Modules\Sales\UI\Forms\BaoGia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\BaoGia.Designer.cs">
+      <DependentUpon>BaoGia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Sales\UI\Forms\QLCongNoKH.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -393,6 +419,12 @@
     <Compile Include="Modules\Sales\UI\Forms\QuanLyKhachHang.Designer.cs">
       <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\TaoBaoGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\TaoBaoGia.Designer.cs">
+      <DependentUpon>TaoBaoGia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -414,6 +446,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- Core Models -->
+    <Compile Include="Core\Models\Company.cs" />
+    <Compile Include="Core\Models\AuditLog.cs" />
+    <Compile Include="Core\Models\DataChangeLog.cs" />
+    <Compile Include="Core\Models\LoginHistory.cs" />
+    <Compile Include="Core\Models\SystemConfig.cs" />
     <Compile Include="Core\Models\User.cs" />
     <Compile Include="Core\Models\Role.cs" />
     <Compile Include="Core\Models\Permission.cs" />
@@ -422,30 +459,30 @@
     <!-- Core Security -->
     <Compile Include="Core\Security\PasswordHasher.cs" />
     <!-- DAL Interfaces -->
+    <Compile Include="DAL\IBackupService.cs" />
+    <Compile Include="DAL\IAuditRepository.cs" />
+    <Compile Include="DAL\IConfigRepository.cs" />
     <Compile Include="DAL\IUserRepository.cs" />
     <Compile Include="DAL\IRoleRepository.cs" />
     <Compile Include="DAL\IPermissionRepository.cs" />
     <!-- DAL InMemory Implementations -->
+    <Compile Include="DAL\InMemoryAuditRepository.cs" />
     <Compile Include="DAL\InMemory\InMemoryUserRepository.cs" />
-    <Compile Include="DAL\InMemory\InMemoryRoleRepository.cs" />
     <Compile Include="DAL\InMemory\InMemoryNotificationRepository.cs" />
+    <Compile Include="DAL\InMemory\InMemoryRoleRepository.cs" />
     <Compile Include="DAL\InMemory\InMemoryPermissionRepository.cs" />
     <!-- DAL SQL Implementations -->
+    <Compile Include="DAL\Sql\SqlAuditRepository.cs" />
+    <Compile Include="DAL\Sql\SqlConfigRepository.cs" />
     <Compile Include="DAL\Sql\SqlConnectionFactory.cs" />
     <Compile Include="DAL\Sql\SqlUserRepository.cs" />
     <Compile Include="DAL\Sql\SqlPermissionRepository.cs" />
     <Compile Include="DAL\Sql\SqlRoleRepository.cs" />
     <!-- BLL Services -->
-    <Compile Include="BLL\AdminService.cs" />
     <Compile Include="BLL\AuthService.cs" />
-    <Compile Include="BLL\ThemeService.cs" />
-    <Compile Include="BLL\NotificationService.cs" />
-    <Compile Include="BLL\AuditService.cs" />
-    <Compile Include="BLL\AuditHelper.cs" />
+    <Compile Include="BLL\BackupService.cs" />
     <Compile Include="BLL\PermissionService.cs" />
     <Compile Include="BLL\SessionService.cs" />
-    <Compile Include="BLL\BackupService.cs" />
-    <Compile Include="DAL\IBackupService.cs" />
     <!-- UI Dashboard -->
     <Compile Include="UI\MainDashboard.cs">
       <SubType>Form</SubType>
@@ -476,10 +513,18 @@
     <Compile Include="Modules\CRM\CRMModule.cs" />
     <Compile Include="Modules\CRM\CRMViewRouter.cs" />
     <!-- HR UI Forms -->
-    <!-- Sales UI Forms -->
     <!-- Inventory UI Forms -->
     <!-- Accounting UI Forms -->
+    <Compile Include="Modules\Accounting\UI\Forms\BaoCaoTaiChinhView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\CongNoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\SoQuyView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <!-- CRM UI Forms -->
@@ -500,35 +545,11 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhEmailForm.resx">
-      <DependentUpon>CauHinhEmailForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\DashboardTongForm.resx">
-      <DependentUpon>DashboardTongForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\CauHinhHeThongForm.resx">
-      <DependentUpon>CauHinhHeThongForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuAddForm.resx">
       <DependentUpon>ChucVuAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuForm.resx">
       <DependentUpon>ChucVuForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\DinhDangTienTeForm.resx">
-      <DependentUpon>DinhDangTienTeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\KhoiPhucDuLieuForm.resx">
-      <DependentUpon>KhoiPhucDuLieuForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\LichSuDangNhapForm.resx">
-      <DependentUpon>LichSuDangNhapForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\LichSuHoatDongForm.resx">
-      <DependentUpon>LichSuHoatDongForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Admin\UI\Forms\NhatKyHeThongForm.resx">
-      <DependentUpon>NhatKyHeThongForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\PhanQuyenChiTietForm.resx">
       <DependentUpon>PhanQuyenChiTietForm.cs</DependentUpon>
@@ -590,6 +611,9 @@
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\XuatKho.resx">
       <DependentUpon>XuatKho.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\BaoGia.resx">
+      <DependentUpon>BaoGia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\LichSuMuaHang.resx">
       <DependentUpon>LichSuMuaHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -632,44 +656,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Database\00_CreateDatabase.sql" />
-    <None Include="Database\CoreSystem.sql" />
+    <None Include="Database\FullSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <!-- Chỉ giữ folder thật có file -->
-    <None Include="Resources\factory.gif" />
-    <None Include="Resources\factory1.gif" />
     <None Include="Resources\android-chrome-96x96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bell-solid.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\d7573b3e236d935c3f87f3d5668a4695.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\croniox_animation1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\31352-business-team.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\web-development-1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Untitled-design-5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\animation.7eeba83c017858379914.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\original-147bf150b62c0b0427139ed589eb667c-ezgif.com-crop %281%29.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\output-onlinegiftools.gif" />

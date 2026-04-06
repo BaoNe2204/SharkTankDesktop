@@ -22,10 +22,10 @@ namespace SharkTank.Modules.HR
        
 
             // ── PHÒNG BAN ──
-            { "Danh sách phòng ban",        () => CreateDefaultView("Danh sách phòng ban") },
-            { "Sơ đồ tổ chức",              () => CreateDefaultView("Sơ đồ tổ chức") },
-            { "Chức danh",                  () => CreateDefaultView("Chức danh") },
-            { "Điều chuyển nhân sự",        () => CreateDefaultView("Điều chuyển nhân sự") },
+            { "Danh sách phòng ban",        () => new DanhSachPhongBanView() },
+            { "Sơ đồ tổ chức",              () => new SoDoToChucView() },
+            { "Chức danh",                  () => new ChucDanhView() },
+            { "Điều chuyển nhân sự",        () => new DieuChuyenNhanSuView() },
 
             // ── HỢP ĐỒNG ──
             { "Tạo hợp đồng",               () => new TaoHopDongView() },
@@ -37,13 +37,6 @@ namespace SharkTank.Modules.HR
             { "Nghỉ phép",                  () => new NghiPhepView() },
             { "Làm thêm giờ",               () => new LamThemGioView() },
 
-            // ── LƯƠNG ──
-            { "Lương cơ bản",               () => CreateDefaultView("Lương cơ bản") },
-            { "Phụ cấp",                    () => CreateDefaultView("Phụ cấp") },
-            { "Khấu trừ",                   () => CreateDefaultView("Khấu trừ") },
-            { "Thưởng",                     () => CreateDefaultView("Thưởng") },
-            { "Bảng lương",                 () => CreateDefaultView("Bảng lương") },
-            { "Phiếu lương",                () => CreateDefaultView("Phiếu lương") },
 
             // ── KHEN THƯỞNG ──
             { "Quyết định thưởng",          () => CreateDefaultView("Quyết định thưởng") },
