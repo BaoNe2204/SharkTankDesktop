@@ -12,10 +12,7 @@ namespace SharkTank.Modules.CRM.UI.Forms
         private Label lblTitle;
         private Chart chartNguon;
         private FormBorderStyle FormBorderStyle;
-<<<<<<< HEAD
 
-=======
->>>>>>> 039ca0c62d227bd20aaa8782e80e100bfdc33507
         private void InitializeComponent()
         {
             this.panelMain = new Panel();
