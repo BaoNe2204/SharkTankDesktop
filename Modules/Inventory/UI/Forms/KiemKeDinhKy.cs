@@ -15,6 +15,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             InitializeComponent();
             this.Load += KiemKeDinhKyView_Load;
             this.dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
+            txtMaSP.KeyDown += txtMaSP_KeyDown;
         }
 
         private void KiemKeDinhKyView_Load(object sender, EventArgs e)
@@ -23,7 +24,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         }
 
         // ================= LOAD DATA =================
-        void LoadData()
+        void LoadData(string maSP = "")
         {
             try
             {
@@ -33,67 +34,9 @@ namespace SharkTank.Modules.Inventory.UI.Forms
 SELECT 
     sp.MaSP,
     ISNULL(SUM(nk.SoLuong),0) - ISNULL(SUM(xk.SoLuong),0) AS TonHeThong,
-    ISNULL(SUM(bb.TonThucTe),0) AS TonThucTe
-FROM SanPham sp
-LEFT JOIN NhapKho nk ON sp.MaSP = nk.MaSP
-LEFT JOIN XuatKho xk ON sp.MaSP = xk.MaSP
-LEFT JOIN BienBanKiemKe bb 
-    ON sp.MaSP = bb.MaSP 
-    AND CAST(bb.NgayKiemKe AS DATE) = CAST(GETDATE() AS DATE)
-GROUP BY sp.MaSP";
-
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dataGridView1.DataSource = dt;
-
-                    // 👉 THÊM CỘT CHÊNH LỆCH NẾU CHƯA CÓ
-                    if (!dataGridView1.Columns.Contains("ChenhLech"))
-                    {
-                        dataGridView1.Columns.Add("ChenhLech", "Chênh lệch");
-                    }
-
-                    // rồi mới tính lại
-
-                    // 👉 TÍNH CHÊNH LỆCH
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-
-                        int tonHeThong = Convert.ToInt32(row.Cells["TonHeThong"].Value);
-                        int tonThucTe = Convert.ToInt32(row.Cells["TonThucTe"].Value);
-
-                        int chenhLech = tonThucTe - tonHeThong;
-
-                        row.Cells["ChenhLech"].Value = chenhLech;
-
-                        // màu (optional)
-                        if (chenhLech < 0)
-                            row.Cells["ChenhLech"].Style.ForeColor = Color.Red;
-                        else
-                            row.Cells["ChenhLech"].Style.ForeColor = Color.Green;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // ================= TÌM =================
-        private void btnTim_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    string sql = @"
-SELECT 
-    sp.MaSP,
-    ISNULL(SUM(nk.SoLuong),0) - ISNULL(SUM(xk.SoLuong),0) AS TonHeThong,
-    ISNULL(SUM(bb.TonThucTe),0) AS TonThucTe
+    ISNULL(SUM(bb.TonThucTe),0) AS TonThucTe,
+    ISNULL(SUM(bb.TonThucTe),0) 
+        - (ISNULL(SUM(nk.SoLuong),0) - ISNULL(SUM(xk.SoLuong),0)) AS ChenhLech
 FROM SanPham sp
 LEFT JOIN NhapKho nk ON sp.MaSP = nk.MaSP
 LEFT JOIN XuatKho xk ON sp.MaSP = xk.MaSP
@@ -104,7 +47,7 @@ WHERE sp.MaSP LIKE @MaSP
 GROUP BY sp.MaSP";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@MaSP", "%" + txtMaSP.Text + "%");
+                    cmd.Parameters.AddWithValue("@MaSP", "%" + maSP + "%");
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -112,21 +55,17 @@ GROUP BY sp.MaSP";
 
                     dataGridView1.DataSource = dt;
 
-                    // thêm cột nếu thiếu
-                    if (!dataGridView1.Columns.Contains("ChenhLech"))
-                    {
-                        dataGridView1.Columns.Add("ChenhLech", "Chênh lệch");
-                    }
-
-                    // tính lại
+                    // 👉 Format màu chênh lệch
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         if (row.IsNewRow) continue;
 
-                        int tonHeThong = Convert.ToInt32(row.Cells["TonHeThong"].Value);
-                        int tonThucTe = Convert.ToInt32(row.Cells["TonThucTe"].Value);
+                        int chenhLech = Convert.ToInt32(row.Cells["ChenhLech"].Value);
 
-                        row.Cells["ChenhLech"].Value = tonThucTe - tonHeThong;
+                        if (chenhLech < 0)
+                            row.Cells["ChenhLech"].Style.ForeColor = Color.Red;
+                        else
+                            row.Cells["ChenhLech"].Style.ForeColor = Color.Green;
                     }
                 }
             }
@@ -152,7 +91,6 @@ GROUP BY sp.MaSP";
             {
                 conn.Open();
 
-                // 👉 XÓA DỮ LIỆU HÔM NAY (TRÁNH LẶP)
                 string deleteSql = "DELETE FROM BienBanKiemKe WHERE CAST(NgayKiemKe AS DATE) = CAST(GETDATE() AS DATE)";
                 new SqlCommand(deleteSql, conn).ExecuteNonQuery();
 
@@ -186,10 +124,10 @@ VALUES (@MaSP, @TonHeThong, @TonThucTe, @ChenhLech, GETDATE())";
             }
 
             MessageBox.Show("Lưu kiểm kê thành công!");
-            LoadData(); // reload lại
+            LoadData(); // reload lại luôn
         }
 
-        // ================= TÍNH REALTIME =================
+        // ================= REALTIME =================
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "TonThucTe")
@@ -200,10 +138,21 @@ VALUES (@MaSP, @TonHeThong, @TonThucTe, @ChenhLech, GETDATE())";
 
                 int tonHeThong = Convert.ToInt32(row.Cells["TonHeThong"].Value);
 
-                int tonThucTe = 0;
-                if (row.Cells["TonThucTe"].Value != null && row.Cells["TonThucTe"].Value.ToString() != "")
+                // ❗ FIX: không ép = 0 nữa
+                if (row.Cells["TonThucTe"].Value == null ||
+                    string.IsNullOrWhiteSpace(row.Cells["TonThucTe"].Value.ToString()))
                 {
-                    tonThucTe = Convert.ToInt32(row.Cells["TonThucTe"].Value);
+                    row.Cells["ChenhLech"].Value = "";
+                    return;
+                }
+
+                int tonThucTe;
+                if (!int.TryParse(row.Cells["TonThucTe"].Value.ToString(), out tonThucTe))
+                {
+                    MessageBox.Show("Vui lòng nhập số hợp lệ!");
+                    row.Cells["TonThucTe"].Value = "";
+                    row.Cells["ChenhLech"].Value = "";
+                    return;
                 }
 
                 int chenhLech = tonThucTe - tonHeThong;
@@ -215,6 +164,26 @@ VALUES (@MaSP, @TonHeThong, @TonThucTe, @ChenhLech, GETDATE())";
                     row.Cells["ChenhLech"].Style.ForeColor = Color.Red;
                 else
                     row.Cells["ChenhLech"].Style.ForeColor = Color.Green;
+            }
+        }
+        // ================= PUBLIC RELOAD =================
+        public void ReloadData()
+        {
+            LoadData();
+        }
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            txtMaSP.Clear();
+            LoadData();
+        }
+
+        private void txtMaSP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData(txtMaSP.Text); // 🔥 gọi trực tiếp
+                e.SuppressKeyPress = true;
             }
         }
     }
