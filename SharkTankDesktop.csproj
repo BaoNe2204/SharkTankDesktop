@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="iTextSharp">
+      <Version>5.5.13.5</Version>
+    </PackageReference>
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" GeneratePathProperty="true" />
     <PackageReference Include="System.Memory" Version="4.5.5" GeneratePathProperty="true" />
     <PackageReference Include="System.Buffers" Version="4.5.1" GeneratePathProperty="true" />
@@ -396,11 +399,30 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Sales\BLL\BaoGiaBLL.cs" />
+    <Compile Include="Modules\Sales\BLL\HoaDonBLL.cs" />
     <Compile Include="Modules\Sales\UI\Forms\BaoGia.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\BaoGia.Designer.cs">
       <DependentUpon>BaoGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\GuiKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\GuiKH.Designer.cs">
+      <DependentUpon>GuiKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\HoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\HoaDon.Designer.cs">
+      <DependentUpon>HoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PDF.Designer.cs">
+      <DependentUpon>PDF.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\QLCongNoKH.cs">
       <SubType>UserControl</SubType>
@@ -431,6 +453,12 @@
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\TaoBaoGia.Designer.cs">
       <DependentUpon>TaoBaoGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\XuatHD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\XuatHD.Designer.cs">
+      <DependentUpon>XuatHD.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -624,11 +652,14 @@
     <EmbeddedResource Include="Modules\Sales\UI\Forms\BaoGia.resx">
       <DependentUpon>BaoGia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\HoaDon.resx">
+      <DependentUpon>HoaDon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\LichSuMuaHang.resx">
       <DependentUpon>LichSuMuaHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\CRM\UI\Forms\TyLeChuyenDoiKHForm.resx">
-      <DependentUpon>TyLeChuyenDoiKHForm.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\PDF.resx">
+      <DependentUpon>PDF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\PhanLoaiKH.resx">
       <DependentUpon>PhanLoaiKH.cs</DependentUpon>

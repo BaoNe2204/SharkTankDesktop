@@ -15,7 +15,7 @@ namespace SharkTank.Modules.Sales
             { "Lịch sử mua hàng", () => new LichSuMuaHang() },
             { "Công nợ khách", () => new QLCongNoKH() },
             { "Báo giá", () => new BaoGia() },
-            { "Hóa đơn", () => new QuanLyKhachHang() },
+            { "Hóa đơn", () => new HoaDon() },
             { "Theo dõi doanh thu", () => new QuanLyKhachHang() },
             //{ "Tạo đơn hàng", () => new QuanLyKhachHang() },
             //{ "Trạng thái đơn", () => new QuanLyKhachHang() },
