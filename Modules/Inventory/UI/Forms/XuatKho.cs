@@ -12,6 +12,9 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += XuatKho_Load;
+
+            // 🔥 ENTER để tìm
+            txtSearch.KeyDown += txtMaSP_KeyDown;
         }
 
         private void XuatKho_Load(object sender, EventArgs e)
@@ -19,14 +22,25 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             LoadData();
         }
 
-        // ================= LOAD =================
-        void LoadData()
+        // ================= LOAD + TÌM =================
+        void LoadData(string keyword = "")
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM XuatKho", conn);
+                    string sql = @"
+SELECT * FROM XuatKho
+WHERE 
+    PhieuXuat LIKE @kw OR
+    MaKho LIKE @kw OR
+    MaSP LIKE @kw OR
+    LoaiXuat LIKE @kw";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -39,6 +53,16 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi load: " + ex.Message);
+            }
+        }
+
+        // ================= ENTER TÌM =================
+        private void txtMaSP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData(txtSearch.Text);
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -177,6 +201,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         // ================= LÀM MỚI =================
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
+            txtSearch.Clear();
             LoadData();
         }
     }
