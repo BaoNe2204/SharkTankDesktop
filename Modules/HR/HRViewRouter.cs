@@ -37,11 +37,6 @@ namespace SharkTank.Modules.HR
             { "Nghỉ phép",                  () => new NghiPhepView() },
             { "Làm thêm giờ",               () => new LamThemGioView() },
 
-
-            // ── KHEN THƯỞNG ──
-            { "Quyết định thưởng",          () => CreateDefaultView("Quyết định thưởng") },
-            { "Vi phạm / cảnh cáo",         () => CreateDefaultView("Vi phạm / cảnh cáo") },
-            { "Lịch sử",                    () => CreateDefaultView("Lịch sử") }
         };
 
         public static UserControl GetView(string menuText)
