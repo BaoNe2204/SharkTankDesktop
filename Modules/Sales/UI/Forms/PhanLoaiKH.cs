@@ -15,7 +15,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             InitializeComponent();
             this.Load += (s, e) => {
                 RefreshDashboard();
-                Application.DoEvents(); // Ép Windows vẽ giao diện ngay lập tức
+                Application.DoEvents(); 
             };
             RegisterEvents();
         }
@@ -57,7 +57,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             if (txtSearch.Text == "🔍 Tìm kiếm khách hàng...")
             {
                 txtSearch.Text = "";
-                txtSearch.ForeColor = Color.Black; // Chuyển sang màu đen để gõ cho rõ
+                txtSearch.ForeColor = Color.Black;
             }
         }
 
@@ -154,15 +154,15 @@ namespace SharkTank.Modules.Sales.UI.Forms
             return card;
         }
 
-        // Khi gõ chữ vào ô tìm kiếm
+       
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
 
-            // Nếu đang là chữ gợi ý thì không tìm
+            
             if (searchText == "🔍 Tìm kiếm khách hàng...")
             {
-                LoadData(""); // Load tất cả
+                LoadData("");
             }
             else
             {
@@ -177,7 +177,7 @@ namespace SharkTank.Modules.Sales.UI.Forms
             {
                 using (SqlConnection conn = new SqlConnection(strCon))
                 {
-                    // Câu Query có thêm điều kiện WHERE để lọc theo Mã hoặc Tên
+                    
                     string query = @"
                 SELECT 
                     kh.MaKH AS [Mã], 

@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
-using Microsoft.VisualBasic; // Đừng quên Add Reference thư viện này nhé An!
+using Microsoft.VisualBasic;
 
 namespace SharkTank.Modules.Sales.UI.Forms
 {

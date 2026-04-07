@@ -1,8 +1,9 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-using System.Data.SqlClient;
 using SharkTank.Core.Data;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SharkTank.Modules.Inventory.UI.Forms
 {
@@ -12,6 +13,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += DanhMucSanPhamView_Load;
+            txtSearch.KeyDown += txtSearch_KeyDown;
         }
 
         // ================= LOAD =================

@@ -98,24 +98,24 @@ namespace SharkTank.BLL
                 AppName = Get("AppName", "SharkTank ERP");
                 AppVersion = Get("AppVersion", "1.0.0");
                 DefaultLanguage = Get("DefaultLanguage", "vi-VN");
-                AutoBackup = GetBool("AutoBackup");
+                AutoBackup = GetBool("AutoBackup", true);
                 BackupInterval = GetInt("BackupInterval", 7);
 
                 // Security
                 PasswordMinLength = GetInt("PasswordMinLength", 8);
-                PasswordRequireUppercase = GetBool("PasswordRequireUppercase");
-                PasswordRequireLowercase = GetBool("PasswordRequireLowercase");
-                PasswordRequireDigit = GetBool("PasswordRequireDigit");
-                PasswordRequireSpecial = GetBool("PasswordRequireSpecial");
+                PasswordRequireUppercase = GetBool("PasswordRequireUppercase", true);
+                PasswordRequireLowercase = GetBool("PasswordRequireLowercase", true);
+                PasswordRequireDigit = GetBool("PasswordRequireDigit", true);
+                PasswordRequireSpecial = GetBool("PasswordRequireSpecial", false);
                 PasswordExpiryDays = GetInt("PasswordExpiryDays", 90);
-                LockAccountOnFail = GetBool("LockAccountOnFail");
+                LockAccountOnFail = GetBool("LockAccountOnFail", true);
                 MaxLoginAttempts = GetInt("MaxLoginAttempts", 5);
 
                 // Display
                 ThemeColor = Get("ThemeColor", "Blue");
                 ThemeStyle = Get("ThemeStyle", "Modern");
-                ShowUsername = GetBool("ShowUsername");
-                ShowAvatar = GetBool("ShowAvatar");
+                ShowUsername = GetBool("ShowUsername", true);
+                ShowAvatar = GetBool("ShowAvatar", true);
                 FontSize = Math.Max(8, Math.Min(24, GetInt("FontSize", 10)));
 
                 // Email
@@ -125,7 +125,7 @@ namespace SharkTank.BLL
                 EmailFrom = Get("EmailFrom", "");
                 EmailUsername = Get("EmailUsername", "");
                 EmailPassword = Get("EmailPassword", "");
-                UseDefaultCredentials = GetBool("UseDefaultCredentials");
+                UseDefaultCredentials = GetBool("UseDefaultCredentials", true);
 
                 // Format
                 DefaultCurrency = Get("DefaultCurrency", "VND");
@@ -138,9 +138,9 @@ namespace SharkTank.BLL
                 TimeZone = Get("TimeZone", "UTC+07:00");
                 NumberDecimalSeparator = Get("NumberDecimalSeparator", ".");
                 NumberThousandSeparator = Get("NumberThousandSeparator", ",");
-                AutoRoundNumbers = GetBool("AutoRoundNumbers");
-                ShowCurrencySymbol = GetBool("ShowCurrencySymbol");
-                UseTimeZone = GetBool("UseTimeZone");
+                AutoRoundNumbers = GetBool("AutoRoundNumbers", true);
+                ShowCurrencySymbol = GetBool("ShowCurrencySymbol", true);
+                UseTimeZone = GetBool("UseTimeZone", true);
             }
             catch
             {
@@ -156,8 +156,16 @@ namespace SharkTank.BLL
 
         public bool GetBool(string key, bool defaultValue = false)
         {
-            var v = Get(key);
-            return v == "1" || v.Equals("true", StringComparison.OrdinalIgnoreCase);
+            if (!_configs.TryGetValue(key, out var v) || string.IsNullOrWhiteSpace(v))
+                return defaultValue;
+
+            if (v == "1" || v.Equals("true", StringComparison.OrdinalIgnoreCase) || v.Equals("yes", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (v == "0" || v.Equals("false", StringComparison.OrdinalIgnoreCase) || v.Equals("no", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            return defaultValue;
         }
 
         /// <summary>Định dạng số tiền theo cấu hình hiện tại.</summary>

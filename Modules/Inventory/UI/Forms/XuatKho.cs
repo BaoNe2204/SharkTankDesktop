@@ -12,71 +12,56 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += XuatKho_Load;
+
+            // 🔥 ENTER để tìm
+            txtSearch.KeyDown += txtMaSP_KeyDown;
         }
 
-        // ================= LOAD =================
         private void XuatKho_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        // ================= LOAD DATA =================
-        void LoadData()
+        // ================= LOAD + TÌM =================
+        void LoadData(string keyword = "")
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM XuatKho", conn);
+                    string sql = @"
+SELECT * FROM XuatKho
+WHERE 
+    PhieuXuat LIKE @kw OR
+    MaKho LIKE @kw OR
+    MaSP LIKE @kw OR
+    LoaiXuat LIKE @kw";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
                     dataGridView1.DataSource = dt;
                     dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    dataGridView1.MultiSelect = false;
                     dataGridView1.ReadOnly = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
+                MessageBox.Show("Lỗi load: " + ex.Message);
             }
         }
 
-        // ================= TÌM KIẾM =================
-        void TimKiem()
-        {
-            try
-            {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    string sql = @"SELECT * FROM XuatKho
-                                   WHERE PhieuXuat LIKE @key
-                                   OR MaSP LIKE @key
-                                   OR MaKho LIKE @key";
-
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtSearch.Text + "%");
-
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dataGridView1.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message);
-            }
-        }
-
-        // ================= ENTER SEARCH =================
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        // ================= ENTER TÌM =================
+        private void txtMaSP_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TimKiem();
+                LoadData(txtSearch.Text);
                 e.SuppressKeyPress = true;
             }
         }
@@ -124,20 +109,22 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("Chọn phiếu cần sửa!");
+                MessageBox.Show("Chọn dòng cần sửa!");
                 return;
             }
 
-            DataGridViewRow row = dataGridView1.CurrentRow;
+            var row = dataGridView1.CurrentRow;
 
             string phieu = row.Cells["PhieuXuat"].Value.ToString();
-            string makho = row.Cells["MaKho"].Value.ToString();
-            string masp = row.Cells["MaSP"].Value.ToString();
-            string loai = row.Cells["LoaiXuat"].Value.ToString();
-            int sl = int.Parse(row.Cells["SoLuong"].Value.ToString());
 
             FrmXuatKho f = new FrmXuatKho();
-            f.SetData(phieu, masp, makho, sl, loai);
+            f.SetData(
+                phieu,
+                row.Cells["MaSP"].Value.ToString(),
+                row.Cells["MaKho"].Value.ToString(),
+                int.Parse(row.Cells["SoLuong"].Value.ToString()),
+                row.Cells["LoaiXuat"].Value.ToString()
+            );
 
             if (f.ShowDialog() == DialogResult.OK)
             {
@@ -180,7 +167,7 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("Chọn phiếu cần xóa!");
+                MessageBox.Show("Chọn dòng cần xóa!");
                 return;
             }
 

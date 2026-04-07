@@ -39,8 +39,8 @@ namespace SharkTank.Modules.Reports.Views
         private DataGridView dgvSoCai;
 
         // Controls cho Tab Lãi Lỗ
-        private Label lblTongThu;
-        private Label lblTongChi;
+            private Label lblTongThu;
+           private Label lblTongChi;
         private Label lblLoiNhuan;
 
         // ============================================
