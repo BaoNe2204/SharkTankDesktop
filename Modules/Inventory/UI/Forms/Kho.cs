@@ -19,15 +19,13 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             LoadKho();
         }
 
-        // Load danh sách kho
+        // ================= LOAD =================
         void LoadKho()
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    conn.Open();
-
                     string sql = "SELECT * FROM Kho";
 
                     SqlDataAdapter da = new SqlDataAdapter(sql, conn);
@@ -43,90 +41,113 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // Thêm kho
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
-            try
+            FrmKho f = new FrmKho();
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
-                    string sql = @"INSERT INTO Kho
-                                   VALUES (@MaKho,@TenKho,@DiaChi)";
-
+                    string sql = "INSERT INTO Kho VALUES (@MaKho,@TenKho,@DiaChi)";
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@TenKho", txtTenKho.Text);
-                    cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                    cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                    cmd.Parameters.AddWithValue("@TenKho", f.TenKho);
+                    cmd.Parameters.AddWithValue("@DiaChi", f.DiaChi);
 
                     cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Thêm kho thành công");
-
-                    LoadKho();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+
+                LoadKho();
             }
         }
 
-        // Sửa kho
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null) return;
+
+            var row = dataGridView1.CurrentRow;
+
+            FrmKho f = new FrmKho();
+
+            f.SetData(
+                row.Cells["MaKho"].Value.ToString(),
+                row.Cells["TenKho"].Value.ToString(),
+                row.Cells["DiaChi"].Value.ToString()
+            );
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
-                    string sql = @"UPDATE Kho
-                                   SET TenKho=@TenKho,
-                                       DiaChi=@DiaChi
+                    string sql = @"UPDATE Kho 
+                                   SET TenKho=@TenKho, DiaChi=@DiaChi 
                                    WHERE MaKho=@MaKho";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
-                    cmd.Parameters.AddWithValue("@TenKho", txtTenKho.Text);
-                    cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                    cmd.Parameters.AddWithValue("@MaKho", f.MaKho);
+                    cmd.Parameters.AddWithValue("@TenKho", f.TenKho);
+                    cmd.Parameters.AddWithValue("@DiaChi", f.DiaChi);
 
                     cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Sửa kho thành công");
-
-                    LoadKho();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+
+                LoadKho();
             }
         }
 
-        // Xóa kho
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+
+            string makho = dataGridView1.CurrentRow.Cells["MaKho"].Value.ToString();
+
+            if (MessageBox.Show("Xóa kho này?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            using (SqlConnection conn = DBHelper.GetConnection())
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "DELETE FROM Kho WHERE MaKho=@MaKho", conn);
+
+                cmd.Parameters.AddWithValue("@MaKho", makho);
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadKho();
+        }
+
+        // ================= TÌM =================
+
+        void TimKiem()
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    conn.Open();
-
-                    string sql = "DELETE FROM Kho WHERE MaKho=@MaKho";
+                    string sql = @"SELECT * FROM Kho
+                           WHERE MaKho LIKE '%' + @key + '%'
+                           OR TenKho LIKE '%' + @key + '%'";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@key", txtSearch.Text);
 
-                    cmd.Parameters.AddWithValue("@MaKho", txtMaKho.Text);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Xóa kho thành công");
-
-                    LoadKho();
+                    dataGridView1.DataSource = dt;
                 }
             }
             catch (Exception ex)
@@ -134,16 +155,20 @@ namespace SharkTank.Modules.Inventory.UI.Forms
                 MessageBox.Show(ex.Message);
             }
         }
-
-        // Click DataGridView để đổ dữ liệu lên TextBox
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void txtMaKho_KeyDown(object sender, KeyEventArgs e)
         {
-            if (dataGridView1.CurrentRow != null)
+            if (e.KeyCode == Keys.Enter)
             {
-                txtMaKho.Text = dataGridView1.CurrentRow.Cells["MaKho"].Value.ToString();
-                txtTenKho.Text = dataGridView1.CurrentRow.Cells["TenKho"].Value.ToString();
-                txtDiaChi.Text = dataGridView1.CurrentRow.Cells["DiaChi"].Value.ToString();
+                e.SuppressKeyPress = true;
+                TimKiem();
             }
+        }
+
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            LoadKho();
         }
     }
 }
