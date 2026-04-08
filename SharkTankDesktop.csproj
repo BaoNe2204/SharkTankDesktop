@@ -652,6 +652,9 @@
     <EmbeddedResource Include="Modules\Sales\UI\Forms\BaoGia.resx">
       <DependentUpon>BaoGia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\GuiKH.resx">
+      <DependentUpon>GuiKH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\HoaDon.resx">
       <DependentUpon>HoaDon.cs</DependentUpon>
     </EmbeddedResource>
