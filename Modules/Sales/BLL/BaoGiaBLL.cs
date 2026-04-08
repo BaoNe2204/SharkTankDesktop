@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 
-// Lưu ý: Đổi namespace này cho khớp với cấu trúc thư mục của bạn nếu cần
 namespace SharkTankDesktop.Modules.Sales.BLL
 {
     public class BaoGiaBLL
@@ -10,11 +9,7 @@ namespace SharkTankDesktop.Modules.Sales.BLL
         // Chuỗi kết nối Database
         private string strCon = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SharkTankERP;Integrated Security=True;TrustServerCertificate=True";
 
-        // ==========================================
-        // CÁC HÀM DÀNH CHO FORM CHÍNH (Quản lý báo giá)
-        // ==========================================
 
-        // 1. Hàm lấy danh sách tất cả Báo Giá (HÀM ĐANG BỊ THIẾU)
         public DataTable GetDanhSachBaoGia()
         {
             using (SqlConnection conn = new SqlConnection(strCon))
@@ -32,7 +27,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
             }
         }
 
-        // 2. Hàm duyệt báo giá (HÀM ĐANG BỊ THIẾU)
         public bool DuyetBaoGia(string maBG)
         {
             using (SqlConnection conn = new SqlConnection(strCon))
@@ -46,11 +40,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
             }
         }
 
-        // ==========================================
-        // CÁC HÀM DÀNH CHO FORM POPUP (Tạo báo giá mới)
-        // ==========================================
-
-        // 3. Hàm lấy danh sách khách hàng đổ vào ComboBox
         public DataTable GetDanhSachKhachHang()
         {
             using (SqlConnection conn = new SqlConnection(strCon))
@@ -62,7 +51,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
             }
         }
 
-        // 4. Hàm lấy danh sách sản phẩm đổ vào ComboBox
         public DataTable GetDanhSachSanPham()
         {
             using (SqlConnection conn = new SqlConnection(strCon))
@@ -74,7 +62,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
             }
         }
 
-        // 5. Hàm lưu Báo Giá và Chi Tiết (Dùng Transaction)
         public bool LuuBaoGiaMoi(string maKH, DateTime ngayHetHan, string ghiChu, decimal tongTien, DataTable chiTietSP)
         {
             string maBG = "BG" + DateTime.Now.ToString("yyMMddHHmmss");
@@ -86,7 +73,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
                 {
                     try
                     {
-                        // Lưu bảng BaoGia
                         string sqlBG = "INSERT INTO BaoGia (MaBG, MaKH, NgayLap, NgayHetHan, TongTien, GhiChu, TrangThai) " +
                                        "VALUES (@maBG, @maKH, GETDATE(), @ngayHH, @tong, @ghiChu, N'Mới lập')";
                         SqlCommand cmdBG = new SqlCommand(sqlBG, conn, trans);
@@ -97,7 +83,6 @@ namespace SharkTankDesktop.Modules.Sales.BLL
                         cmdBG.Parameters.AddWithValue("@ghiChu", ghiChu);
                         cmdBG.ExecuteNonQuery();
 
-                        // Lưu bảng ChiTietBaoGia
                         string sqlCT = "INSERT INTO ChiTietBaoGia (MaBG, MaSP, SoLuong, DonGia, ThanhTien) " +
                                        "VALUES (@maBG, @maSP, @sl, @gia, @thanhTien)";
                         foreach (DataRow row in chiTietSP.Rows)
