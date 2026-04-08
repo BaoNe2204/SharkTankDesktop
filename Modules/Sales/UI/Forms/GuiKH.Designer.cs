@@ -145,7 +145,6 @@
             this.Text = "Gửi Tài Liệu Cho Khách Hàng";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
     }
 }

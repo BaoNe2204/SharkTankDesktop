@@ -80,6 +80,7 @@ namespace SharkTank.Modules.Sales.BLL
                         cmdHD.Parameters.AddWithValue("@trangThai", trangThai);
                         cmdHD.ExecuteNonQuery();
 
+
                         string sqlCT = @"INSERT INTO ChiTietHoaDon (MaHD, MaSP, SoLuong, DonGia, ThanhTien) 
                                        VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
                         foreach (DataRow row in chiTietSP.Rows)
