@@ -109,38 +109,7 @@ namespace SharkTank.Modules.HR
                 }
             });
 
-            // ── TÍNH LƯƠNG ──
 
-            int salaryId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = salaryId,
-                Text = "💵 Tính lương",
-                ParentID = null,
-                Childs = new List<NavBarItem> {
-                    new NavBarItem { ID = _menuId++, Text = "Lương cơ bản", ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Phụ cấp",      ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Khấu trừ",     ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Thưởng",       ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Bảng lương",   ParentID = salaryId },
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu lương",  ParentID = salaryId }
-                }
-            });
-
-            // ── KHEN THƯỞNG VÀ KỈ LUẬT ──
-
-            int rewardId = _menuId++;
-            menuItems.Add(new NavBarItem
-            {
-                ID = rewardId,
-                Text = "🎖️ Khen thưởng & kỷ luật",
-                ParentID = null,
-                Childs = new List<NavBarItem> {
-                    new NavBarItem { ID = _menuId++, Text = "Quyết định thưởng",  ParentID = rewardId },
-                    new NavBarItem { ID = _menuId++, Text = "Vi phạm / cảnh cáo", ParentID = rewardId },
-                    new NavBarItem { ID = _menuId++, Text = "Lịch sử",            ParentID = rewardId }
-                }
-            });
 
             return menuItems;
         }
