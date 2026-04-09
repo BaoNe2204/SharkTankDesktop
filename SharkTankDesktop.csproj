@@ -332,6 +332,12 @@
     <Compile Include="Modules\Inventory\UI\Forms\DieuChinhTon.Designer.cs">
       <DependentUpon>DieuChinhTon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Inventory\UI\Forms\FrmKho.Designer.cs">
+      <DependentUpon>FrmKho.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Inventory\UI\Forms\FrmNhapKho.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -624,6 +630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\DieuChinhTon.resx">
       <DependentUpon>DieuChinhTon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmKho.resx">
+      <DependentUpon>FrmKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Inventory\UI\Forms\FrmNhapKho.resx">
       <DependentUpon>FrmNhapKho.cs</DependentUpon>
