@@ -12,52 +12,32 @@ namespace SharkTank.Modules.Inventory.UI.Forms
         {
             InitializeComponent();
             this.Load += ViTriKho_Load;
+
+            // ENTER để tìm
+            txtSearch.KeyDown += txtTimKiem_KeyDown;
         }
 
         private void ViTriKho_Load(object sender, EventArgs e)
         {
-            LoadKho();
             LoadData();
         }
 
-        // Load danh sách Kho vào Combobox
-        void LoadKho()
+        // ================= LOAD =================
+        void LoadData(string keyword = "")
         {
             try
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
-                    conn.Open();
+                    string sql = @"SELECT * FROM ViTriKho
+                                   WHERE MaViTri LIKE @kw 
+                                   OR TenViTri LIKE @kw 
+                                   OR MaKho LIKE @kw";
 
-                    string sql = "SELECT MaKho, TenKho FROM Kho";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
 
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    cboKho.DataSource = dt;
-                    cboKho.DisplayMember = "TenKho";
-                    cboKho.ValueMember = "MaKho";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // Load dữ liệu vị trí
-        void LoadData()
-        {
-            try
-            {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    conn.Open();
-
-                    string sql = @"SELECT * FROM ViTriKho";
-
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -70,106 +50,113 @@ namespace SharkTank.Modules.Inventory.UI.Forms
             }
         }
 
-        // Thêm
+        // ================= ENTER SEARCH =================
+        private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadData(txtSearch.Text);
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        // ================= THÊM =================
         private void btnThem_Click(object sender, EventArgs e)
         {
-            try
+            FrmViTriKho f = new FrmViTriKho();
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
                     string sql = @"INSERT INTO ViTriKho
-                    (MaViTri, TenViTri, MaKho)
-                    VALUES(@MaViTri,@TenViTri,@MaKho)";
+                                   (MaViTri, TenViTri, MaKho)
+                                   VALUES (@Ma, @Ten, @Kho)";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
-                    cmd.Parameters.AddWithValue("@TenViTri", txtTenViTri.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", cboKho.SelectedValue);
+                    cmd.Parameters.AddWithValue("@Ma", f.MaViTri);
+                    cmd.Parameters.AddWithValue("@Ten", f.TenViTri);
+                    cmd.Parameters.AddWithValue("@Kho", f.MaKho);
 
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
-                MessageBox.Show("Thêm thành công");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
-        // Sửa
+        // ================= SỬA =================
         private void btnSua_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null) return;
+
+            var row = dataGridView1.CurrentRow;
+
+            FrmViTriKho f = new FrmViTriKho();
+
+            f.SetData(
+                row.Cells["MaViTri"].Value.ToString(),
+                row.Cells["TenViTri"].Value.ToString(),
+                row.Cells["MaKho"].Value.ToString()
+            );
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
                 using (SqlConnection conn = DBHelper.GetConnection())
                 {
                     conn.Open();
 
                     string sql = @"UPDATE ViTriKho
-                    SET TenViTri=@TenViTri,
-                        MaKho=@MaKho
-                    WHERE MaViTri=@MaViTri";
+                                   SET TenViTri=@Ten,
+                                       MaKho=@Kho
+                                   WHERE MaViTri=@Ma";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
-                    cmd.Parameters.AddWithValue("@TenViTri", txtTenViTri.Text);
-                    cmd.Parameters.AddWithValue("@MaKho", cboKho.SelectedValue);
+                    cmd.Parameters.AddWithValue("@Ma", f.MaViTri);
+                    cmd.Parameters.AddWithValue("@Ten", f.TenViTri);
+                    cmd.Parameters.AddWithValue("@Kho", f.MaKho);
 
                     cmd.ExecuteNonQuery();
                 }
 
                 LoadData();
-                MessageBox.Show("Sửa thành công");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
-        // Xóa
+        // ================= XÓA =================
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView1.CurrentRow == null) return;
+
+            string ma = dataGridView1.CurrentRow.Cells["MaViTri"].Value.ToString();
+
+            if (MessageBox.Show("Xóa vị trí này?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            using (SqlConnection conn = DBHelper.GetConnection())
             {
-                using (SqlConnection conn = DBHelper.GetConnection())
-                {
-                    conn.Open();
+                conn.Open();
 
-                    string sql = "DELETE FROM ViTriKho WHERE MaViTri=@MaViTri";
+                string sql = "DELETE FROM ViTriKho WHERE MaViTri=@Ma";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@MaViTri", txtMaViTri.Text);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Ma", ma);
 
-                    cmd.ExecuteNonQuery();
-                }
-
-                LoadData();
-                MessageBox.Show("Xóa thành công");
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            LoadData();
         }
 
-        // Click DataGridView
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        // ================= LÀM MỚI =================
+        private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-
-                txtMaViTri.Text = row.Cells["MaViTri"].Value.ToString();
-                txtTenViTri.Text = row.Cells["TenViTri"].Value.ToString();
-                cboKho.SelectedValue = row.Cells["MaKho"].Value.ToString();
-            }
+            txtSearch.Clear();
+            LoadData();
         }
     }
 }

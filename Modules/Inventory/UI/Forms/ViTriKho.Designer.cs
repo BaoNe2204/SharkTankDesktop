@@ -17,144 +17,136 @@ namespace SharkTank.Modules.Inventory.UI.Forms
 
         private void InitializeComponent()
         {
-            this.lblMaViTri = new System.Windows.Forms.Label();
-            this.lblTenViTri = new System.Windows.Forms.Label();
-            this.lblKho = new System.Windows.Forms.Label();
-            this.txtMaViTri = new System.Windows.Forms.TextBox();
-            this.txtTenViTri = new System.Windows.Forms.TextBox();
-            this.cboKho = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnLamMoi = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblMaViTri
-            // 
-            this.lblMaViTri.AutoSize = true;
-            this.lblMaViTri.Location = new System.Drawing.Point(24, 24);
-            this.lblMaViTri.Name = "lblMaViTri";
-            this.lblMaViTri.Size = new System.Drawing.Size(58, 15);
-            this.lblMaViTri.TabIndex = 0;
-            this.lblMaViTri.Text = "Mã vị trí";
-            // 
-            // lblTenViTri
-            // 
-            this.lblTenViTri.AutoSize = true;
-            this.lblTenViTri.Location = new System.Drawing.Point(24, 64);
-            this.lblTenViTri.Name = "lblTenViTri";
-            this.lblTenViTri.Size = new System.Drawing.Size(59, 15);
-            this.lblTenViTri.TabIndex = 1;
-            this.lblTenViTri.Text = "Tên vị trí";
-            // 
-            // lblKho
-            // 
-            this.lblKho.AutoSize = true;
-            this.lblKho.Location = new System.Drawing.Point(24, 104);
-            this.lblKho.Name = "lblKho";
-            this.lblKho.Size = new System.Drawing.Size(29, 15);
-            this.lblKho.TabIndex = 2;
-            this.lblKho.Text = "Kho";
-            // 
-            // txtMaViTri
-            // 
-            this.txtMaViTri.Location = new System.Drawing.Point(120, 21);
-            this.txtMaViTri.Name = "txtMaViTri";
-            this.txtMaViTri.Size = new System.Drawing.Size(280, 23);
-            this.txtMaViTri.TabIndex = 3;
-            // 
-            // txtTenViTri
-            // 
-            this.txtTenViTri.Location = new System.Drawing.Point(120, 61);
-            this.txtTenViTri.Name = "txtTenViTri";
-            this.txtTenViTri.Size = new System.Drawing.Size(280, 23);
-            this.txtTenViTri.TabIndex = 4;
-            // 
-            // cboKho
-            // 
-            this.cboKho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKho.FormattingEnabled = true;
-            this.cboKho.Location = new System.Drawing.Point(120, 101);
-            this.cboKho.Name = "cboKho";
-            this.cboKho.Size = new System.Drawing.Size(280, 23);
-            this.cboKho.TabIndex = 5;
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(24, 200);
+            this.dataGridView1.Location = new System.Drawing.Point(37, 160);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(720, 280);
+            this.dataGridView1.Size = new System.Drawing.Size(1448, 480);
             this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // btnThem
-            // 
-            this.btnThem.Location = new System.Drawing.Point(120, 150);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(85, 28);
-            this.btnThem.TabIndex = 7;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            // 
-            // btnSua
-            // 
-            this.btnSua.Location = new System.Drawing.Point(220, 150);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(85, 28);
-            this.btnSua.TabIndex = 8;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(320, 150);
+            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.btnXoa.FlatAppearance.BorderSize = 0;
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Location = new System.Drawing.Point(1047, 91);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(85, 28);
-            this.btnXoa.TabIndex = 9;
+            this.btnXoa.Size = new System.Drawing.Size(89, 33);
+            this.btnXoa.TabIndex = 50;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnSua
+            // 
+            this.btnSua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(0)))));
+            this.btnSua.FlatAppearance.BorderSize = 0;
+            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnSua.ForeColor = System.Drawing.Color.White;
+            this.btnSua.Location = new System.Drawing.Point(910, 91);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(89, 33);
+            this.btnSua.TabIndex = 49;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
+            // btnLamMoi
+            // 
+            this.btnLamMoi.BackColor = System.Drawing.Color.Gray;
+            this.btnLamMoi.FlatAppearance.BorderSize = 0;
+            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnLamMoi.ForeColor = System.Drawing.Color.White;
+            this.btnLamMoi.Location = new System.Drawing.Point(1178, 91);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(124, 33);
+            this.btnLamMoi.TabIndex = 48;
+            this.btnLamMoi.Text = "Làm mới";
+            this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
+            // 
+            // btnThem
+            // 
+            this.btnThem.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnThem.FlatAppearance.BorderSize = 0;
+            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnThem.ForeColor = System.Drawing.Color.White;
+            this.btnThem.Location = new System.Drawing.Point(771, 91);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(89, 33);
+            this.btnThem.TabIndex = 47;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.txtSearch.Location = new System.Drawing.Point(195, 91);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(535, 33);
+            this.txtSearch.TabIndex = 46;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label1.Location = new System.Drawing.Point(62, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 25);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "Tìm Kiếm";
             // 
             // ViTriKho
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnSua);
+            this.Controls.Add(this.btnLamMoi);
             this.Controls.Add(this.btnThem);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.cboKho);
-            this.Controls.Add(this.txtTenViTri);
-            this.Controls.Add(this.txtMaViTri);
-            this.Controls.Add(this.lblKho);
-            this.Controls.Add(this.lblTenViTri);
-            this.Controls.Add(this.lblMaViTri);
             this.Name = "ViTriKho";
-            this.Size = new System.Drawing.Size(800, 500);
+            this.Size = new System.Drawing.Size(1779, 763);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblMaViTri;
-        private System.Windows.Forms.Label lblTenViTri;
-        private System.Windows.Forms.Label lblKho;
-        private System.Windows.Forms.TextBox txtMaViTri;
-        private System.Windows.Forms.TextBox txtTenViTri;
-        private System.Windows.Forms.ComboBox cboKho;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnSua;
+        private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label1;
     }
 }
