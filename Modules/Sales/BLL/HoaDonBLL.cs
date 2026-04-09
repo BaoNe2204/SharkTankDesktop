@@ -8,7 +8,6 @@ namespace SharkTank.Modules.Sales.BLL
     {
         private string strCon = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SharkTankERP;Integrated Security=True;TrustServerCertificate=True";
 
-        // 1. Lấy danh sách toàn bộ Hóa Đơn
         public DataTable GetDanhSachHoaDon()
         {
             using (SqlConnection conn = new SqlConnection(strCon))
@@ -81,7 +80,7 @@ namespace SharkTank.Modules.Sales.BLL
                         cmdHD.Parameters.AddWithValue("@trangThai", trangThai);
                         cmdHD.ExecuteNonQuery();
 
-                        // Bước 2: Lưu từng sản phẩm vào bảng ChiTietHoaDon
+
                         string sqlCT = @"INSERT INTO ChiTietHoaDon (MaHD, MaSP, SoLuong, DonGia, ThanhTien) 
                                        VALUES (@maHD, @maSP, @soLuong, @donGia, @thanhTien)";
                         foreach (DataRow row in chiTietSP.Rows)
