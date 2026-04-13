@@ -69,9 +69,5 @@ namespace SharkTank.Modules.Sales.UI.Forms
                 MessageBox.Show("Lỗi khi gửi mail: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnHuy_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
     }
 }
