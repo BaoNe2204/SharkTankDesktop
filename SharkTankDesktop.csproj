@@ -411,12 +411,22 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Sales\BLL\BaoGiaBLL.cs" />
+    <Compile Include="Modules\Sales\BLL\DoanhThu_BLL.cs" />
     <Compile Include="Modules\Sales\BLL\HoaDonBLL.cs" />
+    <Compile Include="Modules\Sales\DAL\DoanhThu_DAL.cs" />
+    <Compile Include="Modules\Sales\DAL\TonKhoDAL.cs" />
+    <Compile Include="Modules\Sales\DAL\XuatKhoDAL.cs" />
     <Compile Include="Modules\Sales\UI\Forms\BaoGia.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\BaoGia.Designer.cs">
       <DependentUpon>BaoGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\Doanhthu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\Doanhthu.Designer.cs">
+      <DependentUpon>Doanhthu.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\GuiKH.cs">
       <SubType>Form</SubType>
@@ -430,11 +440,23 @@
     <Compile Include="Modules\Sales\UI\Forms\HoaDon.Designer.cs">
       <DependentUpon>HoaDon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\KiemtraTonkho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\KiemtraTonkho.Designer.cs">
+      <DependentUpon>KiemtraTonkho.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Sales\UI\Forms\PDF.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\PDF.Designer.cs">
       <DependentUpon>PDF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhieuXuatKho.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Sales\UI\Forms\PhieuXuatKho.Designer.cs">
+      <DependentUpon>PhieuXuatKho.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sales\UI\Forms\QLCongNoKH.cs">
       <SubType>UserControl</SubType>
@@ -669,6 +691,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\BaoGia.resx">
       <DependentUpon>BaoGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Sales\UI\Forms\Doanhthu.resx">
+      <DependentUpon>Doanhthu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\UI\Forms\GuiKH.resx">
       <DependentUpon>GuiKH.cs</DependentUpon>
