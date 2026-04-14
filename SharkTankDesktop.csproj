@@ -565,8 +565,26 @@
     <Compile Include="Modules\Accounting\UI\Forms\BaoCaoTaiChinhView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\ChiPhiView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\ChiPhiView.Designer.cs">
+      <DependentUpon>ChiPhiView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Accounting\UI\Forms\CongNoView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\DoanhThuView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\DoanhThuView.Designer.cs">
+      <DependentUpon>DoanhThuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\NhanDuLieuSalesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Accounting\UI\Forms\NhanDuLieuSalesView.Designer.cs">
+      <DependentUpon>NhanDuLieuSalesView.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Accounting\UI\Forms\PhieuThuChiView.cs">
       <SubType>UserControl</SubType>

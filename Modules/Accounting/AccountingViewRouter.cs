@@ -18,9 +18,9 @@ namespace SharkTank.Modules.Accounting
             { "Phiếu thu chi", () => new PhieuThuChiView() },
             { "Quản lý sổ quỹ", () => new SoQuyView() },
             { "Quản lý Công nợ", () => new CongNoView() },
-            { "Nhận dữ liệu từ Sales", () => CreateDefaultView("Nhận dữ liệu từ Sales") },
-            { "Ghi nhận doanh thu", () => CreateDefaultView("Ghi nhận doanh thu") },
-            { "Ghi nhận chi phí", () => CreateDefaultView("Ghi nhận chi phí") },
+            { "Nhận dữ liệu từ Sales", () => new NhanDuLieuSalesView() },
+            { "Ghi nhận doanh thu", () => new DoanhThuView() },
+            { "Ghi nhận chi phí", () => new ChiPhiView() },
             { "Báo cáo tài chính", () => new BaoCaoTaiChinhView() },
 
         };
