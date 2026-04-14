@@ -16,20 +16,10 @@ namespace SharkTank.Modules.Sales
             { "Công nợ khách", () => new QLCongNoKH() },
             { "Báo giá", () => new BaoGia() },
             { "Hóa đơn", () => new HoaDon() },
-            { "Theo dõi doanh thu", () => new QuanLyKhachHang() },
-            //{ "Tạo đơn hàng", () => new QuanLyKhachHang() },
-            //{ "Trạng thái đơn", () => new QuanLyKhachHang() },
-            //{ "Chi tiết sản phẩm", () => new QuanLyKhachHang() },
-            //{ "Chiết khấu", () => new QuanLyKhachHang() },
-            //{ "Thuế", () => new QuanLyKhachHang() },
-            //{ "Xuất hóa đơn", () => new QuanLyKhachHang() },
-            //{ "In / PDF", () => new QuanLyKhachHang() },
-            //{ "Gửi khách hàng", () => new QuanLyKhachHang() },
-            //{ "Doanh thu theo ngày/tháng", () => new QuanLyKhachHang() },
-            //{ "Theo nhân viên", () => new QuanLyKhachHang() },
-            //{ "Theo sản phẩm", () => new QuanLyKhachHang() },
-            { "Kiểm tra tồn trước khi bán", () => new QuanLyKhachHang() },
-            { "Tạo yêu cầu xuất kho", () => new QuanLyKhachHang() }
+            { "Theo dõi doanh thu", () => new Doanhthu() },
+
+            { "Kiểm tra tồn trước khi bán", () => new KiemtraTonkho() },
+            { "Tạo yêu cầu xuất kho", () => new PhieuXuatKho() }
         };
 
         public static UserControl GetView(string menuText)

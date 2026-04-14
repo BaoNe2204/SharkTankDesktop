@@ -6,10 +6,8 @@ namespace SharkTank.Modules.Sales.DAL
 {
     public class DoanhThu_DAL
     {
-        // Nhớ thay đổi chuỗi kết nối (ConnectionString) cho đúng với máy của bạn
         private string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SharkTankERP;Integrated Security=True";
 
-        // 1. Lấy doanh thu theo từng ngày
         public DataTable GetDoanhThuTheoNgay()
         {
             string query = @"
