@@ -35,7 +35,8 @@ namespace SharkTank.Modules.HR
             { "Check-in / Check-out",       () => new CheckInOutView() },
             { "Bảng công theo tháng",       () => new BangCongView() },
             { "Nghỉ phép",                  () => new NghiPhepView() },
-            { "Làm thêm giờ",               () => new LamThemGioView() } };
+            { "Làm thêm giờ",               () => new LamThemGioView() },
+            };
 
 
         public static UserControl GetView(string menuText)
