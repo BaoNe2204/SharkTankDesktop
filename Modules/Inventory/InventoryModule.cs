@@ -35,15 +35,11 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = catalogId,
-                Text = "📋 Danh mục sản phẩm",
+                Text = "Danh mục sản phẩm",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Thêm / sửa / xóa sản phẩm", ParentID = catalogId },
-                    new NavBarItem { ID = _menuId++, Text = "Mã sản phẩm", ParentID = catalogId },
-                    new NavBarItem { ID = _menuId++, Text = "Nhóm hàng", ParentID = catalogId },
-                    new NavBarItem { ID = _menuId++, Text = "Đơn vị tính", ParentID = catalogId },
-                    new NavBarItem { ID = _menuId++, Text = "Giá nhập / bán", ParentID = catalogId }
+                    new NavBarItem { ID = _menuId++, Text = "Sản Phẩm", ParentID = catalogId }
                 }
             });
 
@@ -51,7 +47,7 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = _menuId++,
-                Text = "📥 Nhập kho",
+                Text = "Nhập kho",
                 ParentID = null
             });
 
@@ -59,13 +55,11 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = exportId,
-                Text = "📤 Xuất kho",
+                Text = "Xuất kho",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
-                    new NavBarItem { ID = _menuId++, Text = "Phiếu xuất", ParentID = exportId },
-                    new NavBarItem { ID = _menuId++, Text = "Xuất cho bán hàng", ParentID = exportId },
-                    new NavBarItem { ID = _menuId++, Text = "Xuất nội bộ", ParentID = exportId }
+                    new NavBarItem { ID = _menuId++, Text = "Phiếu xuất", ParentID = exportId }
                 }
             });
 
@@ -73,7 +67,7 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = stockId,
-                Text = "📊 Tồn kho",
+                Text = "Tồn kho",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -87,7 +81,7 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = checkId,
-                Text = "🔍 Kiểm kê",
+                Text = "Kiểm kê",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {
@@ -101,7 +95,7 @@ namespace SharkTank.Modules.Inventory
             menuItems.Add(new NavBarItem
             {
                 ID = warehouseId,
-                Text = "🏬 Quản lý kho",
+                Text = "Quản lý kho",
                 ParentID = null,
                 Childs = new List<NavBarItem>
                 {

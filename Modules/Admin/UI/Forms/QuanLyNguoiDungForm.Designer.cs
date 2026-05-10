@@ -1,4 +1,4 @@
-﻿namespace SharkTank.Modules.Admin.UI.Forms
+namespace SharkTank.Modules.Admin.UI.Forms
 {
     partial class QuanLyNguoiDungForm
     {
@@ -173,7 +173,6 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvUsers.Enabled = false;
             this.dgvUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dgvUsers.Location = new System.Drawing.Point(0, 0);
             this.dgvUsers.MultiSelect = false;

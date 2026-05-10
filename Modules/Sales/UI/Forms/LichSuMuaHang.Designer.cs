@@ -65,13 +65,12 @@ namespace SharkTank.Modules.Sales.UI.Forms
             // 
             this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.btnFilter.ForeColor = System.Drawing.Color.White;
-            this.btnFilter.Location = new System.Drawing.Point(680, 14);
+            this.btnFilter.Location = new System.Drawing.Point(680, 9);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(80, 30);
             this.btnFilter.TabIndex = 0;
             this.btnFilter.Text = "Lọc";
             this.btnFilter.UseVisualStyleBackColor = false;
-            //this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // dtpTo
             // 

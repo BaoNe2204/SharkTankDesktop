@@ -86,7 +86,7 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelHeader.ForeColor = System.Drawing.Color.White;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1500, 60);
+            this.panelHeader.Size = new System.Drawing.Size(1286, 52);
             this.panelHeader.TabIndex = 0;
             // 
             // lblTitle
@@ -94,9 +94,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblTitle.Location = new System.Drawing.Point(17, 13);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(248, 32);
+            this.lblTitle.Size = new System.Drawing.Size(240, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Ghi nhận doanh thu";
             // 
@@ -111,44 +111,45 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelSearch.Controls.Add(this.txtSearch);
             this.panelSearch.Controls.Add(this.lblSearch);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSearch.Location = new System.Drawing.Point(0, 60);
+            this.panelSearch.Location = new System.Drawing.Point(0, 52);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(1500, 50);
+            this.panelSearch.Size = new System.Drawing.Size(1286, 43);
             this.panelSearch.TabIndex = 1;
             // 
             // dtpToDate
             // 
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(600, 10);
+            this.dtpToDate.Location = new System.Drawing.Point(529, 9);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(120, 25);
+            this.dtpToDate.Size = new System.Drawing.Size(103, 20);
             this.dtpToDate.TabIndex = 4;
             // 
             // lblToDate
             // 
             this.lblToDate.AutoSize = true;
             this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblToDate.Location = new System.Drawing.Point(570, 13);
+            this.lblToDate.Location = new System.Drawing.Point(486, 10);
             this.lblToDate.Name = "lblToDate";
-            this.lblToDate.Size = new System.Drawing.Size(24, 19);
+            this.lblToDate.Size = new System.Drawing.Size(37, 19);
             this.lblToDate.TabIndex = 5;
             this.lblToDate.Text = "Đến:";
+            this.lblToDate.Click += new System.EventHandler(this.lblToDate_Click);
             // 
             // dtpFromDate
             // 
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(440, 10);
+            this.dtpFromDate.Location = new System.Drawing.Point(377, 9);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(120, 25);
+            this.dtpFromDate.Size = new System.Drawing.Size(103, 20);
             this.dtpFromDate.TabIndex = 2;
             // 
             // lblFromDate
             // 
             this.lblFromDate.AutoSize = true;
             this.lblFromDate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblFromDate.Location = new System.Drawing.Point(360, 13);
+            this.lblFromDate.Location = new System.Drawing.Point(309, 11);
             this.lblFromDate.Name = "lblFromDate";
-            this.lblFromDate.Size = new System.Drawing.Size(73, 19);
+            this.lblFromDate.Size = new System.Drawing.Size(61, 19);
             this.lblFromDate.TabIndex = 3;
             this.lblFromDate.Text = "Từ ngày:";
             // 
@@ -159,9 +160,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(730, 8);
+            this.btnSearch.Location = new System.Drawing.Point(638, 6);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(90, 30);
+            this.btnSearch.Size = new System.Drawing.Size(77, 26);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Tìm kiếm";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -171,18 +172,19 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSearch.Location = new System.Drawing.Point(80, 10);
+            this.txtSearch.Location = new System.Drawing.Point(88, 8);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(250, 25);
+            this.txtSearch.Size = new System.Drawing.Size(215, 25);
             this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSearch.Location = new System.Drawing.Point(20, 13);
+            this.lblSearch.Location = new System.Drawing.Point(17, 11);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(56, 19);
+            this.lblSearch.Size = new System.Drawing.Size(67, 19);
             this.lblSearch.TabIndex = 1;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
@@ -196,9 +198,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelButtons.Controls.Add(this.btnSua);
             this.panelButtons.Controls.Add(this.btnThem);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelButtons.Location = new System.Drawing.Point(0, 110);
+            this.panelButtons.Location = new System.Drawing.Point(0, 95);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(1500, 50);
+            this.panelButtons.Size = new System.Drawing.Size(1286, 43);
             this.panelButtons.TabIndex = 2;
             // 
             // btnLamMoi
@@ -208,9 +210,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLamMoi.ForeColor = System.Drawing.Color.White;
-            this.btnLamMoi.Location = new System.Drawing.Point(1310, 10);
+            this.btnLamMoi.Location = new System.Drawing.Point(1123, 9);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(100, 35);
+            this.btnLamMoi.Size = new System.Drawing.Size(86, 30);
             this.btnLamMoi.TabIndex = 0;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = false;
@@ -223,9 +225,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnXuatFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXuatFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnXuatFile.ForeColor = System.Drawing.Color.White;
-            this.btnXuatFile.Location = new System.Drawing.Point(1190, 10);
+            this.btnXuatFile.Location = new System.Drawing.Point(1020, 9);
             this.btnXuatFile.Name = "btnXuatFile";
-            this.btnXuatFile.Size = new System.Drawing.Size(110, 35);
+            this.btnXuatFile.Size = new System.Drawing.Size(94, 30);
             this.btnXuatFile.TabIndex = 1;
             this.btnXuatFile.Text = "Xuất File";
             this.btnXuatFile.UseVisualStyleBackColor = false;
@@ -238,9 +240,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnIn.ForeColor = System.Drawing.Color.White;
-            this.btnIn.Location = new System.Drawing.Point(1070, 10);
+            this.btnIn.Location = new System.Drawing.Point(917, 9);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(110, 35);
+            this.btnIn.Size = new System.Drawing.Size(94, 30);
             this.btnIn.TabIndex = 2;
             this.btnIn.Text = "In báo cáo";
             this.btnIn.UseVisualStyleBackColor = false;
@@ -253,9 +255,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Location = new System.Drawing.Point(950, 10);
+            this.btnXoa.Location = new System.Drawing.Point(814, 9);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(110, 35);
+            this.btnXoa.Size = new System.Drawing.Size(94, 30);
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -268,9 +270,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSua.ForeColor = System.Drawing.Color.Black;
-            this.btnSua.Location = new System.Drawing.Point(830, 10);
+            this.btnSua.Location = new System.Drawing.Point(711, 9);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(110, 35);
+            this.btnSua.Size = new System.Drawing.Size(94, 30);
             this.btnSua.TabIndex = 4;
             this.btnSua.Text = "Cập nhật";
             this.btnSua.UseVisualStyleBackColor = false;
@@ -283,9 +285,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnThem.ForeColor = System.Drawing.Color.White;
-            this.btnThem.Location = new System.Drawing.Point(710, 10);
+            this.btnThem.Location = new System.Drawing.Point(609, 9);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(110, 35);
+            this.btnThem.Size = new System.Drawing.Size(94, 30);
             this.btnThem.TabIndex = 5;
             this.btnThem.Text = "Thêm mới";
             this.btnThem.UseVisualStyleBackColor = false;
@@ -296,9 +298,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelForm.BackColor = System.Drawing.Color.White;
             this.panelForm.Controls.Add(this.grpThongTin);
             this.panelForm.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelForm.Location = new System.Drawing.Point(0, 160);
+            this.panelForm.Location = new System.Drawing.Point(0, 138);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1500, 100);
+            this.panelForm.Size = new System.Drawing.Size(1286, 87);
             this.panelForm.TabIndex = 4;
             // 
             // grpThongTin
@@ -320,9 +322,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.grpThongTin.Controls.Add(this.txtMaDoanhThu);
             this.grpThongTin.Controls.Add(this.lblMaDoanhThu);
             this.grpThongTin.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.grpThongTin.Location = new System.Drawing.Point(10, 5);
+            this.grpThongTin.Location = new System.Drawing.Point(9, 4);
             this.grpThongTin.Name = "grpThongTin";
-            this.grpThongTin.Size = new System.Drawing.Size(1480, 90);
+            this.grpThongTin.Size = new System.Drawing.Size(1269, 78);
             this.grpThongTin.TabIndex = 0;
             this.grpThongTin.TabStop = false;
             this.grpThongTin.Text = "Thông tin doanh thu";
@@ -334,9 +336,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnHuy.ForeColor = System.Drawing.Color.White;
-            this.btnHuy.Location = new System.Drawing.Point(1390, 55);
+            this.btnHuy.Location = new System.Drawing.Point(1191, 48);
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(80, 28);
+            this.btnHuy.Size = new System.Drawing.Size(69, 24);
             this.btnHuy.TabIndex = 15;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = false;
@@ -349,9 +351,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLuu.ForeColor = System.Drawing.Color.White;
-            this.btnLuu.Location = new System.Drawing.Point(1300, 55);
+            this.btnLuu.Location = new System.Drawing.Point(1114, 48);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(80, 28);
+            this.btnLuu.Size = new System.Drawing.Size(69, 24);
             this.btnLuu.TabIndex = 14;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = false;
@@ -362,53 +364,56 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.cboTrangThai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTrangThai.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cboTrangThai.FormattingEnabled = true;
-            this.cboTrangThai.Items.AddRange(new object[] { "Đã thu", "Chưa thu", "Đang xử lý" });
-            this.cboTrangThai.Location = new System.Drawing.Point(1040, 55);
+            this.cboTrangThai.Items.AddRange(new object[] {
+            "Đã thu",
+            "Chưa thu",
+            "Đang xử lý"});
+            this.cboTrangThai.Location = new System.Drawing.Point(891, 48);
             this.cboTrangThai.Name = "cboTrangThai";
-            this.cboTrangThai.Size = new System.Drawing.Size(150, 25);
+            this.cboTrangThai.Size = new System.Drawing.Size(129, 23);
             this.cboTrangThai.TabIndex = 13;
             // 
             // lblTrangThai
             // 
             this.lblTrangThai.AutoSize = true;
             this.lblTrangThai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblTrangThai.Location = new System.Drawing.Point(970, 58);
+            this.lblTrangThai.Location = new System.Drawing.Point(831, 50);
             this.lblTrangThai.Name = "lblTrangThai";
-            this.lblTrangThai.Size = new System.Drawing.Size(67, 15);
+            this.lblTrangThai.Size = new System.Drawing.Size(63, 15);
             this.lblTrangThai.TabIndex = 12;
             this.lblTrangThai.Text = "Trạng thái:";
             // 
             // txtGhiChu
             // 
             this.txtGhiChu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtGhiChu.Location = new System.Drawing.Point(760, 55);
+            this.txtGhiChu.Location = new System.Drawing.Point(651, 48);
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(200, 23);
+            this.txtGhiChu.Size = new System.Drawing.Size(172, 23);
             this.txtGhiChu.TabIndex = 11;
             // 
             // lblGhiChu
             // 
             this.lblGhiChu.AutoSize = true;
             this.lblGhiChu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblGhiChu.Location = new System.Drawing.Point(700, 58);
+            this.lblGhiChu.Location = new System.Drawing.Point(600, 50);
             this.lblGhiChu.Name = "lblGhiChu";
-            this.lblGhiChu.Size = new System.Drawing.Size(56, 15);
+            this.lblGhiChu.Size = new System.Drawing.Size(51, 15);
             this.lblGhiChu.TabIndex = 10;
             this.lblGhiChu.Text = "Ghi chú:";
             // 
             // txtSoTien
             // 
             this.txtSoTien.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSoTien.Location = new System.Drawing.Point(520, 55);
+            this.txtSoTien.Location = new System.Drawing.Point(446, 48);
             this.txtSoTien.Name = "txtSoTien";
-            this.txtSoTien.Size = new System.Drawing.Size(170, 23);
+            this.txtSoTien.Size = new System.Drawing.Size(146, 23);
             this.txtSoTien.TabIndex = 9;
             // 
             // lblSoTien
             // 
             this.lblSoTien.AutoSize = true;
             this.lblSoTien.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblSoTien.Location = new System.Drawing.Point(470, 58);
+            this.lblSoTien.Location = new System.Drawing.Point(403, 50);
             this.lblSoTien.Name = "lblSoTien";
             this.lblSoTien.Size = new System.Drawing.Size(46, 15);
             this.lblSoTien.TabIndex = 8;
@@ -417,18 +422,18 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             // txtNoiDung
             // 
             this.txtNoiDung.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtNoiDung.Location = new System.Drawing.Point(200, 55);
+            this.txtNoiDung.Location = new System.Drawing.Point(186, 48);
             this.txtNoiDung.Name = "txtNoiDung";
-            this.txtNoiDung.Size = new System.Drawing.Size(260, 23);
+            this.txtNoiDung.Size = new System.Drawing.Size(208, 23);
             this.txtNoiDung.TabIndex = 7;
             // 
             // lblNoiDung
             // 
             this.lblNoiDung.AutoSize = true;
             this.lblNoiDung.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblNoiDung.Location = new System.Drawing.Point(140, 58);
+            this.lblNoiDung.Location = new System.Drawing.Point(120, 50);
             this.lblNoiDung.Name = "lblNoiDung";
-            this.lblNoiDung.Size = new System.Drawing.Size(57, 15);
+            this.lblNoiDung.Size = new System.Drawing.Size(60, 15);
             this.lblNoiDung.TabIndex = 6;
             this.lblNoiDung.Text = "Nội dung:";
             // 
@@ -437,56 +442,62 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.cboLoaiDoanhThu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLoaiDoanhThu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cboLoaiDoanhThu.FormattingEnabled = true;
-            this.cboLoaiDoanhThu.Items.AddRange(new object[] { "Doanh thu bán hàng", "Doanh thu dịch vụ", "Doanh thu khác", "Thu hồi công nợ", "Lãi đầu tư", "Hoàn nhập dự phòng" });
-            this.cboLoaiDoanhThu.Location = new System.Drawing.Point(200, 25);
+            this.cboLoaiDoanhThu.Items.AddRange(new object[] {
+            "Doanh thu bán hàng",
+            "Doanh thu dịch vụ",
+            "Doanh thu khác",
+            "Thu hồi công nợ",
+            "Lãi đầu tư",
+            "Hoàn nhập dự phòng"});
+            this.cboLoaiDoanhThu.Location = new System.Drawing.Point(171, 22);
             this.cboLoaiDoanhThu.Name = "cboLoaiDoanhThu";
-            this.cboLoaiDoanhThu.Size = new System.Drawing.Size(170, 25);
+            this.cboLoaiDoanhThu.Size = new System.Drawing.Size(146, 23);
             this.cboLoaiDoanhThu.TabIndex = 5;
             // 
             // lblLoaiDoanhThu
             // 
             this.lblLoaiDoanhThu.AutoSize = true;
             this.lblLoaiDoanhThu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblLoaiDoanhThu.Location = new System.Drawing.Point(100, 28);
+            this.lblLoaiDoanhThu.Location = new System.Drawing.Point(86, 24);
             this.lblLoaiDoanhThu.Name = "lblLoaiDoanhThu";
-            this.lblLoaiDoanhThu.Size = new System.Drawing.Size(97, 15);
+            this.lblLoaiDoanhThu.Size = new System.Drawing.Size(90, 15);
             this.lblLoaiDoanhThu.TabIndex = 4;
             this.lblLoaiDoanhThu.Text = "Loại doanh thu:";
             // 
             // dtpNgayThu
             // 
             this.dtpNgayThu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgayThu.Location = new System.Drawing.Point(520, 25);
+            this.dtpNgayThu.Location = new System.Drawing.Point(459, 19);
             this.dtpNgayThu.Name = "dtpNgayThu";
-            this.dtpNgayThu.Size = new System.Drawing.Size(170, 23);
+            this.dtpNgayThu.Size = new System.Drawing.Size(146, 23);
             this.dtpNgayThu.TabIndex = 3;
             // 
             // lblNgayThu
             // 
             this.lblNgayThu.AutoSize = true;
             this.lblNgayThu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblNgayThu.Location = new System.Drawing.Point(460, 28);
+            this.lblNgayThu.Location = new System.Drawing.Point(394, 24);
             this.lblNgayThu.Name = "lblNgayThu";
-            this.lblNgayThu.Size = new System.Drawing.Size(57, 15);
+            this.lblNgayThu.Size = new System.Drawing.Size(59, 15);
             this.lblNgayThu.TabIndex = 2;
             this.lblNgayThu.Text = "Ngày thu:";
             // 
             // txtMaDoanhThu
             // 
             this.txtMaDoanhThu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtMaDoanhThu.Location = new System.Drawing.Point(20, 55);
+            this.txtMaDoanhThu.Location = new System.Drawing.Point(17, 48);
             this.txtMaDoanhThu.Name = "txtMaDoanhThu";
             this.txtMaDoanhThu.ReadOnly = true;
-            this.txtMaDoanhThu.Size = new System.Drawing.Size(110, 23);
+            this.txtMaDoanhThu.Size = new System.Drawing.Size(95, 23);
             this.txtMaDoanhThu.TabIndex = 1;
             // 
             // lblMaDoanhThu
             // 
             this.lblMaDoanhThu.AutoSize = true;
             this.lblMaDoanhThu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMaDoanhThu.Location = new System.Drawing.Point(20, 28);
+            this.lblMaDoanhThu.Location = new System.Drawing.Point(17, 24);
             this.lblMaDoanhThu.Name = "lblMaDoanhThu";
-            this.lblMaDoanhThu.Size = new System.Drawing.Size(95, 15);
+            this.lblMaDoanhThu.Size = new System.Drawing.Size(85, 15);
             this.lblMaDoanhThu.TabIndex = 0;
             this.lblMaDoanhThu.Text = "Mã doanh thu:";
             // 
@@ -494,10 +505,10 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             // 
             this.panelGrid.Controls.Add(this.dgvDoanhThu);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 260);
+            this.panelGrid.Location = new System.Drawing.Point(0, 225);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(1500, 380);
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.panelGrid.Size = new System.Drawing.Size(1286, 364);
             this.panelGrid.TabIndex = 5;
             // 
             // dgvDoanhThu
@@ -508,11 +519,11 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.dgvDoanhThu.BackgroundColor = System.Drawing.Color.White;
             this.dgvDoanhThu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDoanhThu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDoanhThu.Location = new System.Drawing.Point(10, 10);
+            this.dgvDoanhThu.Location = new System.Drawing.Point(9, 9);
             this.dgvDoanhThu.Name = "dgvDoanhThu";
             this.dgvDoanhThu.RowHeadersVisible = false;
             this.dgvDoanhThu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDoanhThu.Size = new System.Drawing.Size(1480, 360);
+            this.dgvDoanhThu.Size = new System.Drawing.Size(1268, 346);
             this.dgvDoanhThu.TabIndex = 0;
             this.dgvDoanhThu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoanhThu_CellClick);
             // 
@@ -522,9 +533,9 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelSummary.Controls.Add(this.txtTongDoanhThu);
             this.panelSummary.Controls.Add(this.lblTongDoanhThu);
             this.panelSummary.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSummary.Location = new System.Drawing.Point(0, 640);
+            this.panelSummary.Location = new System.Drawing.Point(0, 554);
             this.panelSummary.Name = "panelSummary";
-            this.panelSummary.Size = new System.Drawing.Size(1500, 40);
+            this.panelSummary.Size = new System.Drawing.Size(1286, 35);
             this.panelSummary.TabIndex = 6;
             // 
             // txtTongDoanhThu
@@ -533,10 +544,10 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.txtTongDoanhThu.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTongDoanhThu.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.txtTongDoanhThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
-            this.txtTongDoanhThu.Location = new System.Drawing.Point(1200, 8);
+            this.txtTongDoanhThu.Location = new System.Drawing.Point(1029, 7);
             this.txtTongDoanhThu.Name = "txtTongDoanhThu";
             this.txtTongDoanhThu.ReadOnly = true;
-            this.txtTongDoanhThu.Size = new System.Drawing.Size(200, 19);
+            this.txtTongDoanhThu.Size = new System.Drawing.Size(171, 18);
             this.txtTongDoanhThu.TabIndex = 1;
             this.txtTongDoanhThu.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -545,15 +556,15 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.lblTongDoanhThu.AutoSize = true;
             this.lblTongDoanhThu.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblTongDoanhThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
-            this.lblTongDoanhThu.Location = new System.Drawing.Point(1080, 10);
+            this.lblTongDoanhThu.Location = new System.Drawing.Point(926, 9);
             this.lblTongDoanhThu.Name = "lblTongDoanhThu";
-            this.lblTongDoanhThu.Size = new System.Drawing.Size(107, 19);
+            this.lblTongDoanhThu.Size = new System.Drawing.Size(118, 19);
             this.lblTongDoanhThu.TabIndex = 0;
             this.lblTongDoanhThu.Text = "Tổng doanh thu:";
             // 
             // DoanhThuView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.panelSummary);
@@ -563,7 +574,7 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelHeader);
             this.Name = "DoanhThuView";
-            this.Size = new System.Drawing.Size(1500, 680);
+            this.Size = new System.Drawing.Size(1286, 589);
             this.Load += new System.EventHandler(this.DoanhThuView_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
@@ -578,6 +589,7 @@ namespace SharkTank.Modules.Accounting.UI.Forms
             this.panelSummary.ResumeLayout(false);
             this.panelSummary.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion

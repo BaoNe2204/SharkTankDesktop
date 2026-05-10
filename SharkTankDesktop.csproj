@@ -632,6 +632,15 @@
     <Compile Include="TEMPLATES\ViewTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <EmbeddedResource Include="Modules\Accounting\UI\Forms\ChiPhiView.resx">
+      <DependentUpon>ChiPhiView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Accounting\UI\Forms\DoanhThuView.resx">
+      <DependentUpon>DoanhThuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Accounting\UI\Forms\NhanDuLieuSalesView.resx">
+      <DependentUpon>NhanDuLieuSalesView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Admin\UI\Forms\ChucVuAddForm.resx">
       <DependentUpon>ChucVuAddForm.cs</DependentUpon>
     </EmbeddedResource>
